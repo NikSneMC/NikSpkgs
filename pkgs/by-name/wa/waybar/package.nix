@@ -84,8 +84,8 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "Alexays";
     repo = "Waybar";
-    rev = finalAttrs.version;
-    hash = "sha256-xinTLjZJhL4048jpAbN3i6nSxKAqnbesbK/GBX+1CkE=";
+    rev = "f41458ea24a57bb71b629089396c31fe4dd97f1c";
+    hash = "sha256-rgBFaUVE8x/NoZyq8TK20IqbTBQa4deYm+Jc+L2aHEg=";
   };
 
   postUnpack = lib.optional cavaSupport ''
