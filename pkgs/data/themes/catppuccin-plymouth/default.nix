@@ -1,7 +1,7 @@
 { stdenvNoCC
 , lib
 , fetchFromGitHub
-, variant ? "macchiato"
+, variant ? "mocha"
 }:
 
 let
