@@ -3530,6 +3530,8 @@ self: super: with self; {
 
   drawilleplot = callPackage ../development/python-modules/drawilleplot { };
 
+  drawsvg = callPackage ../development/python-modules/drawsvg { };
+
   dremel3dpy = callPackage ../development/python-modules/dremel3dpy { };
 
   drf-jwt = callPackage ../development/python-modules/drf-jwt { };
@@ -4114,8 +4116,6 @@ self: super: with self; {
   });
 
   fastnumbers = callPackage ../development/python-modules/fastnumbers { };
-
-  fastpair = callPackage ../development/python-modules/fastpair { };
 
   fastparquet = callPackage ../development/python-modules/fastparquet { };
 
@@ -8712,10 +8712,9 @@ self: super: with self; {
 
   nfcpy = callPackage ../development/python-modules/nfcpy { };
 
-  nftables = toPythonModule (pkgs.nftables.override {
-    python3 = python;
-    withPython = true;
-  });
+  nftables = callPackage ../os-specific/linux/nftables/python.nix {
+    inherit (pkgs) nftables;
+  };
 
   nh3 = callPackage ../development/python-modules/nh3 { };
 
@@ -10473,6 +10472,8 @@ self: super: with self; {
 
   pweave = callPackage ../development/python-modules/pweave { };
 
+  pwkit = callPackage ../development/python-modules/pwkit { };
+
   pwlf = callPackage ../development/python-modules/pwlf { };
 
   pwndbg = callPackage ../development/python-modules/pwndbg { };
@@ -10978,6 +10979,12 @@ self: super: with self; {
   pygame = callPackage ../development/python-modules/pygame {
     inherit (pkgs.darwin.apple_sdk.frameworks) AppKit;
     SDL2_image = pkgs.SDL2_image_2_0;
+  };
+
+  pygame-ce = callPackage ../development/python-modules/pygame-ce {
+    inherit (pkgs.darwin.apple_sdk.frameworks) AppKit;
+    SDL2_image = pkgs.SDL2_image_2_0;
+    SDL2_mixer = pkgs.SDL2_mixer_2_0;
   };
 
   pygame-sdl2 = callPackage ../development/python-modules/pygame-sdl2 { };
@@ -13495,6 +13502,8 @@ self: super: with self; {
   sanic-routing = callPackage ../development/python-modules/sanic-routing { };
 
   sanic-testing = callPackage ../development/python-modules/sanic-testing { };
+
+  sanix = callPackage ../development/python-modules/sanix { };
 
   sansio-multipart = callPackage ../development/python-modules/sansio-multipart { };
 
@@ -16293,6 +16302,8 @@ self: super: with self; {
   ua-parser = callPackage ../development/python-modules/ua-parser { };
 
   uarray = callPackage ../development/python-modules/uarray { };
+
+  uart-devices = callPackage ../development/python-modules/uart-devices { };
 
   uasiren = callPackage ../development/python-modules/uasiren { };
 

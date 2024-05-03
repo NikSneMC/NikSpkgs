@@ -53,12 +53,12 @@ python3Packages.buildPythonApplication rec {
     "pyprland.plugins.workspaces_follow_focus"
   ];
 
-  meta = with lib; {
+  meta = {
     mainProgram = "pypr";
     description = "An hyperland plugin system";
     homepage = "https://github.com/hyprland-community/pyprland";
-    license = licenses.mit;
-    maintainers = with maintainers; [ iliayar ];
-    platforms = platforms.linux;
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ iliayar johnrtitor ];
+    platforms = lib.platforms.linux;
   };
 }
