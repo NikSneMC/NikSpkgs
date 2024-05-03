@@ -10,8 +10,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "hyprland-community";
     repo = "pyprland";
-    rev = "5c2096168131fd4270b2551b73db5f017ecdde74";
-    hash = "sha256-5hYveDU1LC5l/6J3tWQWC2WYazIK+EDDHPTVBQ+fo9A=";
+    rev = version;
+    hash = "sha256-ju/Xa3s0engE09q9EtKK/zhgimMmlTPXJrpwWQqUFLs=";
   };
 
   nativeBuildInputs = with python3Packages; [ poetry-core ];
