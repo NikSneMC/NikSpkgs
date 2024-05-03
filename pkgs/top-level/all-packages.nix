@@ -2139,6 +2139,8 @@ with pkgs;
     wine = wineWowPackages.stable;
   };
 
+  windscribe = callPackage ../tools/networking/windscribe { };
+
   wtwitch = callPackage ../tools/video/wtwitch { };
 
   wwcd = callPackage ../tools/misc/wwcd { };
