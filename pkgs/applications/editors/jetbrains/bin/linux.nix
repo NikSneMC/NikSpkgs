@@ -60,6 +60,7 @@ with stdenv; lib.makeOverridable mkDerivation (rec {
   };
 
   vmoptsFile = lib.optionalString (vmopts != null) (writeText vmoptsName vmopts);
+  vmoptsName = if hiName == "WEBSTORM" then "WEBIDE" else hiName;
 
   nativeBuildInputs = [ makeWrapper patchelf unzip autoPatchelfHook ];
   buildInputs = extraBuildInputs;
@@ -114,7 +115,7 @@ with stdenv; lib.makeOverridable mkDerivation (rec {
       --set-default JETBRAINS_CLIENT_JDK "$jdk" \
       --set-default ${hiName}_JDK "$jdk" \
       --set-default LOCALE_ARCHIVE "${glibcLocales}/lib/locale/locale-archive" \
-      --set-default ${hiName}_VM_OPTIONS ${vmoptsFile}
+      --set-default ${vmoptsName}_VM_OPTIONS ${vmoptsFile}
 
     ln -s "$out/$pname/bin/${loName}.sh" $out/bin/$pname
     rm -rf $out/$pname/plugins/remote-dev-server/selfcontained/
