@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "syshud";
-  version = "0-unstable-2024-06-20";
+  version = "0-unstable-2024-07-16";
 
   src = fetchFromGitHub {
     owner = "System64fumo";
     repo = "syshud";
-    rev = "2b97f3441970efe67c788a8313eb58182aa7965b";
-    hash = "sha256-XPAKjBLaTGEyDgiZT8tYinYzMivOocOEeauzR4leOjI=";
+    rev = "d60c3bb6c8eefba743478fe7c183055fa057e69e";
+    hash = "sha256-2aVqCXUZYGtv6xIqbZ1yk3SZK45igZVgPl0byxTXu8E=";
   };
 
   postPatch = ''
@@ -49,6 +49,11 @@ stdenv.mkDerivation (finalAttrs: {
     echo '#define GIT_COMMIT_DATE "${lib.removePrefix "0-unstable-" finalAttrs.version}"' >> src/git_info.hpp
 
     runHook postConfigure
+  '';
+
+  # syshud manually `dlopen`'s its library component
+  postInstall = ''
+    wrapProgram $out/bin/syshud --prefix LD_LIBRARY_PATH : $out/lib
   '';
 
   passthru.updateScript = nix-update-script {
