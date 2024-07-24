@@ -629,6 +629,8 @@ self: super: with self; {
 
   ansimarkup = callPackage ../development/python-modules/ansimarkup { };
 
+  ansitable = callPackage ../development/python-modules/ansitable { };
+
   ansiwrap = callPackage ../development/python-modules/ansiwrap { };
 
   anthemav = callPackage ../development/python-modules/anthemav { };
@@ -1622,6 +1624,8 @@ self: super: with self; {
 
   bitvavo-aio = callPackage ../development/python-modules/bitvavo-aio { };
 
+  bitvector-for-humans = callPackage ../development/python-modules/bitvector-for-humans { };
+
   bizkaibus = callPackage ../development/python-modules/bizkaibus { };
 
   bjoern = callPackage ../development/python-modules/bjoern { };
@@ -1880,6 +1884,8 @@ self: super: with self; {
   bundlewrap-pass = callPackage ../development/python-modules/bundlewrap-pass { };
 
   bundlewrap-teamvault = callPackage ../development/python-modules/bundlewrap-teamvault { };
+
+  busylight-for-humans = callPackage ../development/python-modules/busylight-for-humans { };
 
   busypie = callPackage ../development/python-modules/busypie { };
 
@@ -2163,14 +2169,6 @@ self: super: with self; {
 
   chex = callPackage ../development/python-modules/chex { };
 
-  chiabip158 = throw "chiabip158 has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
-  chiapos = throw "chiapos has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
-  chiavdf = throw "chiavdf has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
-  chia-rs = throw "chia-rs has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
   chirpstack-api = callPackage ../development/python-modules/chirpstack-api { };
 
   chispa = callPackage ../development/python-modules/chispa { };
@@ -2344,14 +2342,6 @@ self: super: with self; {
   cloup = callPackage ../development/python-modules/cloup { };
 
   clustershell = callPackage ../development/python-modules/clustershell { };
-
-  clvm = throw "clvm has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
-  clvm-rs = throw "clvm-rs has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
-  clvm-tools = throw "clvm-tools has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
-
-  clvm-tools-rs = throw "clvm-tools-rs has been removed. see https://github.com/NixOS/nixpkgs/pull/270254";
 
   cma = callPackage ../development/python-modules/cma { };
 
@@ -3184,6 +3174,8 @@ self: super: with self; {
   distributed = callPackage ../development/python-modules/distributed { };
 
   distro = callPackage ../development/python-modules/distro { };
+
+  distutils = if pythonOlder "3.12" then null else callPackage ../development/python-modules/distutils { };
 
   distutils-extra = callPackage ../development/python-modules/distutils-extra { };
 
@@ -4582,7 +4574,7 @@ self: super: with self; {
   oelint-parser = callPackage ../development/python-modules/oelint-parser { };
 
   openllm = callPackage ../development/python-modules/openllm {
-    openai-triton = self.openai-triton-cuda;
+    triton = self.triton-cuda;
   };
 
   openllm-client = callPackage ../development/python-modules/openllm-client { };
@@ -5624,6 +5616,8 @@ self: super: with self; {
 
   htmlmin = callPackage ../development/python-modules/htmlmin { };
 
+  htmltools = callPackage ../development/python-modules/htmltools { };
+
   html-sanitizer = callPackage ../development/python-modules/html-sanitizer { };
 
   html-tag-names = callPackage ../development/python-modules/html-tag-names { };
@@ -6144,6 +6138,8 @@ self: super: with self; {
 
   jaraco-email = callPackage ../development/python-modules/jaraco-email { };
 
+  jaraco-envs = callPackage ../development/python-modules/jaraco-envs { };
+
   jaraco-context = callPackage ../development/python-modules/jaraco-context { };
 
   jaraco-functools = callPackage ../development/python-modules/jaraco-functools { };
@@ -6153,6 +6149,8 @@ self: super: with self; {
   jaraco-logging = callPackage ../development/python-modules/jaraco-logging { };
 
   jaraco-net = callPackage ../development/python-modules/jaraco-net { };
+
+  jaraco-path = callPackage ../development/python-modules/jaraco-path { };
 
   jaraco-stream = callPackage ../development/python-modules/jaraco-stream { };
 
@@ -6421,6 +6419,8 @@ self: super: with self; {
   jupyterhub-tmpauthenticator = callPackage ../development/python-modules/jupyterhub-tmpauthenticator { };
 
   jupyterlab = callPackage ../development/python-modules/jupyterlab { };
+
+  jupyterlab-execute-time = callPackage ../development/python-modules/jupyterlab-execute-time { };
 
   jupyterlab-git = callPackage ../development/python-modules/jupyterlab-git { };
 
@@ -6738,6 +6738,8 @@ self: super: with self; {
   ldfparser = callPackage ../development/python-modules/ldfparser { };
 
   leather = callPackage ../development/python-modules/leather { };
+
+  leanblueprint = callPackage ../development/python-modules/leanblueprint { };
 
   leb128 = callPackage ../development/python-modules/leb128 { };
 
@@ -9367,20 +9369,6 @@ self: super: with self; {
 
   open-meteo = callPackage ../development/python-modules/open-meteo { };
 
-  openai-triton = callPackage ../development/python-modules/openai-triton {
-    llvm = pkgs.openai-triton-llvm;
-  };
-
-  openai-triton-cuda = self.openai-triton.override {
-    cudaSupport = true;
-  };
-
-  openai-triton-no-cuda = self.openai-triton.override {
-    cudaSupport = false;
-  };
-
-  openai-triton-bin = callPackage ../development/python-modules/openai-triton/bin.nix { };
-
   openai-whisper = callPackage ../development/python-modules/openai-whisper { };
 
   openant = callPackage ../development/python-modules/openant { };
@@ -10406,6 +10394,11 @@ self: super: with self; {
 
   python-swiftclient = callPackage ../development/python-modules/python-swiftclient { };
 
+  python-xapp = callPackage ../development/python-modules/python-xapp {
+    inherit (pkgs.buildPackages) meson;
+    inherit (pkgs) gtk3 gobject-introspection polkit xapp;
+  };
+
   python-tado = callPackage ../development/python-modules/python-tado { };
 
   python-idzip = callPackage ../development/python-modules/python-idzip { };
@@ -10437,6 +10430,12 @@ self: super: with self; {
   };
 
   plaster = callPackage ../development/python-modules/plaster { };
+
+  plasTeX = callPackage ../development/python-modules/plasTeX { };
+
+  plastexdepgraph = callPackage ../development/python-modules/plastexdepgraph { };
+
+  plastexshowmore = callPackage ../development/python-modules/plastexshowmore { };
 
   plaster-pastedeploy = callPackage ../development/python-modules/plaster-pastedeploy { };
 
@@ -10652,6 +10651,8 @@ self: super: with self; {
   prometheus-api-client = callPackage ../development/python-modules/prometheus-api-client { };
 
   prometheus-client = callPackage ../development/python-modules/prometheus-client { };
+
+  prometheus-fastapi-instrumentator = callPackage ../development/python-modules/prometheus-fastapi-instrumentator { };
 
   prometheus-flask-exporter = callPackage ../development/python-modules/prometheus-flask-exporter { };
 
@@ -11302,6 +11303,10 @@ self: super: with self; {
   pyfume = callPackage ../development/python-modules/pyfume { };
 
   pyfuse3 = callPackage ../development/python-modules/pyfuse3 { };
+
+  pyfwup = callPackage ../development/python-modules/pyfwup {
+    inherit (pkgs) libusb1;
+  };
 
   pyfxa = callPackage ../development/python-modules/pyfxa { };
 
@@ -12440,6 +12445,8 @@ self: super: with self; {
   pytest-mock = callPackage ../development/python-modules/pytest-mock { };
 
   pytest-mockservers = callPackage ../development/python-modules/pytest-mockservers { };
+
+  pytest-mpi = callPackage ../development/python-modules/pytest-mpi { };
 
   pytest-mpl = callPackage ../development/python-modules/pytest-mpl { };
 
@@ -13758,6 +13765,8 @@ self: super: with self; {
   };
 
   rtoml = callPackage ../development/python-modules/rtoml { };
+
+  rtb-data = callPackage ../development/python-modules/rtb-data { };
 
   rtp = callPackage ../development/python-modules/rtp { };
 
@@ -15567,13 +15576,13 @@ self: super: with self; {
   torch-pitch-shift = callPackage ../development/python-modules/torch-pitch-shift { };
 
   torch-bin = callPackage ../development/python-modules/torch/bin.nix {
-    openai-triton = self.openai-triton-bin;
+    triton = self.triton-bin;
   };
 
   torchsnapshot = callPackage ../development/python-modules/torchsnapshot { };
 
   torchWithCuda = self.torch.override {
-    openai-triton = self.openai-triton-cuda;
+    triton = self.triton-cuda;
     cudaSupport = true;
     rocmSupport = false;
   };
@@ -15583,7 +15592,7 @@ self: super: with self; {
   };
 
   torchWithRocm = self.torch.override {
-    openai-triton = self.openai-triton-no-cuda;
+    triton = self.triton-no-cuda;
     rocmSupport = true;
     cudaSupport = false;
   };
@@ -15741,6 +15750,20 @@ self: super: with self; {
   trio-asyncio = callPackage ../development/python-modules/trio-asyncio { };
 
   trio-websocket = callPackage ../development/python-modules/trio-websocket { };
+
+  triton = callPackage ../development/python-modules/triton {
+    llvm = pkgs.triton-llvm;
+  };
+
+  triton-cuda = self.triton.override {
+    cudaSupport = true;
+  };
+
+  triton-no-cuda = self.triton.override {
+    cudaSupport = false;
+  };
+
+  triton-bin = callPackage ../development/python-modules/triton/bin.nix { };
 
   tritonclient = callPackage ../development/python-modules/tritonclient { };
 
@@ -17367,12 +17390,6 @@ self: super: with self; {
 
   xapian = callPackage ../development/python-modules/xapian {
     inherit (pkgs) xapian;
-  };
-
-  xapp = callPackage ../development/python-modules/xapp {
-    inherit (pkgs.buildPackages) meson;
-    inherit (pkgs) gtk3 gobject-introspection polkit;
-    inherit (pkgs.cinnamon) xapp;
   };
 
   xarray = callPackage ../development/python-modules/xarray { };
