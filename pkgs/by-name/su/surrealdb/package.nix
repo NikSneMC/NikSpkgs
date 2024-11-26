@@ -4,7 +4,7 @@
 , fetchFromGitHub
 , pkg-config
 , openssl
-, rocksdb_8_3
+, rocksdb_8_11
 , testers
 , surrealdb
 , darwin
@@ -12,20 +12,20 @@
 }:
 
 let
-  rocksdb = rocksdb_8_3;
+  rocksdb = rocksdb_8_11;
 in
 rustPlatform.buildRustPackage rec {
   pname = "surrealdb";
-  version = "2.0.2";
+  version = "2.0.4";
 
   src = fetchFromGitHub {
     owner = "surrealdb";
     repo = "surrealdb";
     rev = "v${version}";
-    hash = "sha256-kTTZx/IXXJrkC0qm4Nx0hYPbricNjwFshCq0aFYCTo0=";
+    hash = "sha256-5OH+E6zfmhg70c1RYQqhVqaJgeC3i6L5KfAyK6q9yw8=";
   };
 
-  cargoHash = "sha256-K62RqJqYyuAPwm8zLIiASH7kbw6raXS6ZzINMevWav0=";
+  cargoHash = "sha256-MO8PdgoVVX9gxVHycXv9k4wYCt5VcEJ8OIKEy6pLqCs=";
 
   # error: linker `aarch64-linux-gnu-gcc` not found
   postPatch = ''
