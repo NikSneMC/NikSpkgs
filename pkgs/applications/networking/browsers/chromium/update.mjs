@@ -38,7 +38,7 @@ for (const attr_path of Object.keys(lockfile)) {
   }
 
   const ungoogled = attr_path === 'ungoogled-chromium'
-  const version_nixpkgs = !ungoogled ? lockfile[attr_path].version : lockfile[attr_path].deps["ungoogled-patches"].rev
+  const version_nixpkgs = !ungoogled ? lockfile[attr_path].version : lockfile[attr_path].deps['ungoogled-patches'].rev
   const version_upstream = !ungoogled ? await get_latest_chromium_release() : await get_latest_ungoogled_release()
 
   console.log(`[${attr_path}] ${chalk.red(version_nixpkgs)} (nixpkgs)`)
@@ -50,32 +50,34 @@ for (const attr_path of Object.keys(lockfile)) {
     // unconditionally remove ungoogled-chromium's epoch/sub-version (e.g. 130.0.6723.116-1 -> 130.0.6723.116)
     const version_chromium = version_upstream.split('-')[0]
 
+    const chromium_rev = await chromium_resolve_tag_to_rev(version_chromium)
+
     lockfile[attr_path] = {
       version: version_chromium,
       chromedriver: !ungoogled ? await fetch_chromedriver_binaries(version_chromium) : undefined,
       deps: {
         depot_tools: {},
         gn: {},
-        "ungoogled-patches": ungoogled ? await fetch_ungoogled(version_upstream) : undefined,
+        'ungoogled-patches': ungoogled ? await fetch_ungoogled(version_upstream) : undefined,
         npmHash: dummy_hash,
       },
       DEPS: {},
     }
 
-    const depot_tools = await fetch_depot_tools(version_chromium, lockfile_initial[attr_path].deps.depot_tools)
+    const depot_tools = await fetch_depot_tools(chromium_rev, lockfile_initial[attr_path].deps.depot_tools)
     lockfile[attr_path].deps.depot_tools = {
       rev: depot_tools.rev,
       hash: depot_tools.hash,
     }
 
-    const gn = await fetch_gn(version_chromium, lockfile_initial[attr_path].deps.gn)
+    const gn = await fetch_gn(chromium_rev, lockfile_initial[attr_path].deps.gn)
     lockfile[attr_path].deps.gn = {
       rev: gn.rev,
       hash: gn.hash,
     }
 
     // DEPS update loop
-    lockfile[attr_path].DEPS = await resolve_DEPS(depot_tools.out, version_chromium)
+    lockfile[attr_path].DEPS = await resolve_DEPS(depot_tools.out, chromium_rev)
     for (const [path, value] of Object.entries(lockfile[attr_path].DEPS)) {
       delete value.fetcher
       delete value.postFetch
@@ -84,18 +86,28 @@ for (const attr_path of Object.keys(lockfile)) {
         value.recompress = true
       }
 
-      const cache = lockfile_initial[attr_path].DEPS[path]
-      const cache_hit =
-        cache !== undefined &&
-        value.url === cache.url &&
-        value.rev === cache.rev &&
-        value.recompress === cache.recompress &&
-        cache.hash !== undefined &&
-        cache.hash !== '' &&
-        cache.hash !== dummy_hash
+      const cache_hit = (() => {
+        for (const attr_path in lockfile_initial) {
+          const cache = lockfile_initial[attr_path].DEPS[path]
+          const hits_cache =
+            cache !== undefined &&
+            value.url === cache.url &&
+            value.rev === cache.rev &&
+            value.recompress === cache.recompress &&
+            cache.hash !== undefined &&
+            cache.hash !== '' &&
+            cache.hash !== dummy_hash
+
+          if (hits_cache) {
+            cache.attr_path = attr_path
+            return cache;
+          }
+        }
+      })();
+
       if (cache_hit) {
-        console.log(`[${chalk.green(path)}] Reusing hash from previous info.json for ${cache.url}@${cache.rev}`)
-        value.hash = cache.hash
+        console.log(`[${chalk.green(path)}] Reusing hash from previous info.json for ${cache_hit.url}@${cache_hit.rev} from ${cache_hit.attr_path}`)
+        value.hash = cache_hit.hash
         continue
       }
 
@@ -134,6 +146,14 @@ async function fetch_chromedriver_binaries(chromium_version) {
     hash_darwin: await prefetch(url('mac-x64')),
     hash_darwin_aarch64: await prefetch(url('mac-arm64')),
   }
+}
+
+
+async function chromium_resolve_tag_to_rev(tag) {
+  const url = `https://chromium.googlesource.com/chromium/src/+/refs/tags/${tag}?format=json`
+  const response = await (await fetch(url)).text()
+  const json = JSON.parse(response.replace(`)]}'\n`, ''))
+  return json.commit
 }
 
 

@@ -87,10 +87,10 @@ in {
     sourceVersion = {
       major = "3";
       minor = "13";
-      patch = "0";
+      patch = "1";
       suffix = "";
     };
-    hash = "sha256-CG3liC48sxDU3KSEV1IuLkgBjs1D2pzfgn9qB1nvsH0=";
+    hash = "sha256-nPlCe+6eIkLjh33Q9rZBwYU8pGHznWUDziYKWcgL8Nk=";
     inherit passthruFun;
   };
 
@@ -100,9 +100,9 @@ in {
       major = "3";
       minor = "14";
       patch = "0";
-      suffix = "a1";
+      suffix = "a2";
     };
-    hash = "sha256-PkZLDLt1NeLbNCYv0ZoKOT0OYr4PQ7FRPtmDebBU6tQ=";
+    hash = "sha256-L/nhAUc0Kz79afXNnMBuxGJQ8qBGWHWZ0Y4srGnAWSA=";
     inherit passthruFun;
   };
   # Minimal versions of Python (built without optional dependencies)

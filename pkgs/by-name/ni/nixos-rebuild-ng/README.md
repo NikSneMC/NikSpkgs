@@ -53,30 +53,44 @@ an attempt of the rewrite.
 
 And use `nixos-rebuild-ng` instead of `nixos-rebuild`.
 
+## Development
+
+Run:
+
+```console
+nix-build -A nixos-rebuild-ng.tests.ci
+```
+
+The command above will run the unit tests and linters, and also check if the
+code is formatted. However, sometimes is more convenient to run just a few
+tests to debug, in this case you can run:
+
+```console
+nix-shell -A nixos-rebuild-ng.devShell
+```
+
+The command above should automatically put you inside `src` directory, and you
+can run:
+
+```console
+# run program
+python -m nixos_rebuild
+# run tests
+pytest
+# check types
+mypy .
+# fix lint issues
+ruff check --fix .
+# format code
+ruff format .
+```
+
 ## Current caveats
 
 - For now we will install it in `nixos-rebuild-ng` path by default, to avoid
   conflicting with the current `nixos-rebuild`. This means you can keep both in
   your system at the same time, but it also means that a few things like bash
   completion are broken right now (since it looks at `nixos-rebuild` binary)
-- `_NIXOS_REBUILD_EXEC` is **not** implemented yet, so different from
-  `nixos-rebuild`, this will use the current version of `nixos-rebuild-ng` in
-  your `PATH` to build/set profile/switch, while `nixos-rebuild` builds the new
-  version (the one that will be switched) and re-exec to it instead. This means
-  that in case of bugs in `nixos-rebuild-ng`, the only way that you will get
-  them fixed is **after** you switch to a new version
-- `nix` bootstrap is also **not** implemented yet, so this means that you will
-  eval with an old version of Nix instead of a newer one. This is unlikely to
-  cause issues, because the build will happen in the daemon anyway (that is
-  only changed after the switch), and unless you are using bleeding edge `nix`
-  features you will probably have zero problems here. You can basically think
-  that using `nixos-rebuild-ng` is similar to running `nixos-rebuild --fast`
-  right now
-- Ignore any performance advantages of the rewrite right now, because of the 2
-  caveats above
-- `--target-host` and `--build-host` are not implemented yet and this is
-  probably the thing that will be most difficult to implement. Help here is
-  welcome
 - Bugs in the profile manipulation can cause corruption of your profile that
   may be difficult to fix, so right now I only recommend using
   `nixos-rebuild-ng` if you are testing in a VM or in a filesystem with
@@ -86,14 +100,29 @@ And use `nixos-rebuild-ng` instead of `nixos-rebuild`.
 
 ## TODO
 
-- [ ] Remote host/builders (via SSH)
-- [ ] Improve nix arguments handling (e.g.: `nixFlags` vs `copyFlags` in the
+- [x] Remote host/builders (via SSH)
+- [x] Improve nix arguments handling (e.g.: `nixFlags` vs `copyFlags` in the
   old `nixos-rebuild`)
-- [ ] `_NIXOS_REBUILD_EXEC`
+- [x] `_NIXOS_REBUILD_REEXEC`
 - [ ] Port `nixos-rebuild.passthru.tests`
 - [ ] Change module system to allow easier opt-in, like
   `system.switch.enableNg` for `switch-to-configuration-ng`
 - [ ] Improve documentation
-- [ ] `nixos-rebuild repl` (calling old `nixos-rebuild` for now)
-- [ ] `nix` build/bootstrap
-- [ ] Reduce build closure
+- [x] `nixos-rebuild repl`
+- [ ] Generate tab completion via [`shtab`](https://docs.iterative.ai/shtab/)
+- [x] Reduce build closure
+
+## TODON'T
+
+- Reimplement `systemd-run` logic: will be moved to the new
+  [`apply`](https://github.com/NixOS/nixpkgs/pull/344407) script
+- Nix bootstrap: it is only used for non-Flake paths and it is basically
+  useless nowadays. It was created at a time when Nix was changing frequently
+  and there was a need to bootstrap a new version of Nix before evaluating the
+  configuration (otherwise the new Nixpkgs version may have code that is only
+  compatible with a newer version of Nix). Nixpkgs now has a policy to be
+  compatible with Nix 2.3, and even if this is bumped as long we don't do
+  drastic minimum version changes this should not be an issue. Also, the daemon
+  itself always run with the previous version since even we can replace Nix in
+  `PATH` (so Nix client), but we can't replace the daemon without switching to
+  a new version.

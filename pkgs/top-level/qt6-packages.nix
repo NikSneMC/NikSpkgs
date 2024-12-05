@@ -25,7 +25,7 @@ makeScopeWithSplicing' {
   otherSplices = generateSplicesForMkScope "qt6Packages";
   f = (self: let
     inherit (self) callPackage;
-    noExtraAttrs = set: lib.attrsets.removeAttrs set [ "extend" "override" "overrideScope" "overrideScope'" "overrideDerivation" ];
+    noExtraAttrs = set: lib.attrsets.removeAttrs set [ "extend" "override" "overrideScope" "overrideDerivation" ];
   in (noExtraAttrs qt6) // {
   inherit stdenv;
 
@@ -90,6 +90,8 @@ makeScopeWithSplicing' {
 
   qscintilla = callPackage ../development/libraries/qscintilla { };
 
+  qtspell = callPackage ../development/libraries/qtspell { };
+
   qwlroots = callPackage ../development/libraries/qwlroots {
     wlroots = pkgs.wlroots_0_17;
   };
@@ -117,8 +119,5 @@ makeScopeWithSplicing' {
   wayqt = callPackage ../development/libraries/wayqt { };
 
   xwaylandvideobridge = kdePackages.callPackage ../tools/wayland/xwaylandvideobridge { };
-  } // lib.optionalAttrs pkgs.config.allowAliases {
-    # Remove completely before 24.11
-    overrideScope' = builtins.throw "qt6Packages now uses makeScopeWithSplicing which does not have \"overrideScope'\", use \"overrideScope\".";
   });
 }
