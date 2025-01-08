@@ -40,13 +40,13 @@ let
 
 in stdenv.mkDerivation (finalAttrs: {
   pname = "surrealist";
-  version = "3.1.5";
+  version = "3.1.9";
 
   src = fetchFromGitHub {
     owner = "surrealdb";
     repo = "surrealist";
     rev = "surrealist-v${finalAttrs.version}";
-    hash = "sha256-m/MGLu6WCWLXaW/ee7vmL0xiMGY08VTQO4192Borvpo=";
+    hash = "sha256-p+Tyu65A+vykqafu1RCRKYFXb435Uyu9WxUoEqjI8d8=";
   };
 
   # HACK: A dependency (surrealist -> tauri -> **reqwest**) contains hyper-tls
