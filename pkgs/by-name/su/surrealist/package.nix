@@ -1,52 +1,60 @@
-{ buildGoModule
-, cairo
-, cargo
-, cargo-tauri
-, esbuild
-, fetchFromGitHub
-, gdk-pixbuf
-, glib-networking
-, gobject-introspection
-, lib
-, libsoup_3
-, makeBinaryWrapper
-, nodejs
-, openssl
-, pango
-, pkg-config
-, pnpm
-, rustc
-, rustPlatform
-, stdenv
-, webkitgtk_4_1
+{
+  buildGoModule,
+  cairo,
+  cargo,
+  cargo-tauri,
+  esbuild,
+  fetchFromGitHub,
+  gdk-pixbuf,
+  glib-networking,
+  gobject-introspection,
+  lib,
+  libsoup_3,
+  makeBinaryWrapper,
+  nodejs,
+  openssl,
+  pango,
+  pkg-config,
+  pnpm,
+  rustc,
+  rustPlatform,
+  stdenv,
+  webkitgtk_4_1,
 }:
 
 let
-  esbuild_21-5 = let
-    version = "0.21.5";
-  in esbuild.override {
-    buildGoModule = args:
-      buildGoModule (args // {
-        inherit version;
-        src = fetchFromGitHub {
-          owner = "evanw";
-          repo = "esbuild";
-          rev = "v${version}";
-          hash = "sha256-FpvXWIlt67G8w3pBKZo/mcp57LunxDmRUaCU/Ne89B8=";
-        };
-        vendorHash = "sha256-+BfxCyg0KkDQpHt/wycy/8CTG6YBA/VJvJFhhzUnSiQ=";
-      });
-  };
+  esbuild_21-5 =
+    let
+      version = "0.21.5";
+    in
+    esbuild.override {
+      buildGoModule =
+        args:
+        buildGoModule (
+          args
+          // {
+            inherit version;
+            src = fetchFromGitHub {
+              owner = "evanw";
+              repo = "esbuild";
+              rev = "v${version}";
+              hash = "sha256-FpvXWIlt67G8w3pBKZo/mcp57LunxDmRUaCU/Ne89B8=";
+            };
+            vendorHash = "sha256-+BfxCyg0KkDQpHt/wycy/8CTG6YBA/VJvJFhhzUnSiQ=";
+          }
+        );
+    };
 
-in stdenv.mkDerivation (finalAttrs: {
+in
+stdenv.mkDerivation (finalAttrs: {
   pname = "surrealist";
-  version = "3.1.5";
+  version = "3.1.9";
 
   src = fetchFromGitHub {
     owner = "surrealdb";
     repo = "surrealist";
     rev = "surrealist-v${finalAttrs.version}";
-    hash = "sha256-m/MGLu6WCWLXaW/ee7vmL0xiMGY08VTQO4192Borvpo=";
+    hash = "sha256-p+Tyu65A+vykqafu1RCRKYFXb435Uyu9WxUoEqjI8d8=";
   };
 
   # HACK: A dependency (surrealist -> tauri -> **reqwest**) contains hyper-tls
