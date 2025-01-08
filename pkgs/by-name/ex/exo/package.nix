@@ -7,14 +7,14 @@
 }:
 python3Packages.buildPythonApplication {
   pname = "exo";
-  version = "0-unstable-2024-11-14";
+  version = "0-unstable-2024-12-28";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "exo-explore";
     repo = "exo";
-    rev = "f1eec9fa64a0c14e0ef2eec092b799009b3d4a1e";
-    hash = "sha256-WrJrhMtq+S5VD3oyW1k3fkOHunTzdFk0HavjOXLhIKU=";
+    rev = "a174c78004e5fc62220dd4e9734e8ad4eaa75e39";
+    hash = "sha256-q68dcAz4QPS5mSuHSlQ3BnXkPzOi+2X2XgKLZs6SKhE=";
   };
 
   build-system = with python3Packages; [ setuptools ];
@@ -27,13 +27,14 @@ python3Packages.buildPythonApplication {
     aiohttp
     aiohttp-cors
     aiofiles
-    blobfile
     grpcio
     grpcio-tools
     jinja2
     netifaces
     numpy
+    nuitka
     nvidia-ml-py
+    opencv-python
     pillow
     prometheus-client
     protobuf
@@ -41,7 +42,6 @@ python3Packages.buildPythonApplication {
     pydantic
     requests
     rich
-    safetensors
     tenacity
     tqdm
     transformers

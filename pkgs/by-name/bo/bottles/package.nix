@@ -4,10 +4,12 @@
   bottles-unwrapped,
   extraPkgs ? pkgs: [ ],
   extraLibraries ? pkgs: [ ],
+  removeWarningPopup ? false,
 }:
 
 let
   fhsEnv = {
+    inherit (bottles-unwrapped) version;
     # Many WINE games need 32bit
     multiArch = true;
 
@@ -15,7 +17,7 @@ let
       pkgs:
       with pkgs;
       [
-        bottles-unwrapped
+        (bottles-unwrapped.override { inherit removeWarningPopup; })
         # This only allows to enable the toggle, vkBasalt won't work if not installed with environment.systemPackages (or nix-env)
         # See https://github.com/bottlesdevs/Bottles/issues/2401
         vkbasalt
@@ -113,14 +115,14 @@ symlinkJoin {
     (buildFHSEnv (
       fhsEnv
       // {
-        name = "bottles";
+        pname = "bottles";
         runScript = "bottles";
       }
     ))
     (buildFHSEnv (
       fhsEnv
       // {
-        name = "bottles-cli";
+        pname = "bottles-cli";
         runScript = "bottles-cli";
       }
     ))

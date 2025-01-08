@@ -44,7 +44,7 @@
   e2fsprogs,
   krb5,
   libdrm,
-  mesa,
+  libgbm,
   unzip,
   copyDesktopItems,
   libxshmfence,
@@ -145,7 +145,7 @@ let
       e2fsprogs
       krb5
       libdrm
-      mesa
+      libgbm
       libxshmfence
       libxkbcommon
       libGL
@@ -191,7 +191,7 @@ let
     '';
 
     preFixup = ''
-      gappsWrapperArgs+=(--add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}")
+      gappsWrapperArgs+=(--add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}")
     '';
 
     postFixup = ''

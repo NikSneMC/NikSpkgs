@@ -1,79 +1,82 @@
-{ lib
-, stdenv
-, buildPythonApplication
-, fetchFromGitHub
-, makeWrapper
-# Tie withPlugins through the fixed point here, so it will receive an
-# overridden version properly
-, buildbot
-, pythonOlder
-, python
-, twisted
-, jinja2
-, msgpack
-, zope-interface
-, sqlalchemy
-, alembic
-, python-dateutil
-, txaio
-, autobahn
-, pyjwt
-, pyyaml
-, treq
-, txrequests
-, pypugjs
-, boto3
-, moto
-, markdown
-, lz4
-, brotli
-, zstandard
-, setuptools-trial
-, buildbot-worker
-, buildbot-plugins
-, buildbot-pkg
-, parameterized
-, git
-, openssh
-, setuptools
-, croniter
-, importlib-resources
-, packaging
-, unidiff
-, glibcLocales
-, nixosTests
+{
+  lib,
+  stdenv,
+  buildPythonApplication,
+  fetchFromGitHub,
+  makeWrapper,
+  # Tie withPlugins through the fixed point here, so it will receive an
+  # overridden version properly
+  buildbot,
+  pythonOlder,
+  python,
+  twisted,
+  jinja2,
+  msgpack,
+  zope-interface,
+  sqlalchemy,
+  alembic,
+  python-dateutil,
+  txaio,
+  autobahn,
+  pyjwt,
+  pyyaml,
+  treq,
+  txrequests,
+  pypugjs,
+  boto3,
+  moto,
+  markdown,
+  lz4,
+  brotli,
+  zstandard,
+  setuptools-trial,
+  buildbot-worker,
+  buildbot-plugins,
+  buildbot-pkg,
+  parameterized,
+  git,
+  openssh,
+  setuptools,
+  croniter,
+  importlib-resources,
+  packaging,
+  unidiff,
+  glibcLocales,
+  nixosTests,
 }:
 
 let
-  withPlugins = plugins: buildPythonApplication {
-    pname = "${buildbot.pname}-with-plugins";
-    inherit (buildbot) version;
-    format = "other";
+  withPlugins =
+    plugins:
+    buildPythonApplication {
+      pname = "${buildbot.pname}-with-plugins";
+      inherit (buildbot) version;
+      format = "other";
 
-    dontUnpack = true;
-    dontBuild = true;
-    doCheck = false;
+      dontUnpack = true;
+      dontBuild = true;
+      doCheck = false;
 
-    nativeBuildInputs = [
-      makeWrapper
-    ];
+      nativeBuildInputs = [
+        makeWrapper
+      ];
 
-    propagatedBuildInputs = plugins ++ buildbot.propagatedBuildInputs;
+      propagatedBuildInputs = plugins ++ buildbot.propagatedBuildInputs;
 
-    installPhase = ''
-      makeWrapper ${buildbot}/bin/buildbot $out/bin/buildbot \
-        --prefix PYTHONPATH : "${buildbot}/${python.sitePackages}:$PYTHONPATH"
-      ln -sfv ${buildbot}/lib $out/lib
-    '';
+      installPhase = ''
+        makeWrapper ${buildbot}/bin/buildbot $out/bin/buildbot \
+          --prefix PYTHONPATH : "${buildbot}/${python.sitePackages}:$PYTHONPATH"
+        ln -sfv ${buildbot}/lib $out/lib
+      '';
 
-    passthru = buildbot.passthru // {
-      withPlugins = morePlugins: withPlugins (morePlugins ++ plugins);
+      passthru = buildbot.passthru // {
+        withPlugins = morePlugins: withPlugins (morePlugins ++ plugins);
+      };
     };
-  };
 in
 buildPythonApplication rec {
   pname = "buildbot";
-  version = "4.1.0";
+  version = "4.2.0";
   format = "pyproject";
 
   disabled = pythonOlder "3.8";
@@ -82,7 +85,7 @@ buildPythonApplication rec {
     owner = "buildbot";
     repo = "buildbot";
     rev = "v${version}";
-    hash = "sha256-RPg4eXqpm/F1SSoB4MVo61DgZv/iE2R4VtCkUU69iA8=";
+    hash = "sha256-eraNF2J5x04qQESkned/2Io9gb2ZL9XzUfWHwSGErNY=";
   };
 
   build-system = [
@@ -92,28 +95,29 @@ buildPythonApplication rec {
     "twisted"
   ];
 
-  propagatedBuildInputs = [
-    # core
-    twisted
-    jinja2
-    msgpack
-    zope-interface
-    sqlalchemy
-    alembic
-    python-dateutil
-    txaio
-    autobahn
-    pyjwt
-    pyyaml
-    setuptools
-    croniter
-    importlib-resources
-    packaging
-    unidiff
-    treq
-    brotli
-    zstandard
-  ]
+  propagatedBuildInputs =
+    [
+      # core
+      twisted
+      jinja2
+      msgpack
+      zope-interface
+      sqlalchemy
+      alembic
+      python-dateutil
+      txaio
+      autobahn
+      pyjwt
+      pyyaml
+      setuptools
+      croniter
+      importlib-resources
+      packaging
+      unidiff
+      treq
+      brotli
+      zstandard
+    ]
     # tls
     ++ twisted.optional-dependencies.tls;
 
@@ -139,6 +143,9 @@ buildPythonApplication rec {
     # This patch disables the test that tries to read /etc/os-release which
     # is not accessible in sandboxed builds.
     ./skip_test_linux_distro.patch
+
+    # https://github.com/buildbot/buildbot/issues/8274
+    ./allow_git_urls_to_be_renderable_again.patch
   ];
 
   postPatch = ''
@@ -155,14 +162,16 @@ buildPythonApplication rec {
     export PATH="$out/bin:$PATH"
   '';
 
-  passthru = {
-    inherit withPlugins python;
-    updateScript = ./update.sh;
-  } // lib.optionalAttrs stdenv.hostPlatform.isLinux {
-    tests = {
-      inherit (nixosTests) buildbot;
+  passthru =
+    {
+      inherit withPlugins python;
+      updateScript = ./update.sh;
+    }
+    // lib.optionalAttrs stdenv.hostPlatform.isLinux {
+      tests = {
+        inherit (nixosTests) buildbot;
+      };
     };
-  };
 
   meta = with lib; {
     description = "Open-source continuous integration framework for automating software build, test, and release processes";
@@ -170,6 +179,5 @@ buildPythonApplication rec {
     changelog = "https://github.com/buildbot/buildbot/releases/tag/v${version}";
     maintainers = teams.buildbot.members;
     license = licenses.gpl2Only;
-    broken = stdenv.hostPlatform.isDarwin;
   };
 }
