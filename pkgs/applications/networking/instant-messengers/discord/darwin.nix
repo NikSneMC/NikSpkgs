@@ -17,6 +17,8 @@
   openasar,
   withVencord ? false,
   vencord,
+  withEquicord ? false,
+  equicord,
 }:
 
 let
@@ -67,12 +69,17 @@ stdenv.mkDerivation {
     lib.strings.optionalString withOpenASAR ''
       cp -f ${openasar} $out/Applications/${desktopName}.app/Contents/Resources/app.asar
     ''
-    + lib.strings.optionalString withVencord ''
-      mv $out/Applications/${desktopName}.app/Contents/Resources/app.asar $out/Applications/${desktopName}.app/Contents/Resources/_app.asar
-      mkdir $out/Applications/${desktopName}.app/Contents/Resources/app.asar
-      echo '{"name":"discord","main":"index.js"}' > $out/Applications/${desktopName}.app/Contents/Resources/app.asar/package.json
-      echo 'require("${vencord}/patcher.js")' > $out/Applications/${desktopName}.app/Contents/Resources/app.asar/index.js
-    '';
+    + lib.strings.optionalString (withVencord || withEquicord) (
+      let
+        modPath = if withVencord then vencord else "${equicord}/desktop";
+      in
+      ''
+        mv $out/Applications/${desktopName}.app/Contents/Resources/app.asar $out/Applications/${desktopName}.app/Contents/Resources/_app.asar
+        mkdir $out/Applications/${desktopName}.app/Contents/Resources/app.asar
+        echo '{"name":"discord","main":"index.js"}' > $out/Applications/${desktopName}.app/Contents/Resources/app.asar/package.json
+        echo 'require("${modPath}/patcher.js")' > $out/Applications/${desktopName}.app/Contents/Resources/app.asar/index.js
+      ''
+    );
 
   passthru = {
     # make it possible to run disableBreakingUpdates standalone

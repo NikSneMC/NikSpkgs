@@ -62,6 +62,8 @@
   openasar,
   withVencord ? false,
   vencord,
+  withEquicord ? false,
+  equicord,
   withTTS ? true,
 }:
 
@@ -190,12 +192,14 @@ stdenv.mkDerivation rec {
     lib.strings.optionalString withOpenASAR ''
       cp -f ${openasar} $out/opt/${binaryName}/resources/app.asar
     ''
-    + lib.strings.optionalString withVencord ''
+    + lib.strings.optionalString (withVencord || withEquicord) (let
+      modPath = if withVencord then vencord else "${equicord}/desktop";
+    in ''
       mv $out/opt/${binaryName}/resources/app.asar $out/opt/${binaryName}/resources/_app.asar
       mkdir $out/opt/${binaryName}/resources/app.asar
       echo '{"name":"discord","main":"index.js"}' > $out/opt/${binaryName}/resources/app.asar/package.json
-      echo 'require("${vencord}/patcher.js")' > $out/opt/${binaryName}/resources/app.asar/index.js
-    '';
+      echo 'require("${modPath}/patcher.js")' > $out/opt/${binaryName}/resources/app.asar/index.js
+    '');
 
   desktopItem = makeDesktopItem {
     name = pname;
