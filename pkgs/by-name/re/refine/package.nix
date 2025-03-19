@@ -34,7 +34,7 @@ in
 
 python3Packages.buildPythonApplication rec {
   pname = "refine";
-  version = "0.4.2";
+  version = "0.5.2";
   pyproject = false; # uses meson
 
   src = fetchFromGitLab {
@@ -42,7 +42,7 @@ python3Packages.buildPythonApplication rec {
     owner = "TheEvilSkeleton";
     repo = "Refine";
     tag = version;
-    hash = "sha256-5oXLcmj0ZWYaCP93S+tSTqFn+XnrUkE/VwiA3ufvSQ0=";
+    hash = "sha256-G1G9uuch7kdqWvSfCSOgb9o67da7spNKnnka47k4/rY=";
   };
 
   nativeBuildInputs = [

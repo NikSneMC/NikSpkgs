@@ -6,11 +6,12 @@
   pytestCheckHook,
   pythonOlder,
   setuptools,
+  nix-update-script,
 }:
 
 buildPythonPackage rec {
   pname = "archinfo";
-  version = "9.2.138";
+  version = "9.2.146";
   pyproject = true;
 
   disabled = pythonOlder "3.8";
@@ -19,7 +20,7 @@ buildPythonPackage rec {
     owner = "angr";
     repo = "archinfo";
     tag = "v${version}";
-    hash = "sha256-BnmYUvXji+YFBGXyJ0P1y+OIREsT2RYa/hdxwpUacT0=";
+    hash = "sha256-8JlIhLqVPNm3P2ruJh5i7VxnnBXfubLzhtFnWF3RWf8=";
   };
 
   build-system = [ setuptools ];
@@ -29,6 +30,8 @@ buildPythonPackage rec {
   nativeCheckInputs = [ pytestCheckHook ];
 
   pythonImportsCheck = [ "archinfo" ];
+
+  passthru.updateScript = nix-update-script { };
 
   meta = with lib; {
     description = "Classes with architecture-specific information";

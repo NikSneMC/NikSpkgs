@@ -538,7 +538,9 @@ in
           "${cfg.package.util-linux}/bin/umount"
           "${cfg.package.util-linux}/bin/sulogin"
 
-          # required for script services, and some tools like xfs still want the sh symlink
+          # required for services generated with writeShellScript and friends
+          pkgs.runtimeShell
+          # some tools like xfs still want the sh symlink
           "${pkgs.bash}/bin"
 
           # so NSS can look up usernames
@@ -701,10 +703,11 @@ in
             "|stage1panic"
           ];
         };
-        script = ''
-          echo c > /proc/sysrq-trigger
-        '';
-        serviceConfig.Type = "oneshot";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.coreutils}/bin/echo c";
+          StandardOutput = "file:/proc/sysrq-trigger";
+        };
       };
     };
   };

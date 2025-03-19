@@ -31,13 +31,13 @@
 
 buildPythonPackage rec {
   pname = "ansible-core";
-  version = "2.18.1";
+  version = "2.18.3";
   pyproject = true;
 
   src = fetchPypi {
     pname = "ansible_core";
     inherit version;
-    hash = "sha256-FMrB+Su9rogcsGFu3esXkl6MtQfkhgh5deckUz2d508=";
+    hash = "sha256-jE6spAhFI44mAbm8nb+9T27TUCy4smMnifdc5Hir/e4=";
   };
 
   # ansible_connection is already wrapped, so don't pass it through
@@ -48,6 +48,15 @@ buildPythonPackage rec {
       --replace "[python," "["
 
     patchShebangs --build packaging/cli-doc/build.py
+
+    SETUPTOOLS_PATTERN='"setuptools[0-9 <>=.,]+"'
+    PYPROJECT=$(cat pyproject.toml)
+    if [[ "$PYPROJECT" =~ $SETUPTOOLS_PATTERN ]]; then
+      echo "setuptools replace: ''${BASH_REMATCH[0]}"
+      echo "''${PYPROJECT//''${BASH_REMATCH[0]}/'"setuptools"'}" > pyproject.toml
+    else
+      exit 2
+    fi
   '';
 
   nativeBuildInputs = [

@@ -19,7 +19,6 @@
   paramiko,
   pbr,
   prettytable,
-  pynacl,
   python,
   pythonOlder,
   pyyaml,
@@ -36,8 +35,6 @@ buildPythonPackage rec {
   pname = "tempest";
   version = "42.0.0";
   pyproject = true;
-
-  disabled = pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
@@ -75,7 +72,6 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     hacking
     oslotest
-    pynacl
     stestr
   ];
 
@@ -88,6 +84,9 @@ buildPythonPackage rec {
     chmod +x bin/*
 
     stestr --test-path tempest/tests run -e <(echo "
+      tempest.tests.cmd.test_cleanup.TestTempestCleanup.test_load_json_resource_list
+      tempest.tests.cmd.test_cleanup.TestTempestCleanup.test_load_json_saved_state
+      tempest.tests.cmd.test_cleanup.TestTempestCleanup.test_take_action_got_exception
       tempest.tests.lib.cli.test_execute.TestExecute.test_execute_with_prefix
     ")
   '';

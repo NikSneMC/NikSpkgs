@@ -4,7 +4,7 @@
   cctools,
   darwin,
   dotnetCorePackages,
-  fetchFromGitHub,
+  fetchFromGitLab,
   libX11,
   libgdiplus,
   moltenvk,
@@ -30,13 +30,14 @@
 
 buildDotnetModule rec {
   pname = "ryubing";
-  version = "1.2.80";
+  version = "1.2.86";
 
-  src = fetchFromGitHub {
+  src = fetchFromGitLab {
+    domain = "git.ryujinx.app";
     owner = "Ryubing";
     repo = "Ryujinx";
-    rev = version;
-    hash = "sha256-BIiqXXtkc55FQL0HAXxtyx3rA42DTcTxG2pdNmEa5jE=";
+    tag = version;
+    hash = "sha256-Goxg2+zaKaqbGv5q/ril4TBtfTbPEYEwQQ/M6NlEpus=";
   };
 
   nativeBuildInputs = lib.optional stdenv.isDarwin [

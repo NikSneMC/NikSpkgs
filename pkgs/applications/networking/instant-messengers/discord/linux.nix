@@ -62,10 +62,14 @@
   openasar,
   withVencord ? false,
   vencord,
-  withEquicord ? false,
-  equicord,
+  withMoonlight ? false,
+  moonlight,
   withTTS ? true,
 }:
+
+assert lib.assertMsg (
+  !(withMoonlight && withVencord)
+) "discord: Moonlight and Vencord can not be enabled at the same time";
 
 let
   disableBreakingUpdates =
@@ -198,8 +202,14 @@ stdenv.mkDerivation rec {
       mv $out/opt/${binaryName}/resources/app.asar $out/opt/${binaryName}/resources/_app.asar
       mkdir $out/opt/${binaryName}/resources/app.asar
       echo '{"name":"discord","main":"index.js"}' > $out/opt/${binaryName}/resources/app.asar/package.json
-      echo 'require("${modPath}/patcher.js")' > $out/opt/${binaryName}/resources/app.asar/index.js
-    '');
+      echo 'require("${vencord}/patcher.js")' > $out/opt/${binaryName}/resources/app.asar/index.js
+    ''
+    + lib.strings.optionalString withMoonlight ''
+      mv $out/opt/${binaryName}/resources/app.asar $out/opt/${binaryName}/resources/_app.asar
+      mkdir $out/opt/${binaryName}/resources/app
+      echo '{"name":"discord","main":"injector.js","private": true}' > $out/opt/${binaryName}/resources/app/package.json
+      echo 'require("${moonlight}/injector.js").inject(require("path").join(__dirname, "../_app.asar"));' > $out/opt/${binaryName}/resources/app/injector.js
+    '';
 
   desktopItem = makeDesktopItem {
     name = pname;
@@ -212,6 +222,7 @@ stdenv.mkDerivation rec {
       "InstantMessaging"
     ];
     mimeTypes = [ "x-scheme-handler/discord" ];
+    startupWMClass = "discord";
   };
 
   passthru = {

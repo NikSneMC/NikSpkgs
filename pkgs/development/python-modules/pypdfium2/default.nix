@@ -3,21 +3,25 @@
   pkgs,
   buildPythonPackage,
   fetchFromGitHub,
-  fetchurl,
+  fetchgit,
   setuptools-scm,
   pdfium-binaries,
   numpy,
   pillow,
   pytestCheckHook,
-  python,
 }:
 
 let
   pdfiumVersion = "${pdfium-binaries.version}";
 
-  headers = fetchurl {
-    url = "https://pdfium.googlesource.com/pdfium/+archive/refs/heads/chromium/${pdfiumVersion}/public.tar.gz";
-    hash = "sha256-vKfs4Jd8LEtA3aTI+DcJMS0VOErq1IR1eThnMlxiER0=";
+  headers = fetchgit {
+    url = "https://pdfium.googlesource.com/pdfium";
+    # The latest revision on the chromium/${pdfiumVersion} branch
+    rev = "9afffebfa895ea6cdcc05516908c50bd7fe72797";
+    hash = "sha256-n7Xio1hEZqZX2FFKWqjVXEcOWPpkcVfBKXGPxDUL4cs=";
+    sparseCheckout = [
+      "public"
+    ];
   };
 
   # They demand their own fork of ctypesgen
@@ -84,8 +88,8 @@ buildPythonPackage rec {
     in
     ''
       # Preseed the headers and version file
-      mkdir -p ${headersDir}
-      tar -xf ${headers} -C ${headersDir}
+      mkdir -p ${bindingsDir}
+      cp -r ${headers}/public ${headersDir}
       install -m 644 ${inputVersionFile} ${versionFile}
 
       # Make generated bindings consider pdfium derivation path when loading dynamic libraries

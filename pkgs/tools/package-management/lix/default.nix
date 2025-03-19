@@ -4,7 +4,6 @@
   boehmgc,
   callPackage,
   fetchFromGitHub,
-  fetchpatch,
   rustPlatform,
   Security,
 
@@ -68,6 +67,7 @@ lib.makeExtensible (self: {
       docCargoDeps = rustPlatform.fetchCargoVendor {
         name = "lix-doc-${version}";
         inherit src;
+        allowGitDependencies = false;
         sourceRoot = "${src.name or src}/lix-doc";
         hash = "sha256-VPcrf78gfLlkTRrcbLkPgLOk0o6lsOJBm6HYLvavpNU=";
       };
@@ -88,6 +88,7 @@ lib.makeExtensible (self: {
       docCargoDeps = rustPlatform.fetchCargoVendor {
         name = "lix-doc-${version}";
         inherit src;
+        allowGitDependencies = false;
         sourceRoot = "${src.name or src}/lix-doc";
         hash = "sha256-U820gvcbQIBaFr2OWPidfFIDXycDFGgXX1NpWDDqENs=";
       };

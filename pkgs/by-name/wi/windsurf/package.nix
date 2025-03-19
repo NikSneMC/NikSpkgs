@@ -2,35 +2,58 @@
   lib,
   stdenv,
   callPackage,
+  vscode-generic,
   fetchurl,
   nixosTests,
   commandLineArgs ? "",
   useVSCodeRipgrep ? stdenv.hostPlatform.isDarwin,
 }:
-callPackage ../../../applications/editors/vscode/generic.nix (let
-  info = builtins.fromJSON (builtins.readFile ./info.json);
-in rec {
+let
+  info =
+    (lib.importJSON ./info.json)."${stdenv.hostPlatform.system}"
+      or (throw "windsurf: unsupported system ${stdenv.hostPlatform.system}");
+in
+callPackage vscode-generic {
   inherit commandLineArgs useVSCodeRipgrep;
 
+  inherit (info) version vscodeVersion;
   pname = "windsurf";
-  version = info.windsurfVersion;
 
-  executableName = pname;
+  executableName = "windsurf";
   longName = "Windsurf";
-  shortName = pname;
+  shortName = "windsurf";
+  libraryName = "windsurf";
+  iconName = "windsurf";
 
-  src = fetchurl {
-    inherit (info) url;
-    sha256 = info.sha256hash;
-  };
+  sourceRoot = if stdenv.hostPlatform.isDarwin then "Windsurf.app" else "Windsurf";
 
-  sourceRoot = "Windsurf";
+  src = fetchurl { inherit (info) url sha256; };
 
   tests = nixosTests.vscodium;
 
-  updateScript = ./update.py;
+  updateScript = ./update/update.mts;
 
-  meta = with lib; {
-    description = "The first agentic IDE, and then some";
+  # Editing the `codium` binary (and shell scripts) within the app bundle causes the bundle's signature
+  # to be invalidated, which prevents launching starting with macOS Ventura, because VSCodium is notarized.
+  # See https://eclecticlight.co/2022/06/17/app-security-changes-coming-in-ventura/ for more information.
+  dontFixup = stdenv.hostPlatform.isDarwin;
+
+  meta = {
+    description = "Agentic IDE powered by AI Flow paradigm";
+    longDescription = ''
+      The first agentic IDE, and then some.
+      The Windsurf Editor is where the work of developers and AI truly flow together, allowing for a coding experience that feels like literal magic.
+    '';
+    homepage = "https://codeium.com/windsurf";
+    license = lib.licenses.unfree;
+    maintainers = with lib.maintainers; [
+      xiaoxiangmoe
+    ];
+    platforms = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+      "x86_64-linux"
+    ];
+    sourceProvenance = [ lib.sourceTypes.binaryBytecode ];
   };
-})
+}
