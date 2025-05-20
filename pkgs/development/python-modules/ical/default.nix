@@ -17,7 +17,7 @@
 
 buildPythonPackage rec {
   pname = "ical";
-  version = "9.0.1";
+  version = "9.2.4";
   pyproject = true;
 
   disabled = pythonOlder "3.11";
@@ -26,7 +26,7 @@ buildPythonPackage rec {
     owner = "allenporter";
     repo = "ical";
     tag = version;
-    hash = "sha256-VaFzN/Yzo0Ad1vsuZJ4P8+WWH+GtPJGOz3PWum8rLww=";
+    hash = "sha256-R9BuCLuVYuUvrmF/arEDsUPPUeSLjpqiEJ/ovvGIsYQ=";
   };
 
   build-system = [ setuptools ];

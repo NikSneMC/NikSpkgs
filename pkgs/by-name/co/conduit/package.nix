@@ -7,6 +7,7 @@
 
   # passthru
   conduit,
+  python3Packages,
   nix-update-script,
 
   mpiSupport ? false,
@@ -14,14 +15,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "conduit";
-  version = "0.9.3";
+  version = "0.9.4";
 
   src = fetchFromGitHub {
     owner = "LLNL";
     repo = "conduit";
     tag = "v${finalAttrs.version}";
     fetchSubmodules = true;
-    hash = "sha256-R7DiMwaMG9VfqDJiO3kFPb76j6P2GZl/6qLxDfVex8A=";
+    hash = "sha256-xs/9hsE1DLCegXp3CHSl6qpC4ap+niNAWX5lNlUxz9E=";
   };
 
   nativeBuildInputs = [
@@ -50,6 +51,8 @@ stdenv.mkDerivation (finalAttrs: {
   passthru = {
     tests = {
       withMpi = conduit.override { mpiSupport = true; };
+      pythonModule = python3Packages.conduit;
+      pythonModuleWithMpi = python3Packages.conduit-mpi;
     };
     updateScript = nix-update-script { };
   };

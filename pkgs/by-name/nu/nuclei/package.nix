@@ -7,16 +7,16 @@
 
 buildGoModule rec {
   pname = "nuclei";
-  version = "3.3.10";
+  version = "3.4.4";
 
   src = fetchFromGitHub {
     owner = "projectdiscovery";
     repo = "nuclei";
     tag = "v${version}";
-    hash = "sha256-5+alARFuxwJlPYki5TU+4GdaJhBEYXbXH0BrCj2/aic=";
+    hash = "sha256-pZA7Alrn3E9w283nQ5G0sVaTd8/QqnMqa3WGaMsNllQ=";
   };
 
-  vendorHash = "sha256-l3733hg11+Qg4h68DnXoD8LyYiB+iFyZyKggpCAsx7Q=";
+  vendorHash = "sha256-mrLXVfZR+OtinIsvRaEMss//oKl6IWDFcfS8ku05zx4=";
 
   proxyVendor = true; # hash mismatch between Linux and Darwin
 
@@ -34,7 +34,7 @@ buildGoModule rec {
 
   doInstallCheck = true;
 
-  versionCheckProgramArg = [ "-version" ];
+  versionCheckProgramArg = "-version";
 
   meta = with lib; {
     description = "Tool for configurable targeted scanning";

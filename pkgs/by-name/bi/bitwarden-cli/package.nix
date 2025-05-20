@@ -13,13 +13,13 @@
 
 buildNpmPackage rec {
   pname = "bitwarden-cli";
-  version = "2025.2.0";
+  version = "2025.4.0";
 
   src = fetchFromGitHub {
     owner = "bitwarden";
     repo = "clients";
     tag = "cli-v${version}";
-    hash = "sha256-Ls30yeqMDBA4HjQdnICJy0HVHm7VfZarsKUHn3KTatA=";
+    hash = "sha256-sWphSdxh07GS7GPlNVxK7zoXMTGLjT7qTLfH1nsIiQQ=";
   };
 
   postPatch = ''
@@ -29,7 +29,7 @@ buildNpmPackage rec {
 
   nodejs = nodejs_20;
 
-  npmDepsHash = "sha256-V77I2ZzmcCo06vq76lGkRa+NmTEUe2urD0D1HQ/gBJA=";
+  npmDepsHash = "sha256-/BOzDt+wgnWedWfShPkAhaeujBBQTDlZdtiKl3wrOqE=";
 
   nativeBuildInputs = lib.optionals stdenv.hostPlatform.isDarwin [
     cctools
@@ -51,7 +51,7 @@ buildNpmPackage rec {
   npmFlags = [ "--legacy-peer-deps" ];
 
   npmRebuildFlags = [
-    # FIXME one of the esbuild versions fails to download @esbuild/linux-x64
+    # we'll run npm rebuild manually later
     "--ignore-scripts"
   ];
 
@@ -60,6 +60,11 @@ buildNpmPackage rec {
     shopt -s globstar
     rm -r node_modules/**/prebuilds
     shopt -u globstar
+
+    # FIXME one of the esbuild versions fails to download @esbuild/linux-x64
+    rm -r node_modules/esbuild node_modules/vite/node_modules/esbuild
+
+    npm rebuild --verbose
   '';
 
   postBuild = ''
@@ -69,12 +74,16 @@ buildNpmPackage rec {
     shopt -u globstar
   '';
 
-  postInstall = ''
-    # The @bitwarden modules are actually npm workspaces inside the source tree, which
-    # leave dangling symlinks behind. They can be safely removed, because their source is
-    # bundled via webpack and thus not needed at run-time.
-    rm -rf $out/lib/node_modules/@bitwarden/clients/node_modules/{@bitwarden,.bin}
-  '';
+  postInstall =
+    ''
+      # The @bitwarden modules are actually npm workspaces inside the source tree, which
+      # leave dangling symlinks behind. They can be safely removed, because their source is
+      # bundled via webpack and thus not needed at run-time.
+      rm -rf $out/lib/node_modules/@bitwarden/clients/node_modules/{@bitwarden,.bin}
+    ''
+    + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
+      installShellCompletion --cmd bw --zsh <($out/bin/bw completion --shell zsh)
+    '';
 
   passthru = {
     tests = {
@@ -82,7 +91,6 @@ buildNpmPackage rec {
     };
     updateScript = nix-update-script {
       extraArgs = [
-        "--commit"
         "--version=stable"
         "--version-regex=^cli-v(.*)$"
       ];

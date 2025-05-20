@@ -6,13 +6,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "nvidia-modprobe";
-  version = "570.124.04";
+  version = "575.51.02";
 
   src = fetchFromGitHub {
     owner = "NVIDIA";
     repo = "nvidia-modprobe";
     rev = version;
-    hash = "sha256-slYK8O3/Nz07MCP8fB4sg9Io0YSMVzFhXEyM+ZAaKiA=";
+    hash = "sha256-3iQySxYLG+GwtACeY7n5IwUSc0dVVgu6S0y+XMmv7AU=";
   };
 
   nativeBuildInputs = [ gnum4 ];

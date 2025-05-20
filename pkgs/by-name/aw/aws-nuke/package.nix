@@ -10,16 +10,16 @@
 
 buildGoModule rec {
   pname = "aws-nuke";
-  version = "3.48.2";
+  version = "3.52.1";
 
   src = fetchFromGitHub {
     owner = "ekristen";
     repo = "aws-nuke";
     tag = "v${version}";
-    hash = "sha256-1uNZy4XN2hscsvPGWO/dDRToX94lo9HZpU4AKsZ4ATU=";
+    hash = "sha256-yTGAW9q511dI55Zbz729D1nOddvNdrjptRZN21ngodU=";
   };
 
-  vendorHash = "sha256-YLk560F2YBwWsWFhQ8KsUuW/kIAlWBkihynREppQ+40=";
+  vendorHash = "sha256-6BIPF4bBEBnMHLjnH1rSCrh+cbwWjcpBKxHeQcTbEPk=";
 
   overrideModAttrs = _: {
     preBuild = ''

@@ -67,11 +67,11 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "postfix";
-  version = "3.10.1";
+  version = "3.10.2";
 
   src = fetchurl {
     url = "https://de.postfix.org/ftpmirror/official/postfix-${version}.tar.gz";
-    hash = "sha256-dYaNt6jtJSzToUwTo844Pd1CVjFgwCAn0GEgLuNnmb8=";
+    hash = "sha256-vMpWQTLUz1+cnONU2rndNe6OniGQCGRiPIFdrBa/vCc=";
   };
 
   nativeBuildInputs = [
@@ -98,6 +98,7 @@ stdenv.mkDerivation rec {
   patches = [
     ./postfix-script-shell.patch
     ./post-install-script.patch
+    ./postfix-3.0-no-warnings.patch
     ./relative-symlinks.patch
 
     # glibc 2.34 compat

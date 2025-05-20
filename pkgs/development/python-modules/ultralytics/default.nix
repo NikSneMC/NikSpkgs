@@ -8,6 +8,7 @@
   setuptools,
 
   # dependencies
+  lap,
   matplotlib,
   opencv-python,
   pandas,
@@ -31,14 +32,14 @@
 
 buildPythonPackage rec {
   pname = "ultralytics";
-  version = "8.3.92";
+  version = "8.3.130";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "ultralytics";
     repo = "ultralytics";
     tag = "v${version}";
-    hash = "sha256-+SwhQVEl7tLrhwuCruVLAtVS3U/RJb0ysIKG3bmuZk4=";
+    hash = "sha256-lB4Q1LK3hbn67mHcVn2qCh9YjVPDBl4DM3LXDL7lsvQ=";
   };
 
   build-system = [ setuptools ];
@@ -48,6 +49,7 @@ buildPythonPackage rec {
   ];
 
   dependencies = [
+    lap
     matplotlib
     opencv-python
     pandas
@@ -99,6 +101,8 @@ buildPythonPackage rec {
       "test_workflow"
       "test_yolo_world"
       "test_yolov10"
+      "test_yoloe"
+      "test_multichannel"
     ]
     ++ lib.optionals (stdenv.hostPlatform.isLinux && stdenv.hostPlatform.isAarch64) [
       # Fatal Python error: Aborted
@@ -116,7 +120,7 @@ buildPythonPackage rec {
 
   meta = {
     homepage = "https://github.com/ultralytics/ultralytics";
-    changelog = "https://github.com/ultralytics/ultralytics/releases/tag/v${version}";
+    changelog = "https://github.com/ultralytics/ultralytics/releases/tag/${src.tag}";
     description = "Train YOLO models for computer vision tasks";
     mainProgram = "yolo";
     license = lib.licenses.agpl3Only;

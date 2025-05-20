@@ -15,13 +15,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "renovate";
-  version = "39.191.0";
+  version = "40.14.4";
 
   src = fetchFromGitHub {
     owner = "renovatebot";
     repo = "renovate";
     tag = finalAttrs.version;
-    hash = "sha256-HJvtYqEUmIr+P8g6cCr+NSgmZkzF7TZaVifyhI84oSY=";
+    hash = "sha256-qL1pXlY9rBoZ5o4ZdiDAEv2zmLN42q9kma5/5yOlOno=";
   };
 
   postPatch = ''
@@ -39,7 +39,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm_10.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-w0BaiLwP2AC2KsP2+GTgagMcfFbP/FBaUurbL9y+pXw=";
+    hash = "sha256-Uj+w9jzbWKLoJgRS5GVGY5QZAwIKsH/MoIu6OailgAw=";
   };
 
   env.COREPACK_ENABLE_STRICT = 0;
@@ -93,7 +93,12 @@ stdenv.mkDerivation (finalAttrs: {
       version = testers.testVersion { package = finalAttrs.finalPackage; };
       vm-test = nixosTests.renovate;
     };
-    updateScript = nix-update-script { };
+    updateScript = nix-update-script {
+      extraArgs = [
+        "--version-regex"
+        "^(\\d+\\.\\d+\\.\\d+)$"
+      ];
+    };
   };
 
   meta = {

@@ -3,6 +3,7 @@
   buildPythonPackage,
   fetchFromGitHub,
   pythonOlder,
+  nix-update-script,
 
   # build-system
   pdm-backend,
@@ -24,6 +25,7 @@
   tenacity,
 
   # tests
+  blockbuster,
   freezegun,
   httpx,
   lark,
@@ -40,34 +42,28 @@
 
 buildPythonPackage rec {
   pname = "langchain";
-  version = "0.3.20";
+  version = "0.3.25";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "langchain-ai";
     repo = "langchain";
     tag = "langchain==${version}";
-    hash = "sha256-N209wUGdlHkOZynhSSE+ZHylL7cK+8H3PfZIG/wvMd0=";
+    hash = "sha256-B2Kg8kC6Qlu89hZVMhgqPU32BwFvgAti0IIYUdosT1A=";
   };
 
   sourceRoot = "${src.name}/libs/langchain";
-
-  patches = [
-    # blockbuster isn't supported in nixpkgs
-    ./rm-blockbuster.patch
-  ];
 
   build-system = [ pdm-backend ];
 
   buildInputs = [ bash ];
 
   pythonRelaxDeps = [
+    # Each component release requests the exact latest core.
+    # That prevents us from updating individul components.
+    "langchain-core"
     "numpy"
     "tenacity"
-  ];
-
-  pythonRemoveDeps = [
-    "blockbuster"
   ];
 
   dependencies = [
@@ -88,6 +84,7 @@ buildPythonPackage rec {
   };
 
   nativeCheckInputs = [
+    blockbuster
     freezegun
     httpx
     lark
@@ -144,10 +141,11 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "langchain" ];
 
-  passthru = {
-    updateScript = langchain-core.updateScript;
-    # updates the wrong fetcher rev attribute
-    skipBulkUpdate = true;
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--version-regex"
+      "langchain==([0-9.]+)"
+    ];
   };
 
   meta = {

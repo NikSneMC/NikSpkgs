@@ -43,6 +43,7 @@
 
   withGLES ? false,
   buildRemoteServer ? true,
+  zed-editor,
 }:
 
 assert withGLES -> stdenv.hostPlatform.isLinux;
@@ -98,7 +99,7 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "zed-editor";
-  version = "0.177.11";
+  version = "0.186.9";
 
   outputs =
     [ "out" ]
@@ -110,33 +111,34 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "zed-industries";
     repo = "zed";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-cnzaW0paORio8AONtVVGUZWG+HsWte12aWK2qvfj8oI=";
+    hash = "sha256-z3QHD1EfJfhgLZwUv805RHCEKiBm1wCpJG1GAS9OJgE=";
   };
 
   patches = [
-    # Zed uses cargo-install to install cargo-about during the script execution.
-    # We provide cargo-about ourselves and can skip this step.
-    # Until https://github.com/zed-industries/zed/issues/19971 is fixed,
-    # we also skip any crate for which the license cannot be determined.
-    ./0001-generate-licenses.patch
-
     # Upstream delegates linking on Linux to clang to make use of mold,
     # but builds fine with our standard linker.
     # This patch removes their linker override from the cargo config.
-    ./0002-linux-linker.patch
-
-    # See https://github.com/zed-industries/zed/pull/21661#issuecomment-2524161840
-    "script/patches/use-cross-platform-livekit.patch"
+    ./0001-linux-linker.patch
   ];
 
-  # Dynamically link WebRTC instead of static
-  postPatch = ''
-    substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
-      --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
-  '';
+  cargoPatches = [
+    ./0002-fix-duplicate-reqwest.patch
+  ];
+
+  postPatch =
+    # Dynamically link WebRTC instead of static
+    ''
+      substituteInPlace $cargoDepsCopy/webrtc-sys-*/build.rs \
+        --replace-fail "cargo:rustc-link-lib=static=webrtc" "cargo:rustc-link-lib=dylib=webrtc"
+
+      # Zed team renamed the function but forgot to update its usage in this file
+      # We rename it ourselves for now, until upstream fixes the issue
+      substituteInPlace $cargoDepsCopy/reqwest-0.12*/src/blocking/client.rs \
+        --replace-fail "inner.redirect(policy)" "inner.redirect_policy(policy)"
+    '';
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-Hl5QWU9yKXedQFVd60Fz5O7B2e/YUqj3BLNmqC44UP0=";
+  cargoHash = "sha256-qGHUO25a2288hp4+DcQJabauOVGYn7CXtDqWGB6diO8=";
 
   nativeBuildInputs =
     [
@@ -192,6 +194,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   buildFeatures = lib.optionals stdenv.hostPlatform.isDarwin [ "gpui/runtime_shaders" ];
 
   env = {
+    ALLOW_MISSING_LICENSES = true;
     ZSTD_SYS_USE_PKG_CONFIG = true;
     FONTCONFIG_FILE = makeFontsConf {
       fontDirectories = [
@@ -326,7 +329,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
         };
       }
       // lib.optionalAttrs stdenv.hostPlatform.isLinux {
-        withGles = finalAttrs.finalPackage.override { withGLES = true; };
+        withGles = zed-editor.override { withGLES = true; };
       };
   };
 

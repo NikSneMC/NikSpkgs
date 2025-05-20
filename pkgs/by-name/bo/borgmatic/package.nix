@@ -15,12 +15,12 @@
 }:
 python3Packages.buildPythonApplication rec {
   pname = "borgmatic";
-  version = "1.9.14";
+  version = "2.0.5";
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-w503lwXlKWlTsguzECUGmsbhvdJzTF4XK+Ib2KuD2DE=";
+    hash = "sha256-jpaTLbDmwcL8ihu8XTD2LsSfmneBpOGSVaRcJyeSSo4=";
   };
 
   passthru.updateScript = nix-update-script { };
@@ -30,7 +30,7 @@ python3Packages.buildPythonApplication rec {
     [
       flexmock
       pytestCheckHook
-      pytest-cov
+      pytest-cov-stub
     ]
     ++ optional-dependencies.apprise;
 
@@ -39,11 +39,6 @@ python3Packages.buildPythonApplication rec {
   disabledTests = [
     "test_borgmatic_version_matches_news_version"
   ];
-
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace '--cov-fail-under=100' ""
-  '';
 
   nativeBuildInputs = [ installShellFiles ];
 

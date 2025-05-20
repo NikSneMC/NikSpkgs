@@ -2,30 +2,33 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
+  versionCheckHook,
   nix-update-script,
   nixosTests,
 }:
 
 buildGoModule (finalAttrs: {
   pname = "glance";
-  version = "0.7.7";
+  version = "0.8.1";
 
   src = fetchFromGitHub {
     owner = "glanceapp";
     repo = "glance";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-HFF1qiruz1SM9+g3xOKawuGmLzdYUUt3DnMRwjobVN4=";
+    hash = "sha256-syWalphoKjUYrQjKrQUMDijgILQ+AIOVTMqYCiYVWyU=";
   };
 
-  vendorHash = "sha256-lURRHlZoxbuW1SXxrxy2BkMndcEllGFmVCB4pXBad8Q=";
+  vendorHash = "sha256-81FAWMe7ksmbklXGGg15v2W4nuT6AcBHLIhXF7bI78c=";
 
   ldflags = [
     "-s"
     "-w"
-    "-X github.com/glanceapp/glance/internal/glance.buildVersion=${finalAttrs.version}"
+    "-X github.com/glanceapp/glance/internal/glance.buildVersion=v${finalAttrs.version}"
   ];
 
-  excludedPackages = [ "scripts/build-and-ship" ];
+  nativeInstallCheckInputs = [ versionCheckHook ];
+  versionCheckProgramArg = "--version";
+  doInstallCheck = true;
 
   passthru = {
     updateScript = nix-update-script { };

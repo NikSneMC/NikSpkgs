@@ -1,15 +1,18 @@
 {
   lib,
   vscode-utils,
+  vscode-extension-update-script,
 }:
 
 vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     publisher = "RooVeterinaryInc";
     name = "roo-cline";
-    version = "3.8.6";
-    hash = "sha256-t3QUqe0qYizrJQcsEmYYmNYS/cpYiHQXJHtzHk9MGS8=";
+    version = "3.17.1";
+    hash = "sha256-gfzn0KulOHUKcG3LNF7+g7VwkDHR4BYsmq730Uuv2ZU=";
   };
+
+  passthru.updateScript = vscode-extension-update-script { };
 
   meta = {
     description = "AI-powered autonomous coding agent that lives in your editor";
