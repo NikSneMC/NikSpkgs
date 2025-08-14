@@ -11,58 +11,58 @@
     "clion": {
       "update-channel": "CLion RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/cpp/CLion-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "4025fa892f214d4d55d658cb7390d1538d127286ec5aca1311fe9c5470336b45",
-      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.1.3.tar.gz",
-      "build_number": "251.26927.39"
+      "version": "2025.2",
+      "sha256": "a12d094544f0b5222d34e2cd8b36b1ea834e7c7acdea7b65aae5cb3522ca108e",
+      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.2.tar.gz",
+      "build_number": "252.23892.426"
     },
     "datagrip": {
       "update-channel": "DataGrip RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "b672b2b50e2ae539af24e32ac7678ff32a8b207e6692e12c8b891eaf78200d24",
-      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.1.3.tar.gz",
-      "build_number": "251.26094.87"
+      "version": "2025.2.1",
+      "sha256": "1a0dea8a82920818e40b552950e90caf39bcf6ca9ae4e973a1d49e7db0498ecc",
+      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.2.1.tar.gz",
+      "build_number": "252.23892.464"
     },
     "dataspell": {
       "update-channel": "DataSpell RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/dataspell-{version}.tar.gz",
-      "version": "2025.1.1",
-      "sha256": "e0711b629ad45d6d051fd9796bf81689d46212fdd8f21306128a8522097ca3e9",
-      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.1.1.tar.gz",
-      "build_number": "251.25410.158"
+      "version": "2025.2",
+      "sha256": "fd37e488b990e3e395a12c3ebbdb2b4df87c58eb9bb6c82fd38a0322b5c2fb2b",
+      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.2.tar.gz",
+      "build_number": "252.23892.514"
     },
     "gateway": {
       "update-channel": "Gateway RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-{version}.tar.gz",
-      "version": "2025.1.2",
-      "sha256": "666ea22f7bdfdbf327dd77b7292e2abf5a3ac356ae043fe8b35102d78437d7f2",
-      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.1.2.tar.gz",
-      "build_number": "251.26094.128"
+      "version": "2025.2",
+      "sha256": "195509b4e35ba3d31f71e3c39ea32e17dbfebddae857691234fc0683802ce448",
+      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.2.tar.gz",
+      "build_number": "252.23892.437"
     },
     "goland": {
       "update-channel": "GoLand RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/go/goland-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "9dec99e036251696ded89abcb11a67a9f3869fc2bdad4ba0cc1297ca9ae4ebea",
-      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.1.3.tar.gz",
-      "build_number": "251.26927.50"
+      "version": "2025.2",
+      "sha256": "d285c10055af9002db8c913557535ba46e3158c5733b236add3d71f93873e85a",
+      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.2.tar.gz",
+      "build_number": "252.23892.449"
     },
     "idea-community": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIC-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "f9f794a23cc623425bfef201c0a674c56090a24215fe71ebfaf6ba27226990c5",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.1.3.tar.gz",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "30e917c55507443c61674d0bdd5cbb40a5b02c628d5073f8a0028ef49e0c50b5",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.2.tar.gz",
+      "build_number": "252.23892.409"
     },
     "idea-ultimate": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIU-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "d9437e08f57cf6c3b695c2a5dc728b059c8e1523e056e21a101149440ea6dec2",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.1.3.tar.gz",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "d28d0d647cf5f0d2eedd49602493be4a3182aec83c73df01b887164f56db0ff4",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.2.tar.gz",
+      "build_number": "252.23892.409"
     },
     "mps": {
       "update-channel": "MPS RELEASE",
@@ -75,59 +75,59 @@
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "cc113e0f6671c0aeef42122f4b3ae29f27b893ff180497eabab842ce5a9b2ca2",
-      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.1.3.tar.gz",
-      "build_number": "251.26927.60",
+      "version": "2025.2",
+      "sha256": "d0d3e61aaed7c4765b4947a8410a885cf7e1123c488340585ed72151f8c05350",
+      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2.tar.gz",
+      "build_number": "252.23892.419",
       "version-major-minor": "2022.3"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-community-{version}.tar.gz",
-      "version": "2025.1.2",
-      "sha256": "193fbbb638235c4c671bb6c6b432f43a2d46f7f7ebd6b5f2cc8a1db7db93c5d6",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.1.2.tar.gz",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "2b95c6169c6f9bb00657e24cecdad23281c423b661918c09781894f3508f8672",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.2.0.1.tar.gz",
+      "build_number": "252.23892.515"
     },
     "pycharm-professional": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-{version}.tar.gz",
-      "version": "2025.1.2",
-      "sha256": "4a407779c5df9728e29698eeabdb4533911e755ead224d0c1deff959876c3108",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.1.2.tar.gz",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "555a20eb9a695f52430fc3ef1b43c229186df5bf1c8962de55db0ef7eb308fb4",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.2.0.1.tar.gz",
+      "build_number": "252.23892.515"
     },
     "rider": {
       "update-channel": "Rider RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "7fce2077fbd3cb4c80e56af4607c2450db81a727b93cc41e155b3ab3779d7b90",
-      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.1.3.tar.gz",
-      "build_number": "251.26094.147"
+      "version": "2025.2",
+      "sha256": "661d5e8fc12e6373e7a84ee197aa755d77c2e3fe0246284c79bc20682d39d309",
+      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.2.tar.gz",
+      "build_number": "252.23892.524"
     },
     "ruby-mine": {
       "update-channel": "RubyMine RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "9b640bf12efbfc1e6a97c7b749f85154ab64493ae5a51e195c8adca3e07507d9",
-      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.1.3.tar.gz",
-      "build_number": "251.26927.47"
+      "version": "2025.2",
+      "sha256": "2a9c2a4b4ed222bdf0038553f46424f8bea1a2ebe6542c764d9586d82351381d",
+      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.2.tar.gz",
+      "build_number": "252.23892.415"
     },
     "rust-rover": {
       "update-channel": "RustRover RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-{version}.tar.gz",
-      "version": "2025.1.4",
-      "sha256": "88c6bfabe324af665692562ae32c61b9eb1cf3e0afe05b3aa2a835a5a14c181a",
-      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.1.4.tar.gz",
-      "build_number": "251.26094.152"
+      "version": "2025.2",
+      "sha256": "98bf8781c9325d3c4ddd6b0f4efb934b209f2afcbf97533effd2e8ffe40800e0",
+      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.2.tar.gz",
+      "build_number": "252.23892.452"
     },
     "webstorm": {
       "update-channel": "WebStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-{version}.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "dfb8836c7d09d61abdd57c85caf042b8c5e21bf730711b492d4932e6e55ec702",
-      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.1.3.tar.gz",
-      "build_number": "251.26927.40"
+      "version": "2025.2",
+      "sha256": "85c83e8ed716e9cda03be922fd10d95c482f9f3c27e095dd768ddefd1e69462f",
+      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.2.tar.gz",
+      "build_number": "252.23892.411"
     },
     "writerside": {
       "update-channel": "Writerside EAP",
@@ -150,58 +150,58 @@
     "clion": {
       "update-channel": "CLion RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/cpp/CLion-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "62be26d09b1a7182a61aec032963b6264311cccd198cbb91121ca486c03639d3",
-      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.39"
+      "version": "2025.2",
+      "sha256": "a594949bd15a70dd17906d056778b8107a209e0bc874a188b411da8e8f7e4f16",
+      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.426"
     },
     "datagrip": {
       "update-channel": "DataGrip RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "ca0b5a6685e8494311e3276ad22c097ea3a2f8925baff39951a45c467f3c547c",
-      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26094.87"
+      "version": "2025.2.1",
+      "sha256": "da21f165bce024ed6e99275350da41fa49e8ac51a47da50ed7a1e104edc06aa0",
+      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.2.1-aarch64.tar.gz",
+      "build_number": "252.23892.464"
     },
     "dataspell": {
       "update-channel": "DataSpell RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/dataspell-{version}-aarch64.tar.gz",
-      "version": "2025.1.1",
-      "sha256": "4f7f05141bee346dd29ed48dafcea24197494aa8bbc02409df9089da1c8e0be8",
-      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.1.1-aarch64.tar.gz",
-      "build_number": "251.25410.158"
+      "version": "2025.2",
+      "sha256": "3c4261682f54a283ce693315dde5f2a472fec91887cf37b8c6b87c73ce245d2c",
+      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.514"
     },
     "gateway": {
       "update-channel": "Gateway RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-{version}-aarch64.tar.gz",
-      "version": "2025.1.2",
-      "sha256": "306a3eea012a9c398d95e1579fab38c5979297390ae048c98bd32026bd0fbe7f",
-      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.1.2-aarch64.tar.gz",
-      "build_number": "251.26094.128"
+      "version": "2025.2",
+      "sha256": "f0149112bf8813cd37cdf65fa098b2261914263854b025001cfffd0592fc2e69",
+      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.437"
     },
     "goland": {
       "update-channel": "GoLand RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/go/goland-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "6fdf298537395555f70ad34661e0c170564f5a3d2b395978749388be983e33fd",
-      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.50"
+      "version": "2025.2",
+      "sha256": "99a5f3e0455fddf62ce92644cb53906e4600da6d2d2dad89164c594c31faa157",
+      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.449"
     },
     "idea-community": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIC-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "7a6d75ba101304fb2b416ae4ba6e04373a9c1c1a9419d2fff2dfb86d761d27fb",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "dead5589e78a10e5b6df76c484139679c80c94d1ce9c9c5778721ced1ee02b5d",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.409"
     },
     "idea-ultimate": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIU-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "9586bd9c60da153634c8d66340959730cc80d3868e3b3d70472c07650dffefe4",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "eb6b322db2679b45d9d362fc4579b5ddbd1b7510b9f407ea8c34d18b90f62e7b",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.409"
     },
     "mps": {
       "update-channel": "MPS RELEASE",
@@ -214,59 +214,59 @@
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "6d3f75acc847cf4c39110cb5f241b05ca3c78abd76debdbbd0b6a37d4807f539",
-      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.60",
+      "version": "2025.2",
+      "sha256": "06821ba75ce5dd5f192246befd5aedfc236606d8c4a1a2c15bf3d21a39c6cf04",
+      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.419",
       "version-major-minor": "2022.3"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-community-{version}-aarch64.tar.gz",
-      "version": "2025.1.2",
-      "sha256": "10e7426804d649d3c5bdbfc365cf85fe73dd7e74e67fd1e4c82645e8532d17e7",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.1.2-aarch64.tar.gz",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "820f8f1a749d2544a4e4511ff23e8b55f3fe5faa4e0b715ba44999f784c5ac94",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.2.0.1-aarch64.tar.gz",
+      "build_number": "252.23892.515"
     },
     "pycharm-professional": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-{version}-aarch64.tar.gz",
-      "version": "2025.1.2",
-      "sha256": "831f5563a354e617158cd88c2a63c0bda80b21c3a64fc98a3b6dc7ae22151805",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.1.2-aarch64.tar.gz",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "d5a00d4774ad5861fad457494b644bb0ee4c6017f1f6c881da4afd23b44fdaf7",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.2.0.1-aarch64.tar.gz",
+      "build_number": "252.23892.515"
     },
     "rider": {
       "update-channel": "Rider RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "ed6a185bf4768509febf4664e8577b518ce23f974a6b6d5a183d546d3da2d1a5",
-      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26094.147"
+      "version": "2025.2",
+      "sha256": "19b8c6322aac489888afe9eea81dcb6a114b4cc75d525ee3ea8a86899c6b42c7",
+      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.524"
     },
     "ruby-mine": {
       "update-channel": "RubyMine RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "718f5a921d3659e8ebf903af50299c11a87acf1aa86ac213985c82e6226e48c5",
-      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.47"
+      "version": "2025.2",
+      "sha256": "2e657e0fc3458a4bef226fba0ed48f5a5997794efae5b0dc7dc6237e258b8fd9",
+      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.415"
     },
     "rust-rover": {
       "update-channel": "RustRover RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-{version}-aarch64.tar.gz",
-      "version": "2025.1.4",
-      "sha256": "741539972798cef675bb97eed6953ca3eb0b43b53156d30a7fdade1df30c029c",
-      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.1.4-aarch64.tar.gz",
-      "build_number": "251.26094.152"
+      "version": "2025.2",
+      "sha256": "aeb1876b94904056994b8735c4e9b35b2579daea843347ae04eaf9634bb71370",
+      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.452"
     },
     "webstorm": {
       "update-channel": "WebStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-{version}-aarch64.tar.gz",
-      "version": "2025.1.3",
-      "sha256": "9f8f85426f23fc0f3ae9143f46cfaf2aae5c6766d51e3c853cf735db2e0339f8",
-      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.1.3-aarch64.tar.gz",
-      "build_number": "251.26927.40"
+      "version": "2025.2",
+      "sha256": "e7d22b83e0ca89d9aa7663c5444382d77296e7b71ec3e73133f85e83363c0a45",
+      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.2-aarch64.tar.gz",
+      "build_number": "252.23892.411"
     },
     "writerside": {
       "update-channel": "Writerside EAP",
@@ -289,58 +289,58 @@
     "clion": {
       "update-channel": "CLion RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/cpp/CLion-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "8144071d2c4485b5fd2447a00be3577533a7bc5c510b4b4fdd5db68bb93607a1",
-      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.1.3.dmg",
-      "build_number": "251.26927.39"
+      "version": "2025.2",
+      "sha256": "7fb1e9149b29e9794af5975715f14c65b856358ea64161eddb81a80e576158cf",
+      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.2.dmg",
+      "build_number": "252.23892.426"
     },
     "datagrip": {
       "update-channel": "DataGrip RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "006fb7a0875c8fd205cd1d4204dee3be87d1fe359375b75e20ee6e0d21ca7d00",
-      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.1.3.dmg",
-      "build_number": "251.26094.87"
+      "version": "2025.2.1",
+      "sha256": "e6c7fd2777ec7f621fa08b6d2d599c84b765d94be9d2b7a62f840ea6253cb9fe",
+      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.2.1.dmg",
+      "build_number": "252.23892.464"
     },
     "dataspell": {
       "update-channel": "DataSpell RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/dataspell-{version}.dmg",
-      "version": "2025.1.1",
-      "sha256": "a0b3bd8513f98e448a90132dfb61b221cab22938d8a3992627f9cb141cf71926",
-      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.1.1.dmg",
-      "build_number": "251.25410.158"
+      "version": "2025.2",
+      "sha256": "36bd810a0ab4fab0edcc135ef472a731f55c25af80d40b1e6d36a833302d525c",
+      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.2.dmg",
+      "build_number": "252.23892.514"
     },
     "gateway": {
       "update-channel": "Gateway RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-{version}.dmg",
-      "version": "2025.1.2",
-      "sha256": "b4e45266159352598d0cbd7b03283cb53260d20866ca77d57a43150e81cf3d09",
-      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.1.2.dmg",
-      "build_number": "251.26094.128"
+      "version": "2025.2",
+      "sha256": "637f096b34e8fb4425c570c3140de464ee96884b222cec5df1f630ea7aed833f",
+      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.2.dmg",
+      "build_number": "252.23892.437"
     },
     "goland": {
       "update-channel": "GoLand RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/go/goland-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "daeab59912d6530605ac89b18d4cc462f273793153b557e4a06392bcc31de015",
-      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.1.3.dmg",
-      "build_number": "251.26927.50"
+      "version": "2025.2",
+      "sha256": "c42e150a88b9d9ef033a7ff3678eb891408668afe83179d4f678bb674dc8e424",
+      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.2.dmg",
+      "build_number": "252.23892.449"
     },
     "idea-community": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIC-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "1e640fc2bf96667240389e02e116e3a97c5c6d96060c4656a46bcda7b8440d0f",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.1.3.dmg",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "ded2e2b6ade9040a8a32a690c34e1c1c90daa35ec6c3956217cf780c38380445",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.2.dmg",
+      "build_number": "252.23892.409"
     },
     "idea-ultimate": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIU-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "136a3114a3e33e18ad16226ba3b743f8139e113977b43242a0e127aaaa85786f",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.1.3.dmg",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "a142bd47516ee184d3d76676d78451f3e9e05a32ba8fdf8778ac04579b3accab",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.2.dmg",
+      "build_number": "252.23892.409"
     },
     "mps": {
       "update-channel": "MPS RELEASE",
@@ -353,59 +353,59 @@
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "abd27a6baffba215f6e25d79a6cd538736bca1e6d481563455b4a0621dd7fabc",
-      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.1.3.dmg",
-      "build_number": "251.26927.60",
+      "version": "2025.2",
+      "sha256": "2a28e39d10e6470c25839698a160eb0076fb5f8a1e0e3cb9000876d05ab0d502",
+      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2.dmg",
+      "build_number": "252.23892.419",
       "version-major-minor": "2022.3"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-community-{version}.dmg",
-      "version": "2025.1.2",
-      "sha256": "38283e62677079d7d830217087c563ac6daf5e71422c03e56082bde9572e3908",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.1.2.dmg",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "0fa4e9c93bcb1f0d56dd7faecbb01b38d3c07fbbcf4fc8c0ad4dc5dc2f15b5a9",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.2.0.1.dmg",
+      "build_number": "252.23892.515"
     },
     "pycharm-professional": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-{version}.dmg",
-      "version": "2025.1.2",
-      "sha256": "41c6187f4f044522d02749f979cef8f127337b2945772070a0ba44c53a6ebf0c",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.1.2.dmg",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "440e613cc7e9d02ea27c921168b27a120e0eed5d084d878a6e7f9af3c874ac1a",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.2.0.1.dmg",
+      "build_number": "252.23892.515"
     },
     "rider": {
       "update-channel": "Rider RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "9b645982d017d896c46f9cd794807355c1fce90702ed561c121428edc1ec9e09",
-      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.1.3.dmg",
-      "build_number": "251.26094.147"
+      "version": "2025.2",
+      "sha256": "c03da6f4c519e1c697ada502f43d1152e41614262970cbbf4df15d2f470658f3",
+      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.2.dmg",
+      "build_number": "252.23892.524"
     },
     "ruby-mine": {
       "update-channel": "RubyMine RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "e0487e51ce73cc6f24c77cde6c5ab5104f6528b3c14b90488fae1845023b822f",
-      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.1.3.dmg",
-      "build_number": "251.26927.47"
+      "version": "2025.2",
+      "sha256": "b3a959fd9b08d9f21db1d1970f3786705090f334bd05e108cb6206be9d6e753a",
+      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.2.dmg",
+      "build_number": "252.23892.415"
     },
     "rust-rover": {
       "update-channel": "RustRover RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-{version}.dmg",
-      "version": "2025.1.4",
-      "sha256": "c445a87bb152f4486c1e85236778a18dd3b4a3d5cd3e3abc6a2fdd6632dd04a7",
-      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.1.4.dmg",
-      "build_number": "251.26094.152"
+      "version": "2025.2",
+      "sha256": "c0f19ea5e9c7cb27f80312d0eb8c7f7c3b294a0bf583b0a423930827f3cd73c5",
+      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.2.dmg",
+      "build_number": "252.23892.452"
     },
     "webstorm": {
       "update-channel": "WebStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-{version}.dmg",
-      "version": "2025.1.3",
-      "sha256": "1e403680ee7eb9e4aa5c35d3138b0a95477b180e839b501e8b4b8a88878335cb",
-      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.1.3.dmg",
-      "build_number": "251.26927.40"
+      "version": "2025.2",
+      "sha256": "c748bf829295f1d431c032ccbe88d3bcaf771699c8e654ea4bc9f419fb87b576",
+      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.2.dmg",
+      "build_number": "252.23892.411"
     },
     "writerside": {
       "update-channel": "Writerside EAP",
@@ -428,58 +428,58 @@
     "clion": {
       "update-channel": "CLion RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/cpp/CLion-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "b415b03f8099cb4bcfd443562f9a88aecbe641ba387586d437031b5d2dc2726d",
-      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.39"
+      "version": "2025.2",
+      "sha256": "40be28243da1bdb90308e997656af5872103a32d167e1539dd4e1b00a7ce0ea4",
+      "url": "https://jb-proxy-ides.vercel.app/cpp/CLion-2025.2-aarch64.dmg",
+      "build_number": "252.23892.426"
     },
     "datagrip": {
       "update-channel": "DataGrip RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "83da07ddd46fe95aed36d98cbb61c7f81097dc38abe5515933653746859b396c",
-      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.1.3-aarch64.dmg",
-      "build_number": "251.26094.87"
+      "version": "2025.2.1",
+      "sha256": "865a887cc89076eac601bc073e74d6cb1b5711aaf8f4c39a2f7bd18648d9cc6e",
+      "url": "https://jb-proxy-ides.vercel.app/datagrip/datagrip-2025.2.1-aarch64.dmg",
+      "build_number": "252.23892.464"
     },
     "dataspell": {
       "update-channel": "DataSpell RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/dataspell-{version}-aarch64.dmg",
-      "version": "2025.1.1",
-      "sha256": "65bbf4da47e5ceecfab5e19f80bec7ddd5f66bfcdc8dc75691cad98958e72af1",
-      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.1.1-aarch64.dmg",
-      "build_number": "251.25410.158"
+      "version": "2025.2",
+      "sha256": "484c6889a929c3ec572711164600ad93c927b57a3487636d672db77a1e9483f5",
+      "url": "https://jb-proxy-ides.vercel.app/python/dataspell-2025.2-aarch64.dmg",
+      "build_number": "252.23892.514"
     },
     "gateway": {
       "update-channel": "Gateway RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-{version}-aarch64.dmg",
-      "version": "2025.1.2",
-      "sha256": "1cf7dcdbb5408c9c7711a436e4c763df147ce332ce2e1f260fa246af87b0a58e",
-      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.1.2-aarch64.dmg",
-      "build_number": "251.26094.128"
+      "version": "2025.2",
+      "sha256": "d8be067bdd845c3c61e8e9c214b1591c2658e0a59ba5e0a45f3b1129f9c6fa63",
+      "url": "https://jb-proxy-ides.vercel.app/idea/gateway/JetBrainsGateway-2025.2-aarch64.dmg",
+      "build_number": "252.23892.437"
     },
     "goland": {
       "update-channel": "GoLand RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/go/goland-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "f58070d3e49b61dccd8ce218f41558ad9904620860f58aa60fb4b683efed7aa9",
-      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.50"
+      "version": "2025.2",
+      "sha256": "043600466d739338b9d24a472547b3d7133505165032459e9fe6f913b6920eac",
+      "url": "https://jb-proxy-ides.vercel.app/go/goland-2025.2-aarch64.dmg",
+      "build_number": "252.23892.449"
     },
     "idea-community": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIC-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "d912ba961141b315881c16805dd6684d1f0bae321c5baf84d851bdd80d7e9e87",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "a77e9808be00c2225504cd4710fca625027e46ab3d131b3cdfceb982286f4d94",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIC-2025.2-aarch64.dmg",
+      "build_number": "252.23892.409"
     },
     "idea-ultimate": {
       "update-channel": "IntelliJ IDEA RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/idea/ideaIU-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "88cb043b43d6da25269abae0fec2b41705b5ef72501f384ef4084091e461a1e8",
-      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.53"
+      "version": "2025.2",
+      "sha256": "1055a85e2524a67cafa0aa51e75a6d7adf14e7e05a5e52d833a60de5112b60d7",
+      "url": "https://jb-proxy-ides.vercel.app/idea/ideaIU-2025.2-aarch64.dmg",
+      "build_number": "252.23892.409"
     },
     "mps": {
       "update-channel": "MPS RELEASE",
@@ -492,59 +492,59 @@
     "phpstorm": {
       "update-channel": "PhpStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "34cb7ddf548f2a2883560e8b7a861d587a299b864e30cb8311cd37ec4ad54517",
-      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.60",
+      "version": "2025.2",
+      "sha256": "d4ca651a534dfa72d6c6221c23a49bb4bf10a533013db71d51096bb380f1a9c0",
+      "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2-aarch64.dmg",
+      "build_number": "252.23892.419",
       "version-major-minor": "2022.3"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-community-{version}-aarch64.dmg",
-      "version": "2025.1.2",
-      "sha256": "cdcdea2e167c3621f5b5ea8e0150c62d24495192edd2282616676d3f53b06063",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.1.2-aarch64.dmg",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "acdbfd143a7da358cbd9b1410eff8763f9650c58f9a976d80a9aa8977f358e00",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-community-2025.2.0.1-aarch64.dmg",
+      "build_number": "252.23892.515"
     },
     "pycharm-professional": {
       "update-channel": "PyCharm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-{version}-aarch64.dmg",
-      "version": "2025.1.2",
-      "sha256": "89a463c896e4e7f6cf6a624b78305d881756b2a350780bfcecd15d6cb766e54b",
-      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.1.2-aarch64.dmg",
-      "build_number": "251.26094.141"
+      "version": "2025.2.0.1",
+      "sha256": "9d3265dd828c45681ba608ee2325b3b560396b7048290d7c69714cbc99e86fd7",
+      "url": "https://jb-proxy-ides.vercel.app/python/pycharm-professional-2025.2.0.1-aarch64.dmg",
+      "build_number": "252.23892.515"
     },
     "rider": {
       "update-channel": "Rider RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "04b5d3cd99bb3f04fb75ba115d7523db283a70a0410c9274a88ec888a62d8ca3",
-      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.1.3-aarch64.dmg",
-      "build_number": "251.26094.147"
+      "version": "2025.2",
+      "sha256": "ec385a005fb740e6b12a5232ae57c7d189b3d32ac4813734b04d4257421368a3",
+      "url": "https://jb-proxy-ides.vercel.app/rider/JetBrains.Rider-2025.2-aarch64.dmg",
+      "build_number": "252.23892.524"
     },
     "ruby-mine": {
       "update-channel": "RubyMine RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "06e9d70dd8f885526ff778df9c611e1e3b334a7cf313f769c7544936462056d1",
-      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.47"
+      "version": "2025.2",
+      "sha256": "770651a99845dcf8f31ddab0a99e4c74df19a5adb1cfb776c7cf178ac2b8067e",
+      "url": "https://jb-proxy-ides.vercel.app/ruby/RubyMine-2025.2-aarch64.dmg",
+      "build_number": "252.23892.415"
     },
     "rust-rover": {
       "update-channel": "RustRover RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-{version}-aarch64.dmg",
-      "version": "2025.1.4",
-      "sha256": "9f56484888e6b33a034b4d1354a22929b6c701da3da2032ec2b3864b6c973550",
-      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.1.4-aarch64.dmg",
-      "build_number": "251.26094.152"
+      "version": "2025.2",
+      "sha256": "dd0681951c4a8f2a4b97480f37f29c688ff8c7572d96d2417c4bdac1988d17f6",
+      "url": "https://jb-proxy-ides.vercel.app/rustrover/RustRover-2025.2-aarch64.dmg",
+      "build_number": "252.23892.452"
     },
     "webstorm": {
       "update-channel": "WebStorm RELEASE",
       "url-template": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-{version}-aarch64.dmg",
-      "version": "2025.1.3",
-      "sha256": "2d65e2f9737fa436ad099b1d7a0034fe1143521df45ea785e7162d504175b4e9",
-      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.1.3-aarch64.dmg",
-      "build_number": "251.26927.40"
+      "version": "2025.2",
+      "sha256": "5f29ca9472c068f8086cb05c4ef3b0fb2b88d4888ef1c5430a0e1f2c771ccbce",
+      "url": "https://jb-proxy-ides.vercel.app/webstorm/WebStorm-2025.2-aarch64.dmg",
+      "build_number": "252.23892.411"
     },
     "writerside": {
       "update-channel": "Writerside EAP",
