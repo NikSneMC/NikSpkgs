@@ -41,13 +41,14 @@ rustPlatform.buildRustPackage rec {
     rustPlatform.bindgenHook
   ];
 
-  buildInputs = [
-    openssl
-  ];
+  buildInputs = [ openssl ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [ darwin.apple_sdk.frameworks.SystemConfiguration ];
 
   doCheck = false;
 
   checkFlags = [
+    # flaky
+    "--skip=ws_integration::none::merge"
     # requires docker
     "--skip=database_upgrade"
   ];
@@ -64,6 +65,7 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://surrealdb.com/";
     mainProgram = "surreal";
     license = licenses.bsl11;
+    maintainers = with maintainers; [ sikmir happysalada siriobalmelli ];
     maintainers = with maintainers; [ sikmir happysalada siriobalmelli ];
   };
 }
