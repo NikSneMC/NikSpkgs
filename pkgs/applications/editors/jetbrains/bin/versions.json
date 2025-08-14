@@ -217,8 +217,7 @@
       "version": "2025.2",
       "sha256": "06821ba75ce5dd5f192246befd5aedfc236606d8c4a1a2c15bf3d21a39c6cf04",
       "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2-aarch64.tar.gz",
-      "build_number": "252.23892.419",
-      "version-major-minor": "2022.3"
+      "build_number": "252.23892.419"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
@@ -356,8 +355,7 @@
       "version": "2025.2",
       "sha256": "2a28e39d10e6470c25839698a160eb0076fb5f8a1e0e3cb9000876d05ab0d502",
       "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2.dmg",
-      "build_number": "252.23892.419",
-      "version-major-minor": "2022.3"
+      "build_number": "252.23892.419"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
@@ -495,8 +493,7 @@
       "version": "2025.2",
       "sha256": "d4ca651a534dfa72d6c6221c23a49bb4bf10a533013db71d51096bb380f1a9c0",
       "url": "https://jb-proxy-ides.vercel.app/webide/PhpStorm-2025.2-aarch64.dmg",
-      "build_number": "252.23892.419",
-      "version-major-minor": "2022.3"
+      "build_number": "252.23892.419"
     },
     "pycharm-community": {
       "update-channel": "PyCharm RELEASE",
