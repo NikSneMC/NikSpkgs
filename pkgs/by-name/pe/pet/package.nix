@@ -1,20 +1,29 @@
-{ buildGoModule, fetchFromGitHub, installShellFiles, lib }:
+{
+  lib,
+  stdenv,
+  buildGoModule,
+  fetchFromGitHub,
+  installShellFiles,
+  writableTmpDirAsHomeHook,
+}:
 
 buildGoModule rec {
   pname = "pet";
-  version = "0.9.0";
+  version = "1.0.1";
 
   src = fetchFromGitHub {
     owner = "knqyf263";
     repo = "pet";
     rev = "v${version}";
-    sha256 = "sha256-h6e7X93uU/rdTrCz5xJcNtpDbzcF/2Z186b4dHkp9jM=";
+    sha256 = "sha256-B0ilobUlp6UUXu6+lVqIHkbFnxVu33eXZFf+F7ODoQU=";
   };
 
-  vendorHash = "sha256-hf2I5xHloqcXDlC8frxtCiQx2PlTmKmyd1mrzF2UdDo=";
+  vendorHash = "sha256-+ieBk7uMzgeM45uvLfljenNvhGVv1mEazErf4YHPNWQ=";
 
   ldflags = [
-    "-s" "-w" "-X=github.com/knqyf263/pet/cmd.version=${version}"
+    "-s"
+    "-w"
+    "-X=github.com/knqyf263/pet/cmd.version=${version}"
   ];
 
   doCheck = false;
@@ -23,11 +32,14 @@ buildGoModule rec {
 
   nativeBuildInputs = [
     installShellFiles
+    writableTmpDirAsHomeHook
   ];
 
-  postInstall = ''
+  postInstall = lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
     installShellCompletion --cmd pet \
-      --zsh ./misc/completions/zsh/_pet
+      --bash <($out/bin/pet completion bash) \
+      --fish <($out/bin/pet completion fish) \
+      --zsh $src/misc/completions/zsh/_pet
   '';
 
   meta = with lib; {

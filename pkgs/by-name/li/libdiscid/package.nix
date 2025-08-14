@@ -1,12 +1,19 @@
-{ lib, stdenv, fetchurl, cmake, pkg-config, darwin }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+  cmake,
+  pkg-config,
+}:
 
 stdenv.mkDerivation rec {
   pname = "libdiscid";
   version = "0.6.4";
 
-  nativeBuildInputs = [ cmake pkg-config ];
-
-  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [ darwin.apple_sdk.frameworks.IOKit ];
+  nativeBuildInputs = [
+    cmake
+    pkg-config
+  ];
 
   src = fetchurl {
     url = "http://ftp.musicbrainz.org/pub/musicbrainz/${pname}/${pname}-${version}.tar.gz";

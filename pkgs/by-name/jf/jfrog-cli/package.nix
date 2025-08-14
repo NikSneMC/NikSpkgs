@@ -1,31 +1,26 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, nodejs
-, nix-update-script
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  nodejs,
+  nix-update-script,
 }:
 
 buildGoModule rec {
   pname = "jfrog-cli";
-  version = "2.71.4";
+  version = "2.75.1";
 
   src = fetchFromGitHub {
     owner = "jfrog";
     repo = "jfrog-cli";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-pC56OlSo05nMH+Adkg1v0Lba7Vd+bXeHRP4+Phvhlu8=";
+    tag = "v${version}";
+    hash = "sha256-2vJiT0gr+Ix91KeM+wlldDHkrWN4Zug7RmuxJ5XfSGQ=";
   };
 
   proxyVendor = true;
-  vendorHash = "sha256-d1VloSjvXAt10MsZwVJ0Fkg9pN+tcOE5vURy7hatg30=";
+  vendorHash = "sha256-1SLzXB9lw5U9xJtUqI5nSoeDEa2IT8FbRH11yEY8kS4=";
 
-  postPatch = ''
-    # Patch out broken test cleanup.
-    substituteInPlace artifactory_test.go \
-      --replace-fail \
-      'deleteReceivedReleaseBundle(t, "cli-tests", "2")' \
-      '// deleteReceivedReleaseBundle(t, "cli-tests", "2")'
-  '';
+  checkFlags = "-skip=^TestReleaseBundle";
 
   postInstall = ''
     # Name the output the same way as the original build script does
@@ -45,6 +40,9 @@ buildGoModule rec {
     changelog = "https://github.com/jfrog/jfrog-cli/releases/tag/v${version}";
     license = licenses.asl20;
     mainProgram = "jf";
-    maintainers = with maintainers; [ detegr aidalgol ];
+    maintainers = with maintainers; [
+      detegr
+      aidalgol
+    ];
   };
 }

@@ -1,22 +1,44 @@
-{ lib, fetchFromGitHub, rtmpdump, php, wget, python3Packages, ffmpeg
-, testers, yle-dl
+{
+  lib,
+  fetchFromGitHub,
+  rtmpdump,
+  php,
+  wget,
+  python3Packages,
+  ffmpeg,
+  testers,
+  yle-dl,
 }:
 
 python3Packages.buildPythonApplication rec {
   pname = "yle-dl";
-  version = "20240706";
+  version = "20250316";
 
   src = fetchFromGitHub {
     owner = "aajanki";
     repo = "yle-dl";
-    rev = version;
-    hash = "sha256-X5fkcJgTVGASoVvvshGWUFNzB1V4KMSKgwoxzP62mxc=";
+    rev = "releases/${version}";
+    hash = "sha256-8cJVaoZRKAR/mkRebpgMfwOWIdDySS8q6Dc2kanr4SE=";
   };
 
+  pyproject = true;
+
   propagatedBuildInputs = with python3Packages; [
-    attrs configargparse ffmpeg future lxml requests
+    attrs
+    configargparse
+    ffmpeg
+    future
+    lxml
+    requests
   ];
-  pythonPath = [ rtmpdump php wget ];
+  buildInputs = with python3Packages; [
+    flit-core
+  ];
+  pythonPath = [
+    rtmpdump
+    php
+    wget
+  ];
 
   doCheck = false; # tests require network access
   nativeCheckInputs = with python3Packages; [ pytestCheckHook ];

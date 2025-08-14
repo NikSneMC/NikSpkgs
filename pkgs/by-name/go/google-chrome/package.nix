@@ -39,7 +39,7 @@
   libXScrnSaver,
   libxshmfence,
   libXtst,
-  mesa,
+  libgbm,
   nspr,
   nss,
   pango,
@@ -93,6 +93,9 @@
   # For Vulkan support (--enable-features=Vulkan)
   addDriverRunpath,
   undmg,
+
+  # For QT support
+  qt6,
 }:
 
 let
@@ -142,7 +145,7 @@ let
       libXScrnSaver
       libxshmfence
       libXtst
-      mesa
+      libgbm
       nspr
       nss
       opusWithCustomModes
@@ -162,15 +165,17 @@ let
     ++ [
       gtk3
       gtk4
+      qt6.qtbase
+      qt6.qtwayland
     ];
 
   linux = stdenv.mkDerivation (finalAttrs: {
     inherit pname meta passthru;
-    version = "131.0.6778.85";
+    version = "136.0.7103.113";
 
     src = fetchurl {
       url = "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${finalAttrs.version}-1_amd64.deb";
-      hash = "sha256-Cn0fg6WI1kFdk8s0LCksMCMLSDkPImXBDNK+hNMlMpQ=";
+      hash = "sha256-BnKKu7X34g+zg4rDqjVXT3Kx2E8Gn5ELqs3LQS3GCkg=";
     };
 
     # With strictDeps on, some shebangs were not being patched correctly
@@ -220,6 +225,8 @@ let
 
       substituteInPlace $out/share/google/$appname/google-$appname \
         --replace-fail 'CHROME_WRAPPER' 'WRAPPER'
+      substituteInPlace $out/share/applications/com.google.Chrome.desktop \
+        --replace-fail /usr/bin/google-chrome-$dist $exe
       substituteInPlace $out/share/applications/google-$appname.desktop \
         --replace-fail /usr/bin/google-chrome-$dist $exe
       substituteInPlace $out/share/gnome-control-center/default-apps/google-$appname.xml \
@@ -243,12 +250,15 @@ let
 
       # "--simulate-outdated-no-au" disables auto updates and browser outdated popup
       makeWrapper "$out/share/google/$appname/google-$appname" "$exe" \
+        --prefix QT_PLUGIN_PATH  : "${qt6.qtbase}/lib/qt-6/plugins" \
+        --prefix QT_PLUGIN_PATH  : "${qt6.qtwayland}/lib/qt-6/plugins" \
+        --prefix NIXPKGS_QT6_QML_IMPORT_PATH : "${qt6.qtwayland}/lib/qt-6/qml" \
         --prefix LD_LIBRARY_PATH : "$rpath" \
         --prefix PATH            : "$binpath" \
         --suffix PATH            : "${lib.makeBinPath [ xdg-utils ]}" \
         --prefix XDG_DATA_DIRS   : "$XDG_ICON_DIRS:$GSETTINGS_SCHEMAS_PATH:${addDriverRunpath.driverLink}/share" \
         --set CHROME_WRAPPER  "google-chrome-$dist" \
-        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
+        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}" \
         --add-flags "--simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT'" \
         --add-flags ${lib.escapeShellArg commandLineArgs}
 
@@ -266,11 +276,11 @@ let
 
   darwin = stdenvNoCC.mkDerivation (finalAttrs: {
     inherit pname meta passthru;
-    version = "131.0.6778.86";
+    version = "136.0.7103.114";
 
     src = fetchurl {
-      url = "http://dl.google.com/release2/chrome/neljlxhync4hvd3scdidzwcaj4_131.0.6778.86/GoogleChrome-131.0.6778.86.dmg";
-      hash = "sha256-EIX74r86/J8dgz585O7dcx0pv/OlR3ZNLiUe6E/V2C8=";
+      url = "http://dl.google.com/release2/chrome/iwktnyywqpn7dye3zjzgosvevq_136.0.7103.114/GoogleChrome-136.0.7103.114.dmg";
+      hash = "sha256-myJawlgVBQlLtgBfSfCL5XfdnH8d7xd+j8JV2+2MZ/s=";
     };
 
     dontPatch = true;

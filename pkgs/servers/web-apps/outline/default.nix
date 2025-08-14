@@ -1,33 +1,41 @@
-{ stdenv
-, lib
-, fetchFromGitHub
-, fetchYarnDeps
-, makeWrapper
-, nix-update-script
-, prefetch-yarn-deps
-, fixup-yarn-lock
-, nodejs
-, yarn
-, nixosTests
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  fetchYarnDeps,
+  makeWrapper,
+  nix-update-script,
+  prefetch-yarn-deps,
+  fixup-yarn-lock,
+  nodejs,
+  yarn,
+  nixosTests,
 }:
 
 stdenv.mkDerivation rec {
   pname = "outline";
-  version = "0.81.0";
+  version = "0.84.0";
 
   src = fetchFromGitHub {
     owner = "outline";
     repo = "outline";
     rev = "v${version}";
-    hash = "sha256-PgRdIdk0VJHFa+rNRV4mlZ0A/jHmAg0O9td98y1itzw=";
+    hash = "sha256-wTarO1nVta4rxkJRa3NIhyu0IJUukO5trOdOj16Zwn0=";
   };
 
-  nativeBuildInputs = [ makeWrapper prefetch-yarn-deps fixup-yarn-lock ];
-  buildInputs = [ yarn nodejs ];
+  nativeBuildInputs = [
+    makeWrapper
+    prefetch-yarn-deps
+    fixup-yarn-lock
+  ];
+  buildInputs = [
+    yarn
+    nodejs
+  ];
 
   yarnOfflineCache = fetchYarnDeps {
     yarnLock = "${src}/yarn.lock";
-    hash = "sha256-j0mA+2GQZNxQoEi8qwmipUXGjPL4/bY5GHAT0o92Ob0=";
+    hash = "sha256-iXaiTPjbAV/aRIdUYrIf0Y4z43yRALqSxjF5wB2q0Mg=";
   };
 
   configurePhase = ''
@@ -85,7 +93,11 @@ stdenv.mkDerivation rec {
     homepage = "https://www.getoutline.com/";
     changelog = "https://github.com/outline/outline/releases";
     license = licenses.bsl11;
-    maintainers = with maintainers; [ cab404 yrd ] ++ teams.cyberus.members;
+    maintainers = with maintainers; [
+      cab404
+      yrd
+    ];
+    teams = [ teams.cyberus ];
     platforms = platforms.linux;
   };
 }

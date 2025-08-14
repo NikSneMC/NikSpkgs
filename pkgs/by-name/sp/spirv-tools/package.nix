@@ -1,14 +1,21 @@
-{ lib, stdenv, fetchFromGitHub, cmake, python3, spirv-headers }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  python3,
+  spirv-headers,
+}:
 
 stdenv.mkDerivation rec {
   pname = "spirv-tools";
-  version = "1.3.296.0";
+  version = "1.4.313.0";
 
   src = fetchFromGitHub {
     owner = "KhronosGroup";
     repo = "SPIRV-Tools";
     rev = "vulkan-sdk-${version}";
-    hash = "sha256-ExseInoB/mMtVUOf0KMrQwDQ5UQdo3Ru7VnGMGPeXrk=";
+    hash = "sha256-nGyEOREua/W2mdb8DhmqXW0gDThnXnIlhnURAUhCO2g=";
   };
 
   # The cmake options are sufficient for turning on static building, but not
@@ -16,7 +23,10 @@ stdenv.mkDerivation rec {
   # description
   patches = lib.optional stdenv.hostPlatform.isStatic ./no-shared-libs.patch;
 
-  nativeBuildInputs = [ cmake python3 ];
+  nativeBuildInputs = [
+    cmake
+    python3
+  ];
 
   cmakeFlags = [
     "-DSPIRV-Headers_SOURCE_DIR=${spirv-headers.src}"

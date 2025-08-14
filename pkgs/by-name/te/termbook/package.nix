@@ -1,11 +1,11 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, installShellFiles
-, pkg-config
-, oniguruma
-, stdenv
-, darwin
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  installShellFiles,
+  pkg-config,
+  oniguruma,
+  stdenv,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -30,8 +30,6 @@ rustPlatform.buildRustPackage rec {
 
   buildInputs = [
     oniguruma
-  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
-    darwin.apple_sdk.frameworks.Security
   ];
 
   env = {

@@ -10,16 +10,17 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "rogcat";
-  version = "0.4.7";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "flxo";
     repo = "rogcat";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-l2zfVt2vm5GTrYs6/0D3EesxxPWSmjf2tGS545766iA=";
+    tag = "v${version}";
+    hash = "sha256-nXKvepuiBDIGo8Gga5tbbT/mnC6z+HipV5XYtlrURRU=";
   };
 
-  cargoHash = "sha256-cDAS8mengFgBsq9nTiVAjt7pJhKjj7/F9x8IS6vP2ck=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-cl09j96UfLvga4cJBSd1he9nfW3taQMY2e+UPltNQMI=";
 
   nativeBuildInputs = [
     pkg-config
@@ -35,7 +36,7 @@ rustPlatform.buildRustPackage rec {
     versionCheckHook
   ];
 
-  versionCheckProgramArg = [ "--version" ];
+  versionCheckProgramArg = "--version";
 
   meta = {
     description = "Adb logcat wrapper";

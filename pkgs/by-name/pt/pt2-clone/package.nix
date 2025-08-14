@@ -1,20 +1,22 @@
-{ lib, stdenv
-, fetchFromGitHub
-, cmake
-, nixosTests
-, alsa-lib
-, SDL2
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  nixosTests,
+  alsa-lib,
+  SDL2,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pt2-clone";
-  version = "1.70";
+  version = "1.73";
 
   src = fetchFromGitHub {
     owner = "8bitbubsy";
     repo = "pt2-clone";
     rev = "v${finalAttrs.version}";
-    sha256 = "sha256-oGdgvyVIqM4YVxyr5DFBJ+YLtH95vqbNv0arD9yskdo=";
+    sha256 = "sha256-x7pAMa5Bs7Wc/rnQgEoxV0h1TbvNp5Q+vtlNXmyEgSw=";
   };
 
   nativeBuildInputs = [ cmake ];

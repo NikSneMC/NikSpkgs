@@ -1,29 +1,43 @@
-{ lib, fetchFromGitLab, buildGoModule, ruby, libkrb5 }:
+{
+  lib,
+  fetchFromGitLab,
+  buildGoModule,
+  ruby,
+  libkrb5,
+}:
 
 buildGoModule rec {
   pname = "gitlab-shell";
-  version = "14.38.0";
+  version = "14.41.0";
 
   # nixpkgs-update: no auto update
   src = fetchFromGitLab {
     owner = "gitlab-org";
     repo = "gitlab-shell";
     rev = "v${version}";
-    hash = "sha256-oYvsSjdzfJn4ujy1qbMmqZyEQFbYTSke8t3KBqjr/Vc=";
+    hash = "sha256-6bRiw8TC7E/eUc0Zwp46kLbe5QzZ+nXL6YY2u+mjFRw=";
   };
 
-  buildInputs = [ ruby libkrb5 ];
+  buildInputs = [
+    ruby
+    libkrb5
+  ];
 
   patches = [
     ./remove-hardcoded-locations.patch
   ];
 
-  vendorHash = "sha256-YOShgZv0zdfXgKi//IENt6wE2m0S1Kqa+2ndvCwKDLQ=";
+  vendorHash = "sha256-Xz6l0gvjS2nPt/mpOvZDJlnfEmIWPXc/RwBntzfLc1Y=";
+
+  subPackages = [
+    "cmd/gitlab-shell"
+    "cmd/gitlab-sshd"
+    "cmd/gitlab-shell-check"
+    "cmd/gitlab-shell-authorized-principals-check"
+    "cmd/gitlab-shell-authorized-keys-check"
+  ];
 
   postInstall = ''
-    cp -r "$NIX_BUILD_TOP/source"/bin/* $out/bin
-    mv $out/bin/install $out/bin/gitlab-shell-install
-    mv $out/bin/check $out/bin/gitlab-shell-check
     cp -r "$NIX_BUILD_TOP/source"/{support,VERSION} $out/
   '';
   doCheck = false;
@@ -32,7 +46,7 @@ buildGoModule rec {
     description = "SSH access and repository management app for GitLab";
     homepage = "http://www.gitlab.com/";
     platforms = platforms.linux;
-    maintainers = teams.gitlab.members;
+    teams = [ teams.gitlab ];
     license = licenses.mit;
   };
 }

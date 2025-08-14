@@ -1,11 +1,13 @@
-{ lib
-, fetchurl
-, python3Packages
-, gobject-introspection
-, gsettings-desktop-schemas
-, gtk3
-, wrapGAppsHook3
-, xrandr
+{
+  lib,
+  fetchurl,
+  fetchFromGitLab,
+  python3Packages,
+  gobject-introspection,
+  gsettings-desktop-schemas,
+  gtk3,
+  wrapGAppsHook3,
+  xrandr,
 }:
 
 let
@@ -15,10 +17,16 @@ buildPythonApplication rec {
   pname = "arandr";
   version = "0.1.11";
 
-  src = fetchurl {
-    url = "https://christian.amsuess.com/tools/arandr/files/${pname}-${version}.tar.gz";
-    hash = "sha256-5Mu+Npi7gSs5V3CHAXS+AJS7rrOREFqBH5X0LrGCrgI=";
+  src = fetchFromGitLab {
+    owner = "arandr";
+    repo = "arandr";
+    tag = version;
+    hash = "sha256-nQtfOKAnWKsy2DmvtRGJa4+Y9uGgX41BeHpd9m4d9YA=";
   };
+
+  # patch to set mtime=0 on setup.py
+  patches = [ ./gzip-timestamp-fix.patch ];
+  patchFlags = [ "-p0" ];
 
   preBuild = ''
     rm -rf data/po/*
@@ -27,9 +35,19 @@ buildPythonApplication rec {
   # no tests
   doCheck = false;
 
-  buildInputs = [ docutils gsettings-desktop-schemas gtk3 ];
-  nativeBuildInputs = [ gobject-introspection wrapGAppsHook3 ];
-  propagatedBuildInputs = [ xrandr pygobject3 ];
+  buildInputs = [
+    docutils
+    gsettings-desktop-schemas
+    gtk3
+  ];
+  nativeBuildInputs = [
+    gobject-introspection
+    wrapGAppsHook3
+  ];
+  propagatedBuildInputs = [
+    xrandr
+    pygobject3
+  ];
 
   meta = with lib; {
     homepage = "https://christian.amsuess.com/tools/arandr/";

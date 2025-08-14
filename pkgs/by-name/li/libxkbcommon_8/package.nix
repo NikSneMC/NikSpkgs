@@ -1,33 +1,36 @@
-{ lib
-, stdenv
-, fetchurl
-, meson
-, ninja
-, pkg-config
-, bison
-, doxygen
-, xkeyboard_config
-, libxcb
-, libxml2
-, python3
-, libX11
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  bison,
+  doxygen,
+  xkeyboard_config,
+  libxcb,
+  libxml2,
+  python3,
+  libX11,
   # To enable the "interactive-wayland" subcommand of xkbcli. This is the
   # wayland equivalent of `xev` on X11.
-, xorg
-, withWaylandTools ? stdenv.hostPlatform.isLinux
-, wayland
-, wayland-protocols
-, wayland-scanner
-, testers
+  xorg,
+  withWaylandTools ? stdenv.hostPlatform.isLinux,
+  wayland,
+  wayland-protocols,
+  wayland-scanner,
+  testers,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "libxkbcommon";
-  version = "1.7.0";
+  version = "1.8.1";
 
-  src = fetchurl {
-    url = with finalAttrs; "https://xkbcommon.org/download/${pname}-${version}.tar.xz";
-    hash = "sha256-ZXgvChCktFWvnGuqtwQOL1N1IMqi7CCSgFzf02hjskc=";
+  src = fetchFromGitHub {
+    owner = "xkbcommon";
+    repo = "libxkbcommon";
+    tag = "xkbcommon-${finalAttrs.version}";
+    hash = "sha256-MnegPisAtev69pNV6cR4a/oLIQhijG2e6ed6mpKr5js=";
   };
 
   patches = [
@@ -35,13 +38,31 @@ stdenv.mkDerivation (finalAttrs: {
     ./disable-x11com.patch
   ];
 
-  outputs = [ "out" "dev" "doc" ];
+  outputs = [
+    "out"
+    "dev"
+    "doc"
+  ];
 
   depsBuildBuild = [ pkg-config ];
-  nativeBuildInputs = [ meson ninja pkg-config bison doxygen xorg.xvfb ]
-    ++ lib.optional withWaylandTools wayland-scanner;
-  buildInputs = [ xkeyboard_config libxcb libxml2 ]
-    ++ lib.optionals withWaylandTools [ wayland wayland-protocols ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+    bison
+    doxygen
+    xorg.xvfb
+  ] ++ lib.optional withWaylandTools wayland-scanner;
+  buildInputs =
+    [
+      xkeyboard_config
+      libxcb
+      libxml2
+    ]
+    ++ lib.optionals withWaylandTools [
+      wayland
+      wayland-protocols
+    ];
   nativeCheckInputs = [ python3 ];
 
   mesonFlags = [
@@ -74,7 +95,10 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://xkbcommon.org";
     changelog = "https://github.com/xkbcommon/libxkbcommon/blob/xkbcommon-${finalAttrs.version}/NEWS";
     license = licenses.mit;
-    maintainers = with maintainers; [ primeos ttuegel ];
+    maintainers = with maintainers; [
+      primeos
+      ttuegel
+    ];
     mainProgram = "xkbcli";
     platforms = with platforms; unix;
     pkgConfigModules = [

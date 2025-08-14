@@ -2,7 +2,7 @@
   lib,
   buildPythonPackage,
   fetchPypi,
-  pdm-backend,
+  hatchling,
   pydantic,
   pytest-vcr,
   pytestCheckHook,
@@ -13,19 +13,19 @@
 
 buildPythonPackage rec {
   pname = "garth";
-  version = "0.4.46";
+  version = "0.5.10";
   pyproject = true;
 
-  disabled = pythonOlder "3.9";
+  disabled = pythonOlder "3.10";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-WuGeZ2EggyhbEDIbjg4ffIFaj2DyHi8Tvowhoi5k2Os=";
+    hash = "sha256-IGBJNEGD+XgQQJG3sBh6t0CMZH9eRhJIfHE0+4Jx0H0=";
   };
 
   pythonRelaxDeps = [ "requests-oauthlib" ];
 
-  build-system = [ pdm-backend ];
+  build-system = [ hatchling ];
 
   dependencies = [
     pydantic

@@ -1,10 +1,24 @@
-{ lib, mkDerivation, cmake, fetchFromGitHub, fetchpatch, pkg-config
-, boost, exiv2, fftwFloat, gsl
-, ilmbase, lcms2, libraw, libtiff, openexr
-, qtbase, qtdeclarative, qttools, qtwebengine, eigen
+{
+  lib,
+  stdenv,
+  cmake,
+  fetchFromGitHub,
+  fetchpatch,
+  pkg-config,
+  boost,
+  exiv2,
+  fftwFloat,
+  gsl,
+  ilmbase,
+  lcms2,
+  libraw,
+  libtiff,
+  openexr,
+  libsForQt5,
+  eigen,
 }:
 
-mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "luminance-hdr";
   version = "2.6.1.1";
 
@@ -26,11 +40,27 @@ mkDerivation rec {
   env.NIX_CFLAGS_COMPILE = "-I${ilmbase.dev}/include/OpenEXR";
 
   buildInputs = [
-    qtbase qtdeclarative qttools qtwebengine eigen
-    boost exiv2 fftwFloat gsl ilmbase lcms2 libraw libtiff openexr
+    libsForQt5.qtbase
+    libsForQt5.qtdeclarative
+    libsForQt5.qttools
+    libsForQt5.qtwebengine
+    eigen
+    boost
+    exiv2
+    fftwFloat
+    gsl
+    ilmbase
+    lcms2
+    libraw
+    libtiff
+    openexr
   ];
 
-  nativeBuildInputs = [ cmake pkg-config ];
+  nativeBuildInputs = [
+    libsForQt5.wrapQtAppsHook
+    cmake
+    pkg-config
+  ];
 
   meta = with lib; {
     homepage = "https://qtpfsgui.sourceforge.net/";

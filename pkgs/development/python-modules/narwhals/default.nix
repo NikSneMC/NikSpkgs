@@ -1,50 +1,43 @@
 {
   lib,
   buildPythonPackage,
-  # cudf,
   dask,
-  dask-expr,
   duckdb,
   fetchFromGitHub,
   hatchling,
   hypothesis,
-  # modin,
   pandas,
   polars,
   pyarrow,
+  pyspark,
   pytest-env,
   pytestCheckHook,
-  pythonOlder,
+  sqlframe,
 }:
 
 buildPythonPackage rec {
   pname = "narwhals";
-  version = "1.12.1";
+  version = "1.38.2";
   pyproject = true;
-
-  disabled = pythonOlder "3.8";
 
   src = fetchFromGitHub {
     owner = "narwhals-dev";
     repo = "narwhals";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-wE+jLB2O9GqeO8+XwbiIu4lermMBRYNi8GQmbxkYkkc=";
+    tag = "v${version}";
+    hash = "sha256-zqtYTqirAXLcpFA2sXczl0HPWL/3cYWws2yUfE8I8NY=";
   };
 
-  build-system = [
-    hatchling
-  ];
+  build-system = [ hatchling ];
 
   optional-dependencies = {
     # cudf = [ cudf ];
-    dask = [
-      dask
-      dask-expr
-    ];
+    dask = [ dask ] ++ dask.optional-dependencies.dataframe;
     # modin = [ modin ];
     pandas = [ pandas ];
     polars = [ polars ];
     pyarrow = [ pyarrow ];
+    pyspark = [ pyspark ];
+    sqlframe = [ sqlframe ];
   };
 
   nativeCheckInputs = [
@@ -56,6 +49,13 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "narwhals" ];
 
+  disabledTests = [
+    # Flaky
+    "test_rolling_var_hypothesis"
+    # Missing file
+    "test_pyspark_connect_deps_2517"
+  ];
+
   pytestFlagsArray = [
     "-W"
     "ignore::DeprecationWarning"
@@ -64,7 +64,7 @@ buildPythonPackage rec {
   meta = {
     description = "Lightweight and extensible compatibility layer between dataframe libraries";
     homepage = "https://github.com/narwhals-dev/narwhals";
-    changelog = "https://github.com/narwhals-dev/narwhals/releases/tag/v${version}";
+    changelog = "https://github.com/narwhals-dev/narwhals/releases/tag/${src.tag}";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ fab ];
   };

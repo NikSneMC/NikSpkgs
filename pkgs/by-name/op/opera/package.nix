@@ -1,49 +1,50 @@
-{ alsa-lib
-, atk
-, cairo
-, cups
-, curl
-, dbus
-, dpkg
-, expat
-, fetchurl
-, fontconfig
-, freetype
-, gdk-pixbuf
-, glib
-, gtk3
-, gtk4
-, lib
-, libX11
-, libxcb
-, libXScrnSaver
-, libXcomposite
-, libXcursor
-, libXdamage
-, libXext
-, libXfixes
-, libXi
-, libXrandr
-, libXrender
-, libXtst
-, libdrm
-, libnotify
-, libpulseaudio
-, libuuid
-, libxshmfence
-, mesa
-, nspr
-, nss
-, pango
-, stdenv
-, systemd
-, at-spi2-atk
-, at-spi2-core
-, autoPatchelfHook
-, wrapGAppsHook3
-, qt6
-, proprietaryCodecs ? false
-, vivaldi-ffmpeg-codecs
+{
+  alsa-lib,
+  atk,
+  cairo,
+  cups,
+  curl,
+  dbus,
+  dpkg,
+  expat,
+  fetchurl,
+  fontconfig,
+  freetype,
+  gdk-pixbuf,
+  glib,
+  gtk3,
+  gtk4,
+  lib,
+  libX11,
+  libxcb,
+  libXScrnSaver,
+  libXcomposite,
+  libXcursor,
+  libXdamage,
+  libXext,
+  libXfixes,
+  libXi,
+  libXrandr,
+  libXrender,
+  libXtst,
+  libdrm,
+  libnotify,
+  libpulseaudio,
+  libuuid,
+  libxshmfence,
+  libgbm,
+  nspr,
+  nss,
+  pango,
+  stdenv,
+  systemd,
+  at-spi2-atk,
+  at-spi2-core,
+  autoPatchelfHook,
+  wrapGAppsHook3,
+  qt6,
+  proprietaryCodecs ? false,
+  vivaldi-ffmpeg-codecs,
 }:
 
 let
@@ -51,14 +52,12 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "opera";
-  version = "114.0.5282.102";
+  version = "118.0.5461.60";
 
   src = fetchurl {
     url = "${mirror}/${version}/linux/${pname}-stable_${version}_amd64.deb";
-    hash = "sha256-PBbozIdA+cfEzGIyL1P+25FZtrnd7ldctOtZYomKd/8=";
+    hash = "sha256-SApVqrMeOrpw9GDMwBgpxMfSgMXJS1YV2bPx+KXBY/4=";
   };
-
-  unpackPhase = "dpkg-deb -x $src .";
 
   nativeBuildInputs = [
     dpkg
@@ -98,7 +97,7 @@ stdenv.mkDerivation rec {
     libuuid
     libxcb
     libxshmfence
-    mesa
+    libgbm
     nspr
     nss
     pango
@@ -106,22 +105,24 @@ stdenv.mkDerivation rec {
     qt6.qtbase
   ];
 
-  runtimeDependencies = [
-    # Works fine without this except there is no sound.
-    libpulseaudio.out
+  runtimeDependencies =
+    [
+      # Works fine without this except there is no sound.
+      libpulseaudio.out
 
-    # This is a little tricky. Without it the app starts then crashes. Then it
-    # brings up the crash report, which also crashes. `strace -f` hints at a
-    # missing libudev.so.0.
-    (lib.getLib systemd)
+      # This is a little tricky. Without it the app starts then crashes. Then it
+      # brings up the crash report, which also crashes. `strace -f` hints at a
+      # missing libudev.so.0.
+      (lib.getLib systemd)
 
-    # Error at startup:
-    # "Illegal instruction (core dumped)"
-    gtk3
-    gtk4
-  ] ++ lib.optionals proprietaryCodecs [
-    vivaldi-ffmpeg-codecs
-  ];
+      # Error at startup:
+      # "Illegal instruction (core dumped)"
+      gtk3
+      gtk4
+    ]
+    ++ lib.optionals proprietaryCodecs [
+      vivaldi-ffmpeg-codecs
+    ];
 
   dontWrapQtApps = true;
 

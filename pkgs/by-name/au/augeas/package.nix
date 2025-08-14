@@ -1,13 +1,14 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, autoreconfHook
-, bison
-, flex
-, perl # for pod2man
-, pkg-config
-, readline
-, libxml2
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  autoreconfHook,
+  bison,
+  flex,
+  perl, # for pod2man
+  pkg-config,
+  readline,
+  libxml2,
 }:
 
 stdenv.mkDerivation rec {
@@ -39,9 +40,13 @@ stdenv.mkDerivation rec {
     pkg-config
   ];
 
-  buildInputs = [ readline libxml2 ];
+  buildInputs = [
+    readline
+    libxml2
+  ];
 
-  enableParallelBuilding = true;
+  # Makefile doesn't specify dependencies on parser.h correctly
+  enableParallelBuilding = false;
 
   doCheck = true;
 
@@ -52,7 +57,10 @@ stdenv.mkDerivation rec {
     runHook postCheck
   '';
 
-  outputs = [ "out" "dev" ];
+  outputs = [
+    "out"
+    "dev"
+  ];
 
   meta = with lib; {
     description = "Configuration editing tool";

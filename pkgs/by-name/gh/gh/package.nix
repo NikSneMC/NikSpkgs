@@ -10,22 +10,24 @@
 
 buildGoModule rec {
   pname = "gh";
-  version = "2.62.0";
+  version = "2.73.0";
 
   src = fetchFromGitHub {
     owner = "cli";
     repo = "cli";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-1nJCI+MLqZnEeXXHYI/GbZoPqIuIyQO5kFkPiLN+Y6I=";
+    tag = "v${version}";
+    hash = "sha256-enD7y0PA8+W2NIHQ617bKeYI5lJt+xUhEBwjPZ2vwjg=";
   };
 
-  vendorHash = "sha256-b8HO4mevQcfX/VpJv1ZefXWAeXyhsy6074fvVNoH/8Y=";
+  vendorHash = "sha256-vTUsR9aDBztJktdZQEg98/nhV4R1fxLevksQ8a6GhDc=";
 
   nativeBuildInputs = [ installShellFiles ];
 
+  # N.B.: using the Makefile is intentional.
+  # We pass "nixpkgs" for build.Date to avoid `gh --version` reporting a very old date.
   buildPhase = ''
     runHook preBuild
-    make GO_LDFLAGS="-s -w" GH_VERSION=${version} bin/gh ${lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) "manpages"}
+    make GO_LDFLAGS="-s -w -X github.com/cli/cli/v${lib.versions.major version}/internal/build.Date=nixpkgs" GH_VERSION=${version} bin/gh ${lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) "manpages"}
     runHook postBuild
   '';
 

@@ -7,16 +7,17 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "microfetch";
-  version = "0.4.1";
+  version = "0.4.8";
 
   src = fetchFromGitHub {
     owner = "NotAShelf";
     repo = "microfetch";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-mK1sBcTieMjYneMhkuxoOt5+fELcyjH9+SQpzs7542Y=";
+    tag = "v${version}";
+    hash = "sha256-WGr2qqxcbh7hotqPj8ZQbSB3E4qG5U2LEmqXx/aEc18=";
   };
 
-  cargoHash = "sha256-LEw7z73Jm7/mJomN6yy87iCFauXifA+vffn/drXwqpY=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-/siuEdZeIk23aIagbjrd5cYvb5/xEdAq84PoSVLWz60=";
 
   passthru.updateScript = nix-update-script { };
 

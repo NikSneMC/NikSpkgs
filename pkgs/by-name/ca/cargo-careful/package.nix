@@ -1,26 +1,34 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "cargo-careful";
-  version = "0.4.3";
+  version = "0.4.5";
 
   src = fetchFromGitHub {
     owner = "RalfJung";
     repo = "cargo-careful";
     rev = "v${version}";
-    hash = "sha256-pYfyqsS+bGwSP6YZAtI+8iMXdID/hrCiX+cuYoYiZmc=";
+    hash = "sha256-dalsBILFZzVHBIhGGIOUMSCWuM7xE46w91MbzCYa1Io=";
   };
 
-  cargoHash = "sha256-C+bnoYMO0Pjdgn4Q2Qb2COllMK0hnRNBwGd828o3AKE=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-Es5BT0jfyJXuw7TTtGRhI4PeplZgTYm6JhSxQiZ+6NE=";
 
   meta = with lib; {
     description = "Tool to execute Rust code carefully, with extra checking along the way";
     mainProgram = "cargo-careful";
     homepage = "https://github.com/RalfJung/cargo-careful";
-    license = with licenses; [ asl20 mit ];
-    maintainers = with maintainers; [ figsoda matthiasbeyer ];
+    license = with licenses; [
+      asl20
+      mit
+    ];
+    maintainers = with maintainers; [
+      figsoda
+      matthiasbeyer
+    ];
   };
 }

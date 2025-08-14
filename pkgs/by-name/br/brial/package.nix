@@ -1,10 +1,12 @@
-{ lib, stdenv
-, fetchFromGitHub
-, autoreconfHook
-, pkg-config
-, boost
-, m4ri
-, gd
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  autoreconfHook,
+  pkg-config,
+  boost,
+  m4ri,
+  gd,
 }:
 
 stdenv.mkDerivation rec {
@@ -40,7 +42,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/BRiAl/BRiAl";
     description = "Legacy version of PolyBoRi maintained by sagemath developers";
     license = licenses.gpl2Plus;
-    maintainers = teams.sage.members;
+    teams = [ teams.sage ];
     platforms = platforms.unix;
   };
 }

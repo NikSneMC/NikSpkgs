@@ -1,27 +1,28 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, nodejs
-, npmHooks
-, fetchNpmDeps
-, nix-update-script
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  nodejs,
+  npmHooks,
+  fetchNpmDeps,
+  nix-update-script,
 }:
 
 buildGoModule rec {
   pname = "godns";
-  version = "3.1.9";
+  version = "3.2.4";
 
   src = fetchFromGitHub {
     owner = "TimothyYe";
     repo = "godns";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-e39T6pOFD9FrbXVtD/qPN74HQqJcTl3a3enTPVqpsuY=";
+    tag = "v${version}";
+    hash = "sha256-Uf+V6A5Q1gQQn+hJUUwmeaGve8364Lui2dMeCzkkeTQ=";
   };
 
-  vendorHash = "sha256-zz33xHIZ2jhD2s3v2vum0ELG7GTqe5SsADUrO5yqumw=";
+  vendorHash = "sha256-PrXi460v7ooBhFooLw14tMDvLvEzIYt+4Y+36BYdWzA=";
   npmDeps = fetchNpmDeps {
     src = "${src}/web";
-    hash = "sha256-Y35CcUubO3QmbEwWBFXoWKLgvE8dp/mFE/szRigJvLo=";
+    hash = "sha256-+a5IrJLamuNmwGhPIA7JKvgm6COnYre6bPuAv1PgGns=";
   };
 
   npmRoot = "web";

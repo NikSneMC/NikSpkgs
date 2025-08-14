@@ -1,17 +1,23 @@
-{ lib, buildGoModule, fetchFromGitHub, pkg-config, libsecret }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  pkg-config,
+  libsecret,
+}:
 
 buildGoModule rec {
   pname = "protonmail-bridge";
-  version = "3.14.0";
+  version = "3.20.0";
 
   src = fetchFromGitHub {
     owner = "ProtonMail";
     repo = "proton-bridge";
     rev = "v${version}";
-    hash = "sha256-Pup+A637FvsX4dV0G7K/LMB4HCruh5BT1iu4tIXRI7I=";
+    hash = "sha256-Vd7r3devsWGyqFLAoNzUT0hu9oWcDA9XPTTgSUfr17c=";
   };
 
-  vendorHash = "sha256-I/OFpEa3aB+qDBS/sbX5WOgrlSyR7aZaQYrsaSVNAAk=";
+  vendorHash = "sha256-KXq2KIVHCaY/b1nT+GMBY8pT4GLl9l6sT2RiNIH/6Wo=";
 
   nativeBuildInputs = [ pkg-config ];
 
@@ -23,7 +29,9 @@ buildGoModule rec {
   '';
 
   ldflags =
-    let constants = "github.com/ProtonMail/proton-bridge/v3/internal/constants"; in
+    let
+      constants = "github.com/ProtonMail/proton-bridge/v3/internal/constants";
+    in
     [
       "-X ${constants}.Version=${version}"
       "-X ${constants}.Revision=${src.rev}"
@@ -52,6 +60,9 @@ buildGoModule rec {
       To work, use secret-service freedesktop.org API (e.g. Gnome keyring) or pass.
     '';
     mainProgram = "protonmail-bridge";
-    maintainers = with lib.maintainers; [ mrfreezeex daniel-fahey ];
+    maintainers = with lib.maintainers; [
+      mrfreezeex
+      daniel-fahey
+    ];
   };
 }

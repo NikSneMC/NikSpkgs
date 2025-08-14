@@ -1,19 +1,29 @@
-{ lib, buildGoModule, fetchFromGitHub }:
+{
+  lib,
+  buildGo123Module,
+  fetchFromGitHub,
+}:
 
-buildGoModule rec {
+# Tests with go 1.24 do not work. For now
+# https://github.com/kovetskiy/mark/pull/581#issuecomment-2797872996
+buildGo123Module rec {
   pname = "mark";
-  version = "11.2.0";
+  version = "12.2.0";
 
   src = fetchFromGitHub {
-    owner  = "kovetskiy";
-    repo   = "mark";
-    rev    = version;
-    sha256 = "sha256-Pwt8HhbO+1wmEGYRny1W5HzKRWmvTneqN4fuAaKcYaA=";
+    owner = "kovetskiy";
+    repo = "mark";
+    rev = "${version}";
+    sha256 = "sha256-0w6rIOSnOS7EfTBA/mRNWm8KOtdviTxWdukl4reb4zE=";
   };
 
-  vendorHash = "sha256-uokBuQquSkdbHsI3hZ7/FxE93/QOZ6jD2zB8vDPeESI=";
+  vendorHash = "sha256-CqFCjSXw7/jLe1OYosUl6mKSPEsdHl8p3zb/LVNqnxM=";
 
-  ldflags = [ "-s" "-w" "-X main.version=${version}" ];
+  ldflags = [
+    "-s"
+    "-w"
+    "-X main.version=${version}"
+  ];
 
   checkFlags =
     let
@@ -21,7 +31,8 @@ buildGoModule rec {
         # Expects to be able to launch google-chrome
         "TestExtractMermaidImage"
       ];
-    in [
+    in
+    [
       "-skip=^${builtins.concatStringsSep "$|^" skippedTests}$"
     ];
 

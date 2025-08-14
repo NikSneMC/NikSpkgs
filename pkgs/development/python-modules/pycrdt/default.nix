@@ -1,11 +1,7 @@
 {
   lib,
-  stdenv,
   buildPythonPackage,
   fetchFromGitHub,
-
-  # buildInputs
-  libiconv,
 
   # nativeBuildInputs
   rustPlatform,
@@ -23,14 +19,14 @@
 
 buildPythonPackage rec {
   pname = "pycrdt";
-  version = "0.10.6";
+  version = "0.12.18";
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "jupyter-server";
+    owner = "y-crdt";
     repo = "pycrdt";
-    rev = "refs/tags/${version}";
-    hash = "sha256-TKSBTpOvAr1/HBn3HnwNdEwM1hgbvPdice8bcVhVmH0=";
+    tag = version;
+    hash = "sha256-pqGzAOoCJy+7cTtQD6FeFDicg6S0X2M+DM/x6Id28ac=";
   };
 
   postPatch = ''
@@ -43,8 +39,6 @@ buildPythonPackage rec {
     rustPlatform.cargoSetupHook
     rustPlatform.maturinBuildHook
   ];
-
-  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [ libiconv ];
 
   dependencies = [ anyio ];
 
@@ -59,13 +53,18 @@ buildPythonPackage rec {
     y-py
   ];
 
+  pytestFlagsArray = [
+    "-W"
+    "ignore::pytest.PytestUnknownMarkWarning" # requires unpackaged pytest-mypy-testing
+  ];
+
   passthru.updateScript = nix-update-script { extraArgs = [ "--generate-lockfile" ]; };
 
   meta = {
     description = "CRDTs based on Yrs";
     homepage = "https://github.com/jupyter-server/pycrdt";
-    changelog = "https://github.com/jupyter-server/pycrdt/releases/tag/${lib.removePrefix "refs/tags/" src.rev}";
+    changelog = "https://github.com/jupyter-server/pycrdt/blob/${version}/CHANGELOG.md";
     license = lib.licenses.mit;
-    maintainers = lib.teams.jupyter.members;
+    teams = [ lib.teams.jupyter ];
   };
 }

@@ -1,11 +1,12 @@
-{ lib
-, buildPythonPackage
-, sage-src
-, furo
-, jupyter-sphinx
-, sphinx
-, sphinx-copybutton
-, sphinx-inline-tabs
+{
+  lib,
+  buildPythonPackage,
+  sage-src,
+  furo,
+  jupyter-sphinx,
+  sphinx,
+  sphinx-copybutton,
+  sphinx-inline-tabs,
 }:
 
 buildPythonPackage rec {
@@ -31,6 +32,6 @@ buildPythonPackage rec {
     description = "Build system of the Sage documentation";
     homepage = "https://www.sagemath.org";
     license = licenses.gpl2Plus;
-    maintainers = teams.sage.members;
+    teams = [ teams.sage ];
   };
 }

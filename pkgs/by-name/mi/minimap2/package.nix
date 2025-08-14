@@ -1,19 +1,27 @@
-{ lib, stdenv, fetchFromGitHub, zlib }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  zlib,
+}:
 
 stdenv.mkDerivation rec {
   pname = "minimap2";
-  version = "2.28";
+  version = "2.29";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = "minimap2";
     owner = "lh3";
     rev = "v${version}";
-    sha256 = "sha256-cBl2BKgPCP/xHZW6fTH51cY9/lV/1HVLsN7a1R1Blv4=";
+    sha256 = "sha256-AIcxlEDHZOZgUOUZLRwmm5yuuzKHNz21rrSXAWGJEHk=";
   };
 
   buildInputs = [ zlib ];
 
-  makeFlags = lib.optionals stdenv.hostPlatform.isAarch64 [ "arm_neon=1" "aarch64=1" ];
+  makeFlags = lib.optionals stdenv.hostPlatform.isAarch64 [
+    "arm_neon=1"
+    "aarch64=1"
+  ];
 
   installPhase = ''
     mkdir -p $out/bin

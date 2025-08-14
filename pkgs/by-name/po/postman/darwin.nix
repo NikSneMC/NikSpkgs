@@ -1,24 +1,28 @@
-{ stdenvNoCC
-, fetchurl
-, unzip
-, pname
-, version
-, meta
+{
+  stdenvNoCC,
+  fetchurl,
+  unzip,
+  pname,
+  version,
+  meta,
 }:
 
 let
   appName = "Postman.app";
-  dist = {
-    aarch64-darwin = {
-      arch = "arm64";
-      sha256 = "sha256-V+JLXl12DnwZlPF0qNs2lQqRpWbSDiPXDTtl4FGcZcM=";
-    };
+  dist =
+    {
+      aarch64-darwin = {
+        arch = "arm64";
+        sha256 = "sha256-uhhrJk/WtM4tKsrBAn1IjHx0OeR/SpdOzy2XhoUP4sY=";
+      };
 
-    x86_64-darwin = {
-      arch = "64";
-      sha256 = "sha256-l7J4Rrq+kUyk+0Chq5qo50K1VXC/7E3FC/hQ1DQ0PGA=";
-    };
-  }.${stdenvNoCC.hostPlatform.system} or (throw "Unsupported system: ${stdenvNoCC.hostPlatform.system}");
+      x86_64-darwin = {
+        arch = "64";
+        sha256 = "sha256-NYxcZoQYDyn85RkUz57b5yhzpeAK5xyyJF/7L2+3tt4=";
+      };
+    }
+    .${stdenvNoCC.hostPlatform.system}
+      or (throw "Unsupported system: ${stdenvNoCC.hostPlatform.system}");
 
 in
 
@@ -46,7 +50,7 @@ stdenvNoCC.mkDerivation {
     cp -R . $out/Applications/${appName}
     cat > $out/bin/${pname} << EOF
     #!${stdenvNoCC.shell}
-    open -na $out/Applications/${appName} --args "$@"
+    open -na $out/Applications/${appName} --args "\$@"
     EOF
     chmod +x $out/bin/${pname}
     runHook postInstall

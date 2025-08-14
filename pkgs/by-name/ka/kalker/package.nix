@@ -1,9 +1,11 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, gmp
-, mpfr
-, libmpc
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  fetchpatch,
+  gmp,
+  mpfr,
+  libmpc,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -12,16 +14,34 @@ rustPlatform.buildRustPackage rec {
 
   src = fetchFromGitHub {
     owner = "PaddiM8";
-    repo = pname;
+    repo = "kalker";
     rev = "v${version}";
     hash = "sha256-fFeHL+Q1Y0J3rOgbFA952rjae/OQgHTznDI0Kya1KMQ=";
   };
 
-  cargoHash = "sha256-hgtSDPQRrqhQALqzVW8z9xXqIv+v5/Sbs6McrUCKiaU=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-LEP2ebthwtpPSRmJt0BW/T/lB6EE+tylyVv+PDt8UoQ=";
 
-  buildInputs = [ gmp mpfr libmpc ];
+  cargoPatches = [
+    # Fixes build issue by just running cargo update
+    # Can be removed on next release
+    (fetchpatch {
+      name = "bump_cargo_deps.patch";
+      url = "https://github.com/PaddiM8/kalker/commit/81bf66950a9dfeca4ab5fdd12774c93e40021eb1.patch";
+      hash = "sha256-XT8jXTMIMOFw8OieoQM7IkUqw3SDi1c9eE1cD15BI9I=";
+    })
+  ];
 
-  outputs = [ "out" "lib" ];
+  buildInputs = [
+    gmp
+    mpfr
+    libmpc
+  ];
+
+  outputs = [
+    "out"
+    "lib"
+  ];
 
   postInstall = ''
     moveToOutput "lib" "$lib"
@@ -38,7 +58,10 @@ rustPlatform.buildRustPackage rec {
       variables, functions, derivation, integration, and complex numbers
     '';
     license = licenses.mit;
-    maintainers = with maintainers; [ figsoda lovesegfault ];
+    maintainers = with maintainers; [
+      figsoda
+      lovesegfault
+    ];
     mainProgram = "kalker";
   };
 }

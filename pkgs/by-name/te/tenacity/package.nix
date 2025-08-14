@@ -1,54 +1,55 @@
-{ stdenv
-, lib
-, fetchFromGitea
-, cmake
-, wxGTK32
-, gtk3
-, pkg-config
-, python3
-, gettext
-, glib
-, file
-, lame
-, libvorbis
-, libmad
-, libjack2
-, lv2
-, lilv
-, makeWrapper
-, serd
-, sord
-, sqlite
-, sratom
-, suil
-, alsa-lib
-, libsndfile
-, soxr
-, flac
-, twolame
-, expat
-, libid3tag
-, libopus
-, ffmpeg
-, soundtouch
-, pcre
-, portaudio
-, linuxHeaders
-, at-spi2-core
-, dbus
-, libepoxy
-, libXdmcp
-, libXtst
-, libpthreadstubs
-, libselinux
-, libsepol
-, libxkbcommon
-, util-linux
+{
+  stdenv,
+  lib,
+  fetchFromGitea,
+  cmake,
+  wxGTK32,
+  gtk3,
+  pkg-config,
+  python3,
+  gettext,
+  glib,
+  file,
+  lame,
+  libvorbis,
+  libmad,
+  libjack2,
+  lv2,
+  lilv,
+  makeWrapper,
+  serd,
+  sord,
+  sqlite,
+  sratom,
+  suil,
+  alsa-lib,
+  libsndfile,
+  soxr,
+  flac,
+  twolame,
+  expat,
+  libid3tag,
+  libopus,
+  ffmpeg,
+  soundtouch,
+  pcre,
+  portaudio,
+  linuxHeaders,
+  at-spi2-core,
+  dbus,
+  libepoxy,
+  libXdmcp,
+  libXtst,
+  libpthreadstubs,
+  libselinux,
+  libsepol,
+  libxkbcommon,
+  util-linux,
 }:
 
 stdenv.mkDerivation rec {
   pname = "tenacity";
-  version = "1.3.3";
+  version = "1.3.4";
 
   src = fetchFromGitea {
     domain = "codeberg.org";
@@ -56,7 +57,7 @@ stdenv.mkDerivation rec {
     repo = pname;
     fetchSubmodules = true;
     rev = "v${version}";
-    hash = "sha256-UU3iKfab6en4IyGlpNLUhOil3snzaZ2nI6JMqoL6DUs=";
+    hash = "sha256-2gndOwgEJK2zDSbjcZigbhEpGv301/ygrf+EQhKp8PI=";
   };
 
   postPatch = ''
@@ -69,7 +70,6 @@ stdenv.mkDerivation rec {
   '';
 
   postFixup = ''
-    rm $out/tenacity
     wrapProgram "$out/bin/tenacity" \
       --suffix AUDACITY_PATH : "$out/share/tenacity" \
       --suffix AUDACITY_MODULES_PATH : "$out/lib/tenacity/modules" \
@@ -91,56 +91,60 @@ stdenv.mkDerivation rec {
     "-lswscale"
   ];
 
-  nativeBuildInputs = [
-    cmake
-    gettext
-    makeWrapper
-    pkg-config
-    python3
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
-    linuxHeaders
-  ];
+  nativeBuildInputs =
+    [
+      cmake
+      gettext
+      makeWrapper
+      pkg-config
+      python3
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      linuxHeaders
+    ];
 
-  buildInputs = [
-    alsa-lib
-    expat
-    ffmpeg
-    file
-    flac
-    glib
-    lame
-    libid3tag
-    libjack2
-    libmad
-    libopus
-    libsndfile
-    libvorbis
-    lilv
-    lv2
-    pcre
-    portaudio
-    serd
-    sord
-    soundtouch
-    soxr
-    sqlite
-    sratom
-    suil
-    twolame
-    wxGTK32
-    gtk3
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
-    at-spi2-core
-    dbus
-    libepoxy
-    libXdmcp
-    libXtst
-    libpthreadstubs
-    libxkbcommon
-    libselinux
-    libsepol
-    util-linux
-  ];
+  buildInputs =
+    [
+      alsa-lib
+      expat
+      ffmpeg
+      file
+      flac
+      glib
+      lame
+      libid3tag
+      libjack2
+      libmad
+      libopus
+      libsndfile
+      libvorbis
+      lilv
+      lv2
+      pcre
+      portaudio
+      serd
+      sord
+      soundtouch
+      soxr
+      sqlite
+      sratom
+      suil
+      twolame
+      wxGTK32
+      gtk3
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      at-spi2-core
+      dbus
+      libepoxy
+      libXdmcp
+      libXtst
+      libpthreadstubs
+      libxkbcommon
+      libselinux
+      libsepol
+      util-linux
+    ];
 
   cmakeFlags = [
     # RPATH of binary /nix/store/.../bin/... contains a forbidden reference to /build/

@@ -5,15 +5,15 @@
   nixosTests,
 }:
 
-php.buildComposerProject (finalAttrs: {
+php.buildComposerProject2 (finalAttrs: {
   pname = "kimai";
-  version = "2.24.0";
+  version = "2.33.0";
 
   src = fetchFromGitHub {
     owner = "kimai";
     repo = "kimai";
-    rev = finalAttrs.version;
-    hash = "sha256-C6i263sAfZwZELUIcZh/OmXZqgCKifjPYBafnH0wMC4=";
+    tag = finalAttrs.version;
+    hash = "sha256-YkACx0xl+6yN8pgH56WPdEoNAZxAxHIPLay28V1S5WQ=";
   };
 
   php = php.buildEnv {
@@ -26,7 +26,6 @@ php.buildComposerProject (finalAttrs: {
         mbstring
         pdo
         tokenizer
-        xml
         xsl
         zip
       ])
@@ -39,7 +38,7 @@ php.buildComposerProject (finalAttrs: {
     '';
   };
 
-  vendorHash = "sha256-3y3FfSUuDyBGP1dsuzDORDqFNj3jYix5ArM+2FS4gn4=";
+  vendorHash = "sha256-smDAz4RnVEgPcGjsQmN0NC8kWgLw78YFuef9gbajAeQ=";
 
   composerNoPlugins = false;
   composerNoScripts = false;

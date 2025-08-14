@@ -1,35 +1,58 @@
-{ lib
-, stdenv
-, buildGoModule
-, fetchFromGitHub
-, fetchNpmDeps
-, cacert
-, git
-, go
-, enumer
-, mockgen
-, nodejs
-, npmHooks
-, nix-update-script
-, nixosTests
+{
+  lib,
+  stdenv,
+  buildGo124Module,
+  fetchFromGitHub,
+  fetchNpmDeps,
+  cacert,
+  git,
+  go_1_24,
+  gokrazy,
+  enumer,
+  mockgen,
+  nodejs,
+  npmHooks,
+  nix-update-script,
+  nixosTests,
 }:
 
-buildGoModule rec {
-  pname = "evcc";
-  version = "0.131.6";
+let
+  version = "0.203.6";
 
   src = fetchFromGitHub {
     owner = "evcc-io";
     repo = "evcc";
-    rev = version;
-    hash = "sha256-r9GaihxC9ZQtTzKqfJ3LLDMzDEXeud7vTFEMOf0whFU=";
+    tag = version;
+    hash = "sha256-hxh0EgOa2ZFpufyS4Aei86QjeJA0vyuornPK7Y5nRtQ=";
   };
 
-  vendorHash = "sha256-x0EWFsR/O2Ztg39DL+yZx2ZDzJHADo2aPAeg/i+5KqM=";
+  vendorHash = "sha256-hhr6UegsurRsrbN3YB9FAkbZkH+B6RwLmG7RRyNR4+4=";
+
+  commonMeta = with lib; {
+    license = licenses.mit;
+    maintainers = with maintainers; [ hexa ];
+  };
+
+  decorate = buildGo124Module {
+    pname = "evcc-decorate";
+    inherit version src vendorHash;
+
+    subPackages = "cmd/decorate";
+
+    meta = commonMeta // {
+      description = "EVCC decorate helper";
+      homepage = "https://github.com/evcc-io/evcc/tree/master/cmd/decorate";
+    };
+  };
+in
+
+buildGo124Module rec {
+  pname = "evcc";
+  inherit version src vendorHash;
 
   npmDeps = fetchNpmDeps {
     inherit src;
-    hash = "sha256-4pQYv5UKoz3Gu5OS0zoYrjrFYD796MDb7ofWbTv3HlU=";
+    hash = "sha256-8hhiEqQclZUc6zgYvTacVAu5Y47gLJyP249lP4WjVGQ=";
   };
 
   nativeBuildInputs = [
@@ -39,8 +62,10 @@ buildGoModule rec {
 
   overrideModAttrs = _: {
     nativeBuildInputs = [
+      decorate
       enumer
-      go
+      go_1_24
+      gokrazy
       git
       cacert
       mockgen
@@ -57,8 +82,8 @@ buildGoModule rec {
   ];
 
   ldflags = [
-    "-X github.com/evcc-io/evcc/server.Version=${version}"
-    "-X github.com/evcc-io/evcc/server.Commit=${src.rev}"
+    "-X github.com/evcc-io/evcc/util.Version=${version}"
+    "-X github.com/evcc-io/evcc/util.Commit=${src.tag}"
     "-s"
     "-w"
   ];
@@ -69,28 +94,29 @@ buildGoModule rec {
 
   doCheck = !stdenv.hostPlatform.isDarwin; # darwin sandbox limitations around network access, access to /etc/protocols and likely more
 
-  checkFlags = let
-    skippedTests = [
-      # network access
-      "TestOctopusConfigParse"
-      "TestTemplates"
-      "TestOcpp"
-    ];
-  in
-  [ "-skip=^${lib.concatStringsSep "$|^" skippedTests}$" ];
+  checkFlags =
+    let
+      skippedTests = [
+        # network access
+        "TestOctopusConfigParse"
+        "TestTemplates"
+        "TestOcpp"
+      ];
+    in
+    [ "-skip=^${lib.concatStringsSep "$|^" skippedTests}$" ];
 
   passthru = {
+    inherit decorate;
     tests = {
       inherit (nixosTests) evcc;
     };
     updateScript = nix-update-script { };
   };
 
-  meta = with lib; {
+  meta = commonMeta // {
     description = "EV Charge Controller";
     homepage = "https://evcc.io";
     changelog = "https://github.com/evcc-io/evcc/releases/tag/${version}";
-    license = licenses.mit;
-    maintainers = with maintainers; [ hexa ];
+    mainProgram = "evcc";
   };
 }

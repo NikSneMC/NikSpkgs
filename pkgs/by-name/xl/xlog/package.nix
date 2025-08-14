@@ -1,18 +1,30 @@
-{ lib, stdenv, fetchurl, glib, gtk2, pkg-config, hamlib }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+  glib,
+  gtk2,
+  pkg-config,
+  hamlib,
+}:
 stdenv.mkDerivation rec {
   pname = "xlog";
   version = "2.0.25";
 
   src = fetchurl {
-    url = "https://download.savannah.gnu.org/releases/xlog/${pname}-${version}.tar.gz";
-    sha256 = "sha256-NYC3LgoLXnJQURcZTc2xHOzOleotrWtOETMBgadf2qU=";
+    url = "mirror://savannah/${pname}/${pname}-${version}.tar.gz";
+    hash = "sha256-NYC3LgoLXnJQURcZTc2xHOzOleotrWtOETMBgadf2qU=";
   };
 
   # glib-2.62 deprecations
   env.NIX_CFLAGS_COMPILE = "-DGLIB_DISABLE_DEPRECATION_WARNINGS";
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ glib gtk2 hamlib ];
+  buildInputs = [
+    glib
+    gtk2
+    hamlib
+  ];
 
   meta = with lib; {
     description = "Amateur radio logging program";

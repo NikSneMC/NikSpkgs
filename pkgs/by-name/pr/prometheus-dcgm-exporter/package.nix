@@ -1,8 +1,9 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, autoAddDriverRunpath
-, dcgm
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  autoAddDriverRunpath,
+  dcgm,
 }:
 buildGoModule rec {
   pname = "dcgm-exporter";
@@ -14,7 +15,7 @@ buildGoModule rec {
   src = fetchFromGitHub {
     owner = "NVIDIA";
     repo = pname;
-    rev = "refs/tags/${version}";
+    tag = version;
     hash = "sha256-BAMN2yuIW5FcHY3o9MUIMgPnTEFFRCbqhoAkcaZDxcM=";
   };
 
@@ -45,7 +46,7 @@ buildGoModule rec {
     description = "NVIDIA GPU metrics exporter for Prometheus leveraging DCGM";
     homepage = "https://github.com/NVIDIA/dcgm-exporter";
     license = licenses.asl20;
-    maintainers = teams.deshaw.members;
+    teams = [ teams.deshaw ];
     mainProgram = "dcgm-exporter";
     platforms = platforms.linux;
   };

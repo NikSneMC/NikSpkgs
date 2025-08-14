@@ -1,6 +1,7 @@
-{ lib
-, stdenv
-, fetchurl
+{
+  lib,
+  stdenv,
+  fetchurl,
 }:
 
 # Point the environment variable $WALLABAG_DATA to a data directory
@@ -15,7 +16,7 @@
 
 let
   pname = "wallabag";
-  version = "2.6.9";
+  version = "2.6.12";
 in
 stdenv.mkDerivation {
   inherit pname version;
@@ -23,7 +24,7 @@ stdenv.mkDerivation {
   # Release tarball includes vendored files
   src = fetchurl {
     url = "https://github.com/wallabag/wallabag/releases/download/${version}/wallabag-${version}.tar.gz";
-    hash = "sha256-V4s5/y9fFAmZ+WnUxU03UyRivEihD1ZUKQOOq4TLEKw=";
+    hash = "sha256-o6IbFhDac6BUNjYqhRQXWoNVwkqkRLSYyhYoOz+IG80=";
   };
 
   patches = [

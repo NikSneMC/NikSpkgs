@@ -1,21 +1,29 @@
-{ lib, buildGoModule, fetchFromGitHub }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+}:
 
 buildGoModule rec {
   pname = "rke";
-  version = "1.7.0";
+  version = "1.8.3";
 
   src = fetchFromGitHub {
     owner = "rancher";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-TbcjyUB0ni/n24vySZEUd0gFiWHr4FAdYhRB7BFPpCY=";
+    hash = "sha256-+AS8vxMTVKuxVUVyjbMED4pqznMj5lEpr+WhH9DnT84=";
   };
 
-  vendorHash = "sha256-Lp14xvhn4xzOurTa8sRk0A1X1c/sj1clw7niVTRgNeM=";
+  vendorHash = "sha256-OWC8OZhORHwntAR2YHd4KfQgB2Wtma6ayBWfY94uOA4=";
 
   subPackages = [ "." ];
 
-  ldflags = [ "-s" "-w" "-X=main.VERSION=v${version}" ];
+  ldflags = [
+    "-s"
+    "-w"
+    "-X=main.VERSION=v${version}"
+  ];
 
   meta = with lib; {
     homepage = "https://github.com/rancher/rke";

@@ -1,10 +1,12 @@
-{ lib
-, fetchFromGitHub
-, python3
+{
+  lib,
+  fetchFromGitHub,
+  python3,
 }:
 
 python3.pkgs.buildPythonApplication rec {
   pname = "offensive-azure";
+  # nixpkgs-update: no auto update
   version = "0.4.10";
   format = "pyproject";
 

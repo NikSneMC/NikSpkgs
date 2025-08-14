@@ -1,21 +1,22 @@
-{ lib
-, fetchFromGitHub
-, buildGoModule
-, sqlite
-, callPackage
-, nixosTests
-, nix-update-script
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+  sqlite,
+  callPackage,
+  nixosTests,
+  nix-update-script,
 }:
 
 buildGoModule rec {
   pname = "gotify-server";
-  version = "2.5.0";
+  version = "2.6.3";
 
   src = fetchFromGitHub {
     owner = "gotify";
     repo = "server";
     rev = "v${version}";
-    hash = "sha256-Na/bxETIgVm1mxMOXWTgYIFFuB6XG1jGvbW6q/n5LRw=";
+    hash = "sha256-9vIReA29dWf3QwUYEW8JhzF9o74JZqG4zGobgI+gIWE=";
   };
 
   # With `allowGoReference = true;`, `buildGoModule` adds the `-trimpath`
@@ -24,7 +25,7 @@ buildGoModule rec {
   #   server[780]: stat /var/lib/private/ui/build/index.html: no such file or directory
   allowGoReference = true;
 
-  vendorHash = "sha256-Vnk/c2dzxIXDChobFSP++9uyiFD+SKyxJC9ZwaQ2pVw=";
+  vendorHash = "sha256-rs6EfnJT6Jgif2TR5u5Tp5/Ozn+4uhSapksyKFnQiCo=";
 
   doCheck = false;
 
@@ -56,7 +57,8 @@ buildGoModule rec {
   subPackages = [ "." ];
 
   ldflags = [
-    "-X main.Version=${version}" "-X main.Mode=prod"
+    "-X main.Version=${version}"
+    "-X main.Mode=prod"
   ];
 
   meta = with lib; {

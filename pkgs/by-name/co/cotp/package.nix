@@ -1,22 +1,24 @@
-{ lib
-, stdenv
-, rustPlatform
-, fetchFromGitHub
-, libxcb
+{
+  lib,
+  stdenv,
+  rustPlatform,
+  fetchFromGitHub,
+  libxcb,
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "cotp";
-  version = "1.9.2";
+  version = "1.9.4";
 
   src = fetchFromGitHub {
     owner = "replydev";
     repo = "cotp";
     rev = "v${version}";
-    hash = "sha256-5wVIjh16AYwrzjbPgvjsQhihu/vwdQfzU2kZS6eSTWs=";
+    hash = "sha256-O9qss8vxsGyBWaCTt3trjnFVol5ib/G7IZIj742A/XI=";
   };
 
-  cargoHash = "sha256-DMswC+Qp6w7Dcp5YYV4EGWUylv/ouG0ukAdCdDnOA/8=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-Y8kGOeDKjdG+5zuA1mDx4h5IbKETjZU+SiFWiUv3xkw=";
 
   buildInputs = lib.optionals stdenv.hostPlatform.isLinux [ libxcb ];
 

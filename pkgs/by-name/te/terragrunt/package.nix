@@ -1,52 +1,54 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, go-mockery
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  versionCheckHook,
+  go-mockery,
 }:
 
-buildGoModule rec {
+buildGoModule (finalAttrs: {
   pname = "terragrunt";
-  version = "0.68.7";
+  version = "0.78.2";
 
   src = fetchFromGitHub {
     owner = "gruntwork-io";
-    repo = pname;
-    rev = "refs/tags/v${version}";
-    hash = "sha256-+66+qntwEILB0wbO/J5S6ED5W8JoE0C1KSGmGwIYGM0=";
+    repo = "terragrunt";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-6pNRc5nUlGa1tStXGesP9lnbMfkgIO9dnaUMzmJ7qEA=";
   };
 
-  nativeBuildInputs = [ go-mockery ];
+  nativeBuildInputs = [
+    versionCheckHook
+    go-mockery
+  ];
 
   preBuild = ''
     make generate-mocks
   '';
 
-  vendorHash = "sha256-MLIj+/FUw7C4sOWby9nmcQFAvjVNvnf6bKs3pmlhzRQ=";
+  vendorHash = "sha256-sVA2bzQoeDdYRDaAC6DZtF4izuXhlHTUMKNkOIveG7c=";
 
   doCheck = false;
 
   ldflags = [
     "-s"
     "-w"
-    "-X github.com/gruntwork-io/go-commons/version.Version=v${version}"
+    "-X github.com/gruntwork-io/go-commons/version.Version=v${finalAttrs.version}"
     "-extldflags '-static'"
   ];
 
   doInstallCheck = true;
 
-  installCheckPhase = ''
-    runHook preInstallCheck
-    $out/bin/terragrunt --help
-    $out/bin/terragrunt --version | grep "v${version}"
-    runHook postInstallCheck
-  '';
-
   meta = with lib; {
     homepage = "https://terragrunt.gruntwork.io";
-    changelog = "https://github.com/gruntwork-io/terragrunt/releases/tag/v${version}";
+    changelog = "https://github.com/gruntwork-io/terragrunt/releases/tag/v${finalAttrs.version}";
     description = "Thin wrapper for Terraform that supports locking for Terraform state and enforces best practices";
     mainProgram = "terragrunt";
     license = licenses.mit;
-    maintainers = with maintainers; [ jk qjoly kashw2 ];
+    maintainers = with maintainers; [
+      jk
+      qjoly
+      kashw2
+    ];
   };
-}
+})

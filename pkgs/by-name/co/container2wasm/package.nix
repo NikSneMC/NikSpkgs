@@ -1,20 +1,21 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
 }:
 
 buildGoModule rec {
   pname = "container2wasm";
-  version = "0.7.0";
+  version = "0.8.1";
 
   src = fetchFromGitHub {
     owner = "ktock";
     repo = "container2wasm";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-Zet7gTS/929/RVsh/F0N4AlQ9KVfsfDVyAYYJR3Xjc4=";
+    tag = "v${version}";
+    hash = "sha256-detM0A8pm65VmEuEh7Xc+LcXfz4aq9p46NvJtdzfzAA=";
   };
 
-  vendorHash = "sha256-X6JG/D+f9MmZVGqic13OkyPriLloEazU6dqDjue6YmY=";
+  vendorHash = "sha256-G75YojD+GR1C++crDkWS3A4nrUI9HwZfxmKpdNZ7qYY=";
 
   ldflags = [
     "-s"

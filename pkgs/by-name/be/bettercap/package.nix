@@ -1,14 +1,16 @@
-{ lib, stdenv
-, buildGo122Module
-, fetchFromGitHub
-, pkg-config
-, libpcap
-, libnfnetlink
-, libnetfilter_queue
-, libusb1
+{
+  lib,
+  stdenv,
+  buildGoModule,
+  fetchFromGitHub,
+  pkg-config,
+  libpcap,
+  libnfnetlink,
+  libnetfilter_queue,
+  libusb1,
 }:
 
-buildGo122Module rec {
+buildGoModule rec {
   pname = "bettercap";
   version = "2.32.0";
 
@@ -24,8 +26,15 @@ buildGo122Module rec {
   doCheck = false;
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ libpcap libusb1 ]
-    ++ lib.optionals stdenv.hostPlatform.isLinux [ libnfnetlink libnetfilter_queue ];
+  buildInputs =
+    [
+      libpcap
+      libusb1
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      libnfnetlink
+      libnetfilter_queue
+    ];
 
   meta = with lib; {
     description = "Man in the middle tool";
@@ -38,5 +47,8 @@ buildGo122Module rec {
     license = with licenses; [ gpl3Only ];
     maintainers = with maintainers; [ y0no ];
     mainProgram = "bettercap";
+    # Broken on darwin for Go toolchain > 1.22, with error:
+    # 'link: golang.org/x/net/internal/socket: invalid reference to syscall.recvmsg'
+    broken = stdenv.hostPlatform.isDarwin;
   };
 }

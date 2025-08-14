@@ -2,26 +2,22 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  fetchpatch,
-  stdenv,
-  darwin,
   nixosTests,
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "static-web-server";
-  version = "2.33.0";
+  version = "2.36.1";
 
   src = fetchFromGitHub {
     owner = "static-web-server";
-    repo = pname;
+    repo = "static-web-server";
     rev = "v${version}";
-    hash = "sha256-WR8fzpeN6zufvakanJBSMtgTpfDRqCyaTfEzE5NqFOA=";
+    hash = "sha256-labHPDsPRyF/cxHFoOJ5n+tBFn1KF2QdB/hZnDGWf1Q=";
   };
 
-  cargoHash = "sha256-AasNva4SOTSrvBTrGHX/jOPjcjt3o8KUsFL7e4uhW6M=";
-
-  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [ darwin.apple_sdk.frameworks.Security ];
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-Sri2NTCN5vIf/5KVI+BtyOBAjkXoGpOJjP2iOh/M5NU=";
 
   # Some tests rely on timestamps newer than 18 Nov 1974 00:00:00
   preCheck = ''
@@ -45,7 +41,10 @@ rustPlatform.buildRustPackage rec {
       mit # or
       asl20
     ];
-    maintainers = with maintainers; [ figsoda ];
+    maintainers = with maintainers; [
+      figsoda
+      misilelab
+    ];
     mainProgram = "static-web-server";
   };
 }

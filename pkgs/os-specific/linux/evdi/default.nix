@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   kernel,
+  kernelModuleMakeFlags,
   libdrm,
   python3,
 }:
@@ -16,13 +17,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "evdi";
-  version = "1.14.7";
+  version = "1.14.10";
 
   src = fetchFromGitHub {
     owner = "DisplayLink";
     repo = "evdi";
-    rev = "refs/tags/v${finalAttrs.version}";
-    hash = "sha256-z3GawjaokbmmUC1LihwGSnF3tUp9n/FO+kDiWvBq+mY=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-xB3AHg9t/X8vw5p7ohFQ+WuMjb1P8DAP3pROiwWkVPs=";
   };
 
   env.NIX_CFLAGS_COMPILE = toString [
@@ -39,7 +40,7 @@ stdenv.mkDerivation (finalAttrs: {
     python3WithLibs
   ];
 
-  makeFlags = kernel.makeFlags ++ [
+  makeFlags = kernelModuleMakeFlags ++ [
     "KVER=${kernel.modDirVersion}"
     "KDIR=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
   ];
@@ -60,7 +61,7 @@ stdenv.mkDerivation (finalAttrs: {
   enableParallelBuilding = true;
 
   meta = {
-    broken = kernel.kernelOlder "4.19" || kernel.kernelAtLeast "6.12";
+    broken = kernel.kernelOlder "4.19";
     changelog = "https://github.com/DisplayLink/evdi/releases/tag/v${finalAttrs.version}";
     description = "Extensible Virtual Display Interface";
     homepage = "https://www.displaylink.com/";

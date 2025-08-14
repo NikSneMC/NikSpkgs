@@ -1,9 +1,9 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, stdenv
-, darwin
-, xorg
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  stdenv,
+  xorg,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -17,11 +17,10 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-buIceYP/dZMDw3tyrzj1bY6+sIIPaVJIVj1L//jZnws=";
   };
 
-  cargoHash = "sha256-rxNp9dOvy/UTx6Q9pzZGccEKmIiWxzWVYyMxb+h5bqw=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-/AnzUaya+dgckcilxj9ZZbDNqmfj1uTWkzhVphpZIsM=";
 
-  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [
-    darwin.apple_sdk.frameworks.AppKit
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
+  buildInputs = lib.optionals stdenv.hostPlatform.isLinux [
     xorg.libxcb
   ];
 

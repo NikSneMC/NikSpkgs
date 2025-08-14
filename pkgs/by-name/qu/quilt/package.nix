@@ -1,28 +1,29 @@
-{ lib
-, stdenv
-, fetchurl
-, makeWrapper
-, bash
-, coreutils
-, diffstat
-, diffutils
-, findutils
-, gawk
-, gnugrep
-, gnused
-, patch
-, perl
-, unixtools
+{
+  lib,
+  stdenv,
+  fetchurl,
+  makeWrapper,
+  bash,
+  coreutils,
+  diffstat,
+  diffutils,
+  findutils,
+  gawk,
+  gnugrep,
+  gnused,
+  patch,
+  perl,
+  unixtools,
 }:
 
 stdenv.mkDerivation rec {
 
   pname = "quilt";
-  version = "0.68";
+  version = "0.69";
 
   src = fetchurl {
     url = "mirror://savannah/${pname}/${pname}-${version}.tar.gz";
-    sha256 = "sha256-/owJ3gPBBuhbNzfI8DreFHyVa3ntevSFocijhY2zhCY=";
+    sha256 = "sha256-VV3f/eIto8htHK9anB+4oVKsK4RzBDe9OcwIhJyfSFI=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
@@ -40,6 +41,14 @@ stdenv.mkDerivation rec {
     perl
     unixtools.column
     unixtools.getopt
+  ];
+
+  strictDeps = true;
+
+  configureFlags = [
+    # configure only looks in $PATH by default,
+    # which does not include buildInputs if strictDeps is true
+    "--with-perl=${lib.getExe perl}"
   ];
 
   postInstall = ''

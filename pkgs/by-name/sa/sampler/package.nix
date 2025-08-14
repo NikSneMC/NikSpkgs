@@ -1,4 +1,11 @@
-{ lib, buildGoModule, fetchFromGitHub, fetchpatch, darwin, alsa-lib, stdenv }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  fetchpatch,
+  alsa-lib,
+  stdenv,
+}:
 
 buildGoModule rec {
   pname = "sampler";
@@ -25,10 +32,7 @@ buildGoModule rec {
 
   subPackages = [ "." ];
 
-  buildInputs = lib.optional stdenv.hostPlatform.isLinux alsa-lib
-    ++ lib.optionals stdenv.hostPlatform.isDarwin [
-    darwin.apple_sdk.frameworks.OpenAL
-  ];
+  buildInputs = lib.optional stdenv.hostPlatform.isLinux alsa-lib;
 
   meta = with lib; {
     description = "Tool for shell commands execution, visualization and alerting";

@@ -1,13 +1,15 @@
-{ lib
-, stdenv
-, fetchurl
-, pkg-config
-, SDL2
-, fftw
-, gtest
-, darwin
-, eigen
-, libepoxy
+{
+  lib,
+  stdenv,
+  fetchurl,
+  pkg-config,
+  SDL2,
+  fftw,
+  gtest,
+  eigen,
+  libepoxy,
+  libGL,
+  libX11,
 }:
 
 stdenv.mkDerivation rec {
@@ -19,7 +21,10 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-szBztwXwzLasSULPURUVFUB7QLtOmi3QIowcLLH7wRo=";
   };
 
-  outputs = [ "out" "dev" ];
+  outputs = [
+    "out"
+    "dev"
+  ];
 
   GTEST_DIR = "${gtest.src}/googletest";
 
@@ -31,9 +36,8 @@ stdenv.mkDerivation rec {
     SDL2
     fftw
     gtest
-  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
-    darwin.apple_sdk.frameworks.OpenGL
-    darwin.libobjc
+    libGL
+    libX11
   ];
 
   propagatedBuildInputs = [

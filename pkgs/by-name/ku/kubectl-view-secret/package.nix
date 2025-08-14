@@ -1,17 +1,21 @@
-{ lib, buildGoModule, fetchFromGitHub }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+}:
 
 buildGoModule rec {
   pname = "kubectl-view-secret";
-  version = "0.13.0";
+  version = "0.14.0";
 
   src = fetchFromGitHub {
     owner = "elsesiy";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-mdooeKlwoPxiAHaOuhMF+Zx1l0uZ1OYMgDADI7JbYDc=";
+    hash = "sha256-l7pyS3eQDETrGCN7+Q0xhm+9Ocpk+qxTNMu4SMq+IDU=";
   };
 
-  vendorHash = "sha256-5mSS7UWfdk28oXk/ONnnjj4OMGJAtH26xGES4NGZuTc=";
+  vendorHash = "sha256-XtQkAgmnXNKHHjFtZN8Ht/C/aH2mPOeHk7azihehzsc=";
 
   subPackages = [ "./cmd/" ];
 

@@ -1,7 +1,6 @@
 {
   lib,
   stdenv,
-  darwin,
   fetchFromGitHub,
   flac,
   libgpiod,
@@ -40,13 +39,13 @@ stdenv.mkDerivation {
   pname = binName;
   # versions are specified in `squeezelite.h`
   # see https://github.com/ralph-irving/squeezelite/issues/29
-  version = "2.0.0.1504";
+  version = "2.0.0.1533";
 
   src = fetchFromGitHub {
     owner = "ralph-irving";
     repo = "squeezelite";
-    rev = "54e39690d9882d56c56fbdced4661abce7d8beff";
-    hash = "sha256-+NjCykWlru8y1Iy3uLvO87NcoFvcggCaEnajXRxKYno=";
+    rev = "bb7ae0615f6e661c217a1c77fdff70122859c3c5";
+    hash = "sha256-R3yCJJMsrD3dkrfkm4q69YkqfjBdZTiB9UXIriyPawA=";
   };
 
   buildInputs =
@@ -59,17 +58,7 @@ stdenv.mkDerivation {
     ++ optional pulseSupport libpulseaudio
     ++ optional alsaSupport alsa-lib
     ++ optional portaudioSupport portaudio
-    ++ optionals stdenv.hostPlatform.isDarwin (
-      with darwin.apple_sdk_11_0.frameworks;
-      [
-        CoreVideo
-        VideoDecodeAcceleration
-        CoreAudio
-        AudioToolbox
-        AudioUnit
-        Carbon
-      ]
-    )
+
     ++ optional faad2Support faad2
     ++ optional ffmpegSupport ffmpeg
     ++ optional opusSupport opusfile

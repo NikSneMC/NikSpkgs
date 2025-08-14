@@ -51,9 +51,8 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $out/share/icons
   '';
 
-  # clean up wrongly created dirs in `install.sh` and broken .desktop file
   postInstall = ''
-    grep -v "Version=#VERSION#" $src/LINUX/die.desktop > $out/share/applications/die.desktop
+    cp -r $src/XYara/yara_rules $out/lib/die/
   '';
 
   meta = {
@@ -62,7 +61,10 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://github.com/horsicq/Detect-It-Easy";
     changelog = "https://github.com/horsicq/Detect-It-Easy/blob/master/changelog.txt";
     maintainers = with lib.maintainers; [ ivyfanchiang ];
-    platforms = [ "x86_64-linux" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
     license = lib.licenses.mit;
   };
 })

@@ -1,9 +1,15 @@
-{ lib, skawarePackages, skalibs }:
+{
+  lib,
+  skawarePackages,
+  skalibs,
+  execline,
+  writeTextFile,
+}:
 
 let
   version = "2.9.6.1";
-
-in skawarePackages.buildPackage {
+in
+skawarePackages.buildPackage {
   inherit version;
 
   pname = "execline";
@@ -24,7 +30,13 @@ in skawarePackages.buildPackage {
 
   description = "Small scripting language, to be used in place of a shell in non-interactive scripts";
 
-  outputs = [ "bin" "lib" "dev" "doc" "out" ];
+  outputs = [
+    "bin"
+    "lib"
+    "dev"
+    "doc"
+    "out"
+  ];
 
   # TODO: nsss support
   configureFlags = [
@@ -64,4 +76,24 @@ in skawarePackages.buildPackage {
       ${./execlineb-wrapper.c} \
       -lskarnet
   '';
+
+  # Write an execline script.
+  # Documented in ../../../../doc/build-helpers/trivial-build-helpers.chapter.md
+  passthru.writeScript =
+    name: options: script:
+    writeTextFile {
+      inherit name;
+      text = ''
+        #!${execline}/bin/execlineb ${toString options}
+        ${script}
+      '';
+
+      executable = true;
+      derivationArgs.nativeBuildInputs = [ execline ];
+      checkPhase = ''
+        echo redirfd -w 1 /dev/null echo >test.el
+        cat <$target >>test.el
+        execlineb -W test.el
+      '';
+    };
 }

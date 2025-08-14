@@ -1,9 +1,10 @@
-{ lib
-, buildPythonPackage
-, sage-src
-, cython
-, jinja2
-, pkgconfig # the python module, not the pkg-config alias
+{
+  lib,
+  buildPythonPackage,
+  sage-src,
+  cython,
+  jinja2,
+  pkgconfig, # the python module, not the pkg-config alias
 }:
 
 buildPythonPackage rec {
@@ -25,6 +26,6 @@ buildPythonPackage rec {
     description = "Build system of the Sage library";
     homepage = "https://www.sagemath.org";
     license = licenses.gpl2Plus;
-    maintainers = teams.sage.members;
+    teams = [ teams.sage ];
   };
 }

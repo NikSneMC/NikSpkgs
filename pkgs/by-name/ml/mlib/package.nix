@@ -1,20 +1,24 @@
-{ lib
-, stdenv
-, fetchFromGitHub
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
 }:
 
 stdenv.mkDerivation rec {
   pname = "mlib";
-  version = "0.7.3";
+  version = "0.7.4";
 
   src = fetchFromGitHub {
     owner = "P-p-H-d";
-    repo = pname;
+    repo = "mlib";
     rev = "V${version}";
-    hash = "sha256-r8ol923tNkZ13QXWjWpMrN6rBjjjg5XoBCho4OKdyvY=";
+    hash = "sha256-yP0oTlUJPllhmSLz0i3t3tIZhSnzwPJD6kzoFnEtrLM=";
   };
 
-  makeFlags = [ "CC=${stdenv.cc.targetPrefix}cc" "PREFIX=$(out)" ];
+  makeFlags = [
+    "CC=${stdenv.cc.targetPrefix}cc"
+    "PREFIX=$(out)"
+  ];
 
   doCheck = true;
 

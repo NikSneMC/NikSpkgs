@@ -1,10 +1,10 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, installShellFiles
-, stdenv
-, darwin
-, curl
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  installShellFiles,
+  stdenv,
+  curl,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -18,15 +18,11 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-jrQnmIYap5eHVWPqoRsXVroB0VWLKxesi3rB/WylR0U=";
   };
 
-  cargoHash = "sha256-/BBue4YfpFk/tId2GV9sstEdgNuy3QnieINGnx45ydU=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-SosRbtk5gBcOVropy+HVFFmLLexu29GjchC6zFweiYw=";
 
   nativeBuildInputs = [
     installShellFiles
-  ];
-
-  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [
-    darwin.apple_sdk.frameworks.Security
-    darwin.apple_sdk.frameworks.SystemConfiguration
   ];
 
   nativeCheckInputs = [

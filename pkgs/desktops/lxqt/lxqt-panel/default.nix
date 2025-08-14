@@ -1,47 +1,47 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, cmake
-, pkg-config
-, alsa-lib
-, libdbusmenu-lxqt
-, kguiaddons
-, kwindowsystem
-, layer-shell-qt
-, libXdamage
-, libXdmcp
-, libXtst
-, libdbusmenu
-, liblxqt
-, libpthreadstubs
-, libpulseaudio
-, libqtxdg
-, libstatgrab
-, libsysstat
-, lm_sensors
-, lxqt-build-tools
-, lxqt-globalkeys
-, lxqt-menu-data
-, menu-cache
-, pcre
-, qtbase
-, qtsvg
-, qttools
-, qtwayland
-, solid
-, wrapQtAppsHook
-, gitUpdater
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  pkg-config,
+  alsa-lib,
+  libdbusmenu-lxqt,
+  kguiaddons,
+  kwindowsystem,
+  layer-shell-qt,
+  libXdamage,
+  libXdmcp,
+  libXtst,
+  libdbusmenu,
+  liblxqt,
+  libpthreadstubs,
+  libpulseaudio,
+  libqtxdg,
+  libstatgrab,
+  libsysstat,
+  lm_sensors,
+  lxqt-build-tools,
+  lxqt-globalkeys,
+  lxqt-menu-data,
+  pcre,
+  qtbase,
+  qtsvg,
+  qttools,
+  qtwayland,
+  solid,
+  wrapQtAppsHook,
+  gitUpdater,
 }:
 
 stdenv.mkDerivation rec {
   pname = "lxqt-panel";
-  version = "2.1.1";
+  version = "2.2.0";
 
   src = fetchFromGitHub {
     owner = "lxqt";
     repo = pname;
     rev = version;
-    hash = "sha256-IlT7qXWMKFkmHNjXJYivawd4HnOBzILtIE6XaM/ZvkM=";
+    hash = "sha256-BMdiSm+FJXeLRGGoCdUpJjFu8JRk0+95LPZJSTFMqrM=";
   };
 
   nativeBuildInputs = [
@@ -71,7 +71,6 @@ stdenv.mkDerivation rec {
     lm_sensors
     lxqt-globalkeys
     lxqt-menu-data
-    menu-cache
     pcre
     qtbase
     qtsvg
@@ -87,6 +86,6 @@ stdenv.mkDerivation rec {
     mainProgram = "lxqt-panel";
     license = licenses.lgpl21Plus;
     platforms = platforms.linux;
-    maintainers = teams.lxqt.members;
+    teams = [ teams.lxqt ];
   };
 }

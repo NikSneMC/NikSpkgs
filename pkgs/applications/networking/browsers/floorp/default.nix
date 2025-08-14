@@ -9,7 +9,7 @@
 (
   (buildMozillaMach rec {
     pname = "floorp";
-    packageVersion = "11.20.0";
+    packageVersion = "11.26.1";
     applicationName = "Floorp";
     binaryName = "floorp";
     branding = "browser/branding/official";
@@ -17,18 +17,17 @@
     allowAddonSideload = true;
 
     # Must match the contents of `browser/config/version.txt` in the source tree
-    version = "128.5.0";
+    version = "128.10.0";
 
     src = fetchFromGitHub {
       owner = "Floorp-Projects";
       repo = "Floorp";
       fetchSubmodules = true;
       rev = "v${packageVersion}";
-      hash = "sha256-+FVnG8CKEQdFN9bO8rUZadp+d8keCB98T7qt9OBfLDA=";
+      hash = "sha256-WX7I81Rjv/6+L+HCN6j/HvLOPJk0vyiLpUmxoK+FDn8=";
     };
 
     extraConfigureFlags = [
-      "--with-app-name=${pname}"
       "--with-app-basename=${applicationName}"
       "--with-unsigned-addon-scopes=app,system"
       "--enable-proxy-bypass-protection"
@@ -67,19 +66,10 @@
     privacySupport = true;
     webrtcSupport = true;
     enableOfficialBranding = false;
-    googleAPISupport = true;
-    mlsAPISupport = true;
+    geolocationSupport = true;
   }
 ).overrideAttrs
   (prev: {
     MOZ_DATA_REPORTING = "";
     MOZ_TELEMETRY_REPORTING = "";
-
-    # Upstream already includes some of the bugfix patches that are applied by
-    # `buildMozillaMach`. Pick out only the relevant ones for Floorp and override
-    # the list here.
-    patches = [
-      ../firefox/env_var_for_system_dir-ff111.patch
-      ../firefox/no-buildconfig-ffx121.patch
-    ];
   })
