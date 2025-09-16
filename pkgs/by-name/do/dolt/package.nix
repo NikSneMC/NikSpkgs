@@ -4,28 +4,28 @@
   buildGoModule,
 }:
 
-buildGoModule rec {
+buildGoModule (finalAttrs: {
   pname = "dolt";
-  version = "1.53.2";
+  version = "1.59.2";
 
   src = fetchFromGitHub {
     owner = "dolthub";
     repo = "dolt";
-    rev = "v${version}";
-    sha256 = "sha256-NrwCgFJqh8XugKd8+T7KZsJtlYbx42zwD47h8xLr/YU=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-qIV4pbyrN40joXCgmE0e1EDkfRaHC/G1lwdkpzrO5fU=";
   };
 
   modRoot = "./go";
   subPackages = [ "cmd/dolt" ];
-  vendorHash = "sha256-mobygEA/p5uuWZSToReygQWnz0Wt488MGn5owPi55k0=";
+  vendorHash = "sha256-DPo1xzV11Q9emVIlrBFQcWXGNXKfYOKzR/hi5nJJp34=";
   proxyVendor = true;
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Relational database with version control and CLI a-la Git";
     mainProgram = "dolt";
     homepage = "https://github.com/dolthub/dolt";
-    license = licenses.asl20;
-    maintainers = with maintainers; [ danbst ];
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ danbst ];
   };
-}
+})

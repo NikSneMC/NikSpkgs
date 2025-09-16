@@ -87,13 +87,13 @@ in stdenv.mkDerivation (finalAttrs: {
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
-    inherit (finalAttrs) src;
-    sourceRoot = "${finalAttrs.src.name}/${finalAttrs.cargoRoot}";
+    inherit (finalAttrs) src cargoRoot;
     hash = "sha256-Su9ZOPIskV5poeS8pgtri+sZANBpdgnuCsQqE4WKFdA=";
   };
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
+    fetcherVersion = 1;
     hash = "sha256-oreeV9g16/F7JGLApi0Uq+vTqNhIg7Lg1Z4k00RUOYI=";
   };
 
@@ -134,7 +134,7 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   meta = with lib; {
-    description = "Surrealist is the ultimate way to visually manage your SurrealDB database";
+    description = "Visual management of your SurrealDB database";
     homepage = "https://surrealdb.com/surrealist";
     license = licenses.mit;
     mainProgram = "surrealist";

@@ -12,23 +12,23 @@
 
 buildGoModule rec {
   pname = "trayscale";
-  version = "0.16.0";
+  version = "0.18.3";
 
   src = fetchFromGitHub {
     owner = "DeedleFake";
     repo = "trayscale";
     tag = "v${version}";
-    hash = "sha256-Fvp75DaU/ZB4VZsUIgiSAg9eWU2JO6aGGwEYaC+VzIE=";
+    hash = "sha256-rk4JfK0wBvWLis9XvaZuwAoMyLfoySt3SHLJChYl0SE=";
   };
 
-  vendorHash = "sha256-KC2eWO3pS8Xbq9FwWfT3bAodhxdTOzpvkBxzxPa9pUY=";
+  vendorHash = "sha256-8Um5Ps1EEVShJEeCRkGE3pJi2/5PxgEVNqq3JsKdivA=";
 
   subPackages = [ "cmd/trayscale" ];
 
   ldflags = [
     "-s"
     "-w"
-    "-X=deedles.dev/trayscale/internal/version.version=${version}"
+    "-X=deedles.dev/trayscale/internal/metadata.version=${version}"
   ];
 
   nativeBuildInputs = [

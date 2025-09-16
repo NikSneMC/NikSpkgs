@@ -12,19 +12,19 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "raycast";
-  version = "1.98.0";
+  version = "1.102.7";
 
   src =
     {
       aarch64-darwin = fetchurl {
         name = "Raycast.dmg";
         url = "https://releases.raycast.com/releases/${finalAttrs.version}/download?build=arm";
-        hash = "sha256-cHTGXuzi7YVAPeeMHugL7uvR9BHJ5xR7I9NE63H3vcg=";
+        hash = "sha256-nfkgwSmIIRtsU6j+/y9xWO7KaBDQCrphftyn58/Pqrk=";
       };
       x86_64-darwin = fetchurl {
         name = "Raycast.dmg";
         url = "https://releases.raycast.com/releases/${finalAttrs.version}/download?build=x86_64";
-        hash = "sha256-KYMjr8SA8a0B19hmdsKLLz+smBpB687e+BLRRCRM+AM=";
+        hash = "sha256-4H8TlPEkp5m+E+Eo3VvNE9F5g7v3h4F6inf7UysTW0U=";
       };
     }
     .${stdenvNoCC.system} or (throw "raycast: ${stdenvNoCC.system} is unsupported.");
@@ -80,7 +80,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     maintainers = with lib.maintainers; [
       lovesegfault
       stepbrobd
-      donteatoreo
+      FlameFlag
       jakecleary
     ];
     platforms = [
